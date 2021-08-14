@@ -20,17 +20,17 @@ const App = ({ theme }) => {
 
   const rootTheme = createTheme({
     palette: {
-      type: 'light',
-      primary: {
-        light: "#FA8844",
-        main: "#BB6533",
-        dark: "#7D4322"
-      },
-      secondary: {
-        light: "#EB507F",
-        main: "#FE024E",
-        dark: "#7C2326"
-      }
+      type: 'dark',
+      // primary: {
+      //   light: "#FA8844",
+      //   main: "#BB6533",
+      //   dark: "#7D4322"
+      // },
+      // secondary: {
+      //   light: "#EB507F",
+      //   main: "#FE024E",
+      //   dark: "#7C2326"
+      // }
     }
   })
 
