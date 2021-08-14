@@ -1,0 +1,609 @@
+{
+  "movies-1": {
+    "data": [
+      {
+        "id": "1",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "379686",
+        "title": "Space Jam: A New Legacy",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/5bFK5d3mVTAvBCXi5NPWH0tYjKl.jpg",
+        "poster": "/8s4h9friP6Ci3adRGahHARVd76E.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.8,
+        "total_review": 1263,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "2",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "497698",
+        "title": "Black Widow",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/qAZ0pzat24kLdO3o8ejmbLxyOac.jpg",
+        "poster": "/keIxh0wPr2Ymj0Btjh4gW7JJ89e.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 8,
+        "total_review": 3393,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "3",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "602223",
+        "title": "The Forever Purge",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/uHA5COgDzcxjpYSHHulrKVl6ByL.jpg",
+        "poster": "/tehpKMsls621GT9WUQie2Ft6LmP.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.8,
+        "total_review": 601,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "4",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "459151",
+        "title": "The Boss Baby: Family Business",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/5dExO5G2iaaTxYnLIFKLWofDzyI.jpg",
+        "poster": "/gX5UrH1TLVVBwI7WxplW43BD6Z1.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.9,
+        "total_review": 922,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "5",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "508943",
+        "title": "Luca",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/jTswp6KyDYKtvC52GbHagrZbGvD.jpg",
+        "poster": "/620hnMVLu6RSZW6a5rwO8gqpt0t.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 8.1,
+        "total_review": 3255,
+        "trailler": "5qap5aO4i9A"
+      }
+    ],
+    "status": 200,
+    "total_result": 200,
+    "page": 1,
+    "total_pages": 3
+  },
+  
+
+
+  "movies-2": {
+    "data": [
+      {
+        "id": "1",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "379686",
+        "title": "Space Jam: A New Legacy",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/5bFK5d3mVTAvBCXi5NPWH0tYjKl.jpg",
+        "poster": "/8s4h9friP6Ci3adRGahHARVd76E.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.8,
+        "total_review": 1263,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "2",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "497698",
+        "title": "Black Widow",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/qAZ0pzat24kLdO3o8ejmbLxyOac.jpg",
+        "poster": "/keIxh0wPr2Ymj0Btjh4gW7JJ89e.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 8,
+        "total_review": 3393,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "3",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "602223",
+        "title": "The Forever Purge",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/uHA5COgDzcxjpYSHHulrKVl6ByL.jpg",
+        "poster": "/tehpKMsls621GT9WUQie2Ft6LmP.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.8,
+        "total_review": 601,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "4",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "459151",
+        "title": "The Boss Baby: Family Business",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/5dExO5G2iaaTxYnLIFKLWofDzyI.jpg",
+        "poster": "/gX5UrH1TLVVBwI7WxplW43BD6Z1.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.9,
+        "total_review": 922,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "5",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "508943",
+        "title": "Luca",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/jTswp6KyDYKtvC52GbHagrZbGvD.jpg",
+        "poster": "/620hnMVLu6RSZW6a5rwO8gqpt0t.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 8.1,
+        "total_review": 3255,
+        "trailler": "5qap5aO4i9A"
+      }
+    ],
+    "status": 200,
+    "total_result": 200,
+    "page": 2,
+    "total_pages": 3
+  },
+
+
+  "movies-3": {
+    "data": [
+      {
+        "id": "1",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "379686",
+        "title": "Space Jam: A New Legacy",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/5bFK5d3mVTAvBCXi5NPWH0tYjKl.jpg",
+        "poster": "/8s4h9friP6Ci3adRGahHARVd76E.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.8,
+        "total_review": 1263,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "2",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "497698",
+        "title": "Black Widow",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/qAZ0pzat24kLdO3o8ejmbLxyOac.jpg",
+        "poster": "/keIxh0wPr2Ymj0Btjh4gW7JJ89e.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 8,
+        "total_review": 3393,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "3",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "602223",
+        "title": "The Forever Purge",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/uHA5COgDzcxjpYSHHulrKVl6ByL.jpg",
+        "poster": "/tehpKMsls621GT9WUQie2Ft6LmP.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.8,
+        "total_review": 601,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "4",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "459151",
+        "title": "The Boss Baby: Family Business",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/5dExO5G2iaaTxYnLIFKLWofDzyI.jpg",
+        "poster": "/gX5UrH1TLVVBwI7WxplW43BD6Z1.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 7.9,
+        "total_review": 922,
+        "trailler": "5qap5aO4i9A"
+      },
+      {
+        "id": "5",
+        "__comment": "id disini di moc seolah olah page_number dalam API /movies/:page_number, sehingga kita bisa memanggilnya  per page",
+        "movie_id": "508943",
+        "title": "Luca",
+        "category": "Anime",
+        "genre": [
+          "action",
+          "triller",
+          "comedy",
+          "horrom"
+        ],
+        "thumbnail": "/jTswp6KyDYKtvC52GbHagrZbGvD.jpg",
+        "poster": "/620hnMVLu6RSZW6a5rwO8gqpt0t.jpg",
+        "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+        "average_rating": 8.1,
+        "total_review": 3255,
+        "trailler": "5qap5aO4i9A"
+      }
+    ],
+    "status": 200,
+    "total_result": 200,
+    "page": 3,
+    "total_pages": 3
+  },
+
+
+  "movie": [
+    {
+      "id": "379686",
+      "title": "Space Jam: A New Legacy",
+      "category": "Anime",
+      "genre": [
+        "action",
+        "triller",
+        "comedy",
+        "horrom"
+      ],
+      "thumbnail": "/5bFK5d3mVTAvBCXi5NPWH0tYjKl.jpg",
+      "poster": "/8s4h9friP6Ci3adRGahHARVd76E.jpg",
+      "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+      "synopsis": "Commodo mollit ex ipsum nulla. Ut occaecat sunt ea deserunt et aute occaecat ad nostrud. Fugiat labore sit incididunt dolore magna ea exercitation sint non do et. Lorem duis cupidatat laboris irure occaecat laboris duis commodo ipsum adipisicing.",
+      "movie_info": {
+        "release_date": "2021-07-08",
+        "director": "John Doe Featured",
+        "song": "Pegasus fantasi",
+        "budget": "200 million USD"
+      },
+      "average_rating": 7.8,
+      "total_review": 1263,
+      "trailler": "5qap5aO4i9A"
+    },
+    {
+      "id": "497698",
+      "title": "Black Widow",
+      "category": "Anime",
+      "genre": [
+        "action",
+        "triller",
+        "comedy",
+        "horrom"
+      ],
+      "thumbnail": "/qAZ0pzat24kLdO3o8ejmbLxyOac.jpg",
+      "poster": "/keIxh0wPr2Ymj0Btjh4gW7JJ89e.jpg",
+      "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+      "synopsis": "Commodo mollit ex ipsum nulla. Ut occaecat sunt ea deserunt et aute occaecat ad nostrud. Fugiat labore sit incididunt dolore magna ea exercitation sint non do et. Lorem duis cupidatat laboris irure occaecat laboris duis commodo ipsum adipisicing.",
+      "movie_info": {
+        "release_date": "2021-07-07",
+        "director": "John Doe Featured",
+        "song": "Pegasus fantasi",
+        "budget": "200 million USD"
+      },
+      "average_rating": 8,
+      "total_review": 3393,
+      "trailler": "5qap5aO4i9A"
+    },
+    {
+      "id": "602223",
+      "title": "The Forever Purge",
+      "category": "Anime",
+      "genre": [
+        "action",
+        "triller",
+        "comedy",
+        "horrom"
+      ],
+      "thumbnail": "/uHA5COgDzcxjpYSHHulrKVl6ByL.jpg",
+      "poster": "/tehpKMsls621GT9WUQie2Ft6LmP.jpg",
+      "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+      "synopsis": "Commodo mollit ex ipsum nulla. Ut occaecat sunt ea deserunt et aute occaecat ad nostrud. Fugiat labore sit incididunt dolore magna ea exercitation sint non do et. Lorem duis cupidatat laboris irure occaecat laboris duis commodo ipsum adipisicing.",
+      "movie_info": {
+        "release_date": "2021-06-30",
+        "director": "John Doe Featured",
+        "song": "Pegasus fantasi",
+        "budget": "200 million USD"
+      },
+      "average_rating": 7.8,
+      "total_review": 601,
+      "trailler": "5qap5aO4i9A"
+    },
+    {
+      "id": "459151",
+      "title": "The Boss Baby: Family Business",
+      "category": "Anime",
+      "genre": [
+        "action",
+        "triller",
+        "comedy",
+        "horrom"
+      ],
+      "thumbnail": "/5dExO5G2iaaTxYnLIFKLWofDzyI.jpg",
+      "poster": "/gX5UrH1TLVVBwI7WxplW43BD6Z1.jpg",
+      "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+      "synopsis": "Commodo mollit ex ipsum nulla. Ut occaecat sunt ea deserunt et aute occaecat ad nostrud. Fugiat labore sit incididunt dolore magna ea exercitation sint non do et. Lorem duis cupidatat laboris irure occaecat laboris duis commodo ipsum adipisicing.",
+      "movie_info": {
+        "release_date": "2021-07-01",
+        "director": "John Doe Featured",
+        "song": "Pegasus fantasi",
+        "budget": "200 million USD"
+      },
+      "average_rating": 7.9,
+      "total_review": 922,
+      "trailler": "5qap5aO4i9A"
+    },
+    {
+      "id": "508943",
+      "title": "Luca",
+      "category": "Anime",
+      "genre": [
+        "action",
+        "triller",
+        "comedy",
+        "horrom"
+      ],
+      "thumbnail": "/jTswp6KyDYKtvC52GbHagrZbGvD.jpg",
+      "poster": "/620hnMVLu6RSZW6a5rwO8gqpt0t.jpg",
+      "brief_description": "Aliquip mollit minim excepteur incididunt et ea ea incididunt laborum nisi do.",
+      "synopsis": "Commodo mollit ex ipsum nulla. Ut occaecat sunt ea deserunt et aute occaecat ad nostrud. Fugiat labore sit incididunt dolore magna ea exercitation sint non do et. Lorem duis cupidatat laboris irure occaecat laboris duis commodo ipsum adipisicing.",
+      "movie_info": {
+        "release_date": "2021-06-17",
+        "director": "John Doe Featured",
+        "song": "Pegasus fantasi",
+        "budget": "200 million USD"
+      },
+      "average_rating": 8.1,
+      "total_review": 3255,
+      "trailler": "5qap5aO4i9A"
+    }
+  ],
+
+  "review": [
+    {
+      "id": "379686",
+      "__coment": "id ini meniru API dari backend, agar gita bisa menggunakan baseUrl/review/:movie_id maka id ini diisi dengan id movie",
+      "movie_id": "379686",
+      "reviewer": {
+        "id": "13452345234",
+        "user_name": "Surya Rangga Fuad"
+      },
+      "headline": "Some Headline",
+      "comment": "Dolor pariatur voluptate id tempor deserunt Lorem voluptate do mollit sit amet.",
+      "rating": 10
+    },
+    {
+      "id": "379686",
+      "__coment": "id ini meniru API dari backend, agar gita bisa menggunakan baseUrl/review/:movie_id maka id ini diisi dengan id movie",
+      "movie_id": "379686",
+      "reviewer": {
+        "id": "13452345234",
+        "user_name": "Surya Rangga Fuad"
+      },
+      "headline": "Some Headline",
+      "comment": "Dolor pariatur voluptate id tempor deserunt Lorem voluptate do mollit sit amet.",
+      "rating": 10
+    },
+    {
+      "id": "379686",
+      "__coment": "id ini meniru API dari backend, agar gita bisa menggunakan baseUrl/review/:movie_id maka id ini diisi dengan id movie",
+      "movie_id": "379686",
+      "reviewer": {
+        "id": "13452345234",
+        "user_name": "Surya Rangga Fuad"
+      },
+      "headline": "Some Headline",
+      "comment": "Dolor pariatur voluptate id tempor deserunt Lorem voluptate do mollit sit amet.",
+      "rating": 10
+    },
+    {
+      "id": "379686",
+      "__coment": "id ini meniru API dari backend, agar gita bisa menggunakan baseUrl/review/:movie_id maka id ini diisi dengan id movie",
+      "movie_id": "379686",
+      "reviewer": {
+        "id": "13452345234",
+        "user_name": "Surya Rangga Fuad"
+      },
+      "headline": "Some Headline",
+      "comment": "Dolor pariatur voluptate id tempor deserunt Lorem voluptate do mollit sit amet.",
+      "rating": 10
+    },
+    {
+      "id": "379686",
+      "__coment": "id ini meniru API dari backend, agar gita bisa menggunakan baseUrl/review/:movie_id maka id ini diisi dengan id movie",
+      "movie_id": "379686",
+      "reviewer": {
+        "id": "13452345234",
+        "user_name": "Surya Rangga Fuad"
+      },
+      "headline": "Some Headline",
+      "comment": "Dolor pariatur voluptate id tempor deserunt Lorem voluptate do mollit sit amet.",
+      "rating": 10
+    },
+    {
+      "id": "379686",
+      "__coment": "id ini meniru API dari backend, agar gita bisa menggunakan baseUrl/review/:movie_id maka id ini diisi dengan id movie",
+      "movie_id": "379686",
+      "reviewer": {
+        "id": "13452345234",
+        "user_name": "Surya Rangga Fuad"
+      },
+      "headline": "Some Headline",
+      "comment": "Dolor pariatur voluptate id tempor deserunt Lorem voluptate do mollit sit amet.",
+      "rating": 10
+    },
+    {
+      "id": "379686",
+      "__coment": "id ini meniru API dari backend, agar gita bisa menggunakan baseUrl/review/:movie_id maka id ini diisi dengan id movie",
+      "movie_id": "379686",
+      "reviewer": {
+        "id": "13452345234",
+        "user_name": "Surya Rangga Fuad"
+      },
+      "headline": "Some Headline",
+      "comment": "Dolor pariatur voluptate id tempor deserunt Lorem voluptate do mollit sit amet.",
+      "rating": 10
+    }
+  ],
+
+  "users": [
+    {
+      "id": "1",
+      "userName": "asdfahsdfa",
+      "fullName": "ssdafa sdf asdf adf",
+      "email": "example@domain.com",
+      "image": "users/131451243235.png"
+    },
+    {
+      "id": "2",
+      "userName": "asdfahsdfa",
+      "fullName": "ssdafa sdf asdf adf",
+      "email": "example@domain.com",
+      "image": "users/131451243235.png"
+    },
+    {
+      "id": "3",
+      "userName": "asdfahsdfa",
+      "fullName": "ssdafa sdf asdf adf",
+      "email": "example@domain.com",
+      "image": "users/131451243235.png"
+    },
+    {
+      "id": "4",
+      "userName": "asdfahsdfa",
+      "fullName": "ssdafa sdf asdf adf",
+      "email": "example@domain.com",
+      "image": "users/131451243235.png"
+    }
+  ],
+  
+  "actors": [
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    },
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    },
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    },
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    },
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    },
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    },
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    },
+    {
+      "id": "379686",
+      "__comments": "agar kita bisa meniru API dari backend maka id disi dengan id movie sehingga kita bisa menggunakan endpoint seperti ini /actors/movie_id",
+      "name": "richardo kaka",
+      "photo": "actors/1215341234124.png"
+    }
+  ]
+}
