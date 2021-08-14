@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import UserPage from './pages/UserPage';
-
+import TestPage from './pages/TestPage';
 
 
 
@@ -45,6 +45,7 @@ const App = ({ theme }) => {
         <Switch>
           <Route exact path="/" component={() => (<LandingPage />)} /> {/**Loading page */}
           <Route path="/user" component={() => (<UserPage />)} />
+          <Route path="/test" component={() => (<TestPage />)} />
         </Switch>
       </ThemeProvider>
     </Router>
