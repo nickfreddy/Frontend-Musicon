@@ -7,15 +7,19 @@ import logoImage from '../../assets/img/Logo.svg'
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // display: 'flex',
+    // justifyContent: 'center',
+    overflowY: 'scroll'
   },
   paper: {
     backgroundColor: "#252836",
     boxShadow: theme.shadows[5],
     borderRadius: theme.spacing(1),
-    width: theme.spacing(40),
+    margin: theme.spacing(4, 'auto'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]:{
+      maxWidth: theme.spacing(60)
+    }
   },
   header: {
     background: "#1F1D2B",

@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 
 const buttonDefaultStyle ={
   borderRadius: '10em',
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   border: 0,
   color: 'white',
   height: 40,
@@ -32,10 +31,15 @@ const useStyles = makeStyles(theme => ({
   gold:{
     ...buttonDefaultStyle,
     background: 'linear-gradient(90deg, #FFCA6F, #F3AF38)'
+  },
+  transparent:{
+    ...buttonDefaultStyle,
+    border: '1px solid #3C4156'
   }
 }));
 
-export function RoundedButton({children,variant = "root", ...other}) {
+export function RoundedButton({children,variant, className = "root", ...other}) {
   const classes = useStyles();
-  return <Button {...other} className={classes[variant]}>{children}</Button>;
+  return <Button {...other} className={`${classes[variant]} ${className}`}>{children}</Button>;
 }
+
