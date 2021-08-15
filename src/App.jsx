@@ -21,15 +21,29 @@ const App = ({ theme }) => {
   const rootTheme = createTheme({
     palette: {
       type: 'dark',
-      // primary: {
-      //   light: "#FA8844",
-      //   main: "#BB6533",
-      //   dark: "#7D4322"
-      // },
+      primary: {
+        light: "#BFBFBF",
+        main: "#FFFFFF",
+        dark: "#808080"
+      },
       // secondary: {
       //   light: "#EB507F",
       //   main: "#FE024E",
       //   dark: "#7C2326"
+      // }
+    },
+    overrides: {
+      // MuiTextField: {
+      //   root: {
+      //     '& .MuiOutlinedInput-root': {
+      //       background: '#3C4156'
+      //     },
+      //     // '& .Mui-focused':{
+      //     //   '& .MuiOutlinedInput-notchedOutline':{
+      //     //     borderColor: 'gray'
+      //     //   }
+      //     // }
+      //   }
       // }
     }
   })

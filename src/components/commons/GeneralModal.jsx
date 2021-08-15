@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.spacing(60)
+    },
+    [theme.breakpoints.up('md')]: {
+      maxWidth: theme.spacing(80)
     }
   },
   header: {

@@ -19,14 +19,11 @@ const useStyles = makeStyles(theme => ({
   },
   primary:{
     ...buttonDefaultStyle,
-    background: 'linear-gradient(90deg, #4399FD, #0065DA)',
+    background: 'linear-gradient(90deg, #4399FD, #0065DA)'
   },
   secondary:{
     ...buttonDefaultStyle,
-    background: '#92929D',
-    '&:hover':{ 
-      color: 'black'
-    }
+    background: '#92929D'
   },
   gold:{
     ...buttonDefaultStyle,
