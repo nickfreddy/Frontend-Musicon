@@ -2,7 +2,9 @@ import React from 'react'
 import { useFormik } from 'formik'
 import ImageInput from '../commons/ImageInput'
 import { TextField, makeStyles } from '@material-ui/core'
-import { RoundedButton } from '../commons/CstButton'
+import { RoundedButton } from '../commons/CstButton';
+import { useDispatch } from 'react-redux';
+import { closeCreatePlaylistModalAction } from '../../redux/actions/modalAction';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -35,7 +37,8 @@ const useStyles = makeStyles(theme => ({
 
 
 const CreatePlaylistForm = () => {
-  const classes = useStyles()
+  const dispatch = useDispatch();
+  const classes = useStyles();
   //SETUP FORMIK
   const formik = useFormik({
     initialValues: {
@@ -50,6 +53,10 @@ const CreatePlaylistForm = () => {
 
   const handleImageIput = (e) => {
     formik.setFieldValue('coverPhoto', e.target.files[0])
+  }
+
+  const handleCloseModal =() => {
+    dispatch(closeCreatePlaylistModalAction());
   }
   return (
     <form className={classes.formContainer} onSubmit={formik.handleSubmit}>
@@ -83,7 +90,7 @@ const CreatePlaylistForm = () => {
           minRows={7}
           className={`${classes.textInput}`}
         />
-        <RoundedButton className={classes.inputButton} variant="secondary">Cancle</RoundedButton>
+        <RoundedButton onClick={handleCloseModal} className={classes.inputButton} variant="secondary">Cancle</RoundedButton>
         <RoundedButton className={classes.inputButton} type="submit" variant="primary">Save</RoundedButton>
       </div>
     </form>
