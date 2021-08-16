@@ -7,8 +7,11 @@ const useStyles = makeStyles(theme => ({
     // width: theme.spacing(6),
     height: '100vh',
     float: 'left',
-    background: 'red'
-
+    background: 'red',
+    //Temporary Style can be deleted
+    width: '0px',
+    overflow: 'hidden'
+    //==============================
   }
 }))
 

@@ -17,14 +17,17 @@ const App = ({ theme }) => {
   // const dispatch = useDispatch()
   // const {loading} = useSelector(state => state.movies);
   // console.log(loading);
-
+  const themeType = 'dark';
   const rootTheme = createTheme({
     palette: {
-      type: 'dark',
+      type: themeType,
       primary: {
         light: "#BFBFBF",
         main: "#FFFFFF",
         dark: "#808080"
+      },
+      background:{
+        default: themeType === 'dark' ? "#252836" : "#fafafa",
       },
       // secondary: {
       //   light: "#EB507F",
