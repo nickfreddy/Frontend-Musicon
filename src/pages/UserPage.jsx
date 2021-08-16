@@ -7,6 +7,7 @@ import PlaylistPage from './playListPage/PlaylistPage';
 import CreatedPlaylistPage from './createdPlaylistPage/CreatedPlaylistPage';
 import DetailPlaylist from './playListPage/DetailPlaylist';
 import SongList from './createdPlaylistPage/SongList';
+import ProfilePage from './profilePage/ProfilePage';
 
 const UserPage = () => {
   let match = useRouteMatch();
@@ -20,6 +21,7 @@ const UserPage = () => {
         <Route       path={`${match.path}/playlist/:playlist_id`}         component={() => <DetailPlaylist/>}/>
         <Route exact path={`${match.path}/createdPlaylist`}               component={() => <CreatedPlaylistPage/>}/>
         <Route       path={`${match.path}/createdPlaylist/:playlist_id`}  component={() => <SongList/>}/>
+        <Route exact path={`${match.path}/profile`}                       component={() => <ProfilePage/>}/>
       </Switch>
     </div>
   )
