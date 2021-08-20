@@ -6,11 +6,11 @@ import { alpha } from '@material-ui/core';
 
 const useStyle = makeStyles(theme => ({
   root:{
-    maxWidth: '229px',
+    maxWidth: '241px',
     
   },
   imageInput:{
-    height: '229px',
+    height: '241px',
     borderRadius: theme.spacing(1),
     background: '#3C4156',
     display: 'flex',

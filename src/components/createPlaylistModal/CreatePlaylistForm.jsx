@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   imageInput: {
     margin: theme.spacing(1, 'auto'),
     [theme.breakpoints.up('md')]:{
-      minWidth: '229px',
+      minWidth: '241px',
       margin: theme.spacing(0, 2, 0, 0),
     }
   },

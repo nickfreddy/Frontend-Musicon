@@ -44,7 +44,7 @@ const useStyle = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
-    opacity: '0',
+    opacity: '0.5',
     transition: 'all 0.3s ease',
     textAlign: 'center',
     '&:hover': {
@@ -53,26 +53,28 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const ImageInputCircle = ({ value, onChange, className }) => {
+const ImageInputCircle = ({ value, disabled, onChange, className }) => {
   const classes = useStyle();
   return (
     <div className={`${classes.root} ${className}`}>
       <label className={`${classes.imageInput}`} htmlFor="image_select_125">
         {Boolean(value) ?
           <div className={classes.imageContainer}>
-            <img className={classes.imagePreview} src={URL.createObjectURL(value)} alt="" />
+            <img className={classes.imagePreview} src={typeof value === "string" ? value : URL.createObjectURL(value)} alt="" />
+            {disabled ||
             <div className={classes.changeImageIcon}>
               <div>
               <AddAPhotoIcon />
               <Typography variant='body1'>Change Photo</Typography>
               </div>
             </div>
+            }
           </div>
           :
           <AddAPhotoIcon />
         }
       </label>
-      <input accept="image/*" id="image_select_125" onChange={onChange} style={{ display: 'none' }} type="file" />
+      <input disabled={disabled} accept="image/*" id="image_select_125" onChange={onChange} style={{ display: 'none' }} type="file" />
     </div>
   )
 }

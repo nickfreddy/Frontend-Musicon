@@ -3,7 +3,8 @@ import React from 'react';
 
 const useStyles = makeStyles(theme => ({
   root:{
-    background: '#1F1D2B'
+    background: '#1F1D2B',
+    width: "200px",
   },
   cardContent: {
     textAlign: 'center'

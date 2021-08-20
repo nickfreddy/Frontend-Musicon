@@ -16,7 +16,7 @@ import {
 import { Delete } from '@material-ui/icons';
 import React, {useState} from 'react';
 import TablePaginationActions from './TablePaginationAction';
-import samplePhoto from '../../assets/img/XMLID1383.svg'
+import samplePhoto from '../../../assets/img/XMLID1383.svg'
 
 
 const dummyData = [

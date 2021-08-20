@@ -1,0 +1,59 @@
+{
+  "data": {
+      "playlistTitle": "LOVE SONG",
+      "songs": [
+          {
+              "songTitle": "Alfred - Intro",
+              "songDuration": "17",
+              "songImage": "https://i.scdn.co/image/ab67616d0000b2736851bc06fc0d85bbe74cffd7",
+              "_id": "611cb652faacba1d5b26b85",
+              "artistId": {
+                  "_id": "611cb64dfaacba1d5b26b802",
+                  "name": "Eminem",
+                  "id": "611cb64dfaacba1d5b26b802"
+              },
+              "id": "611cb652faacba1d5b26b85e"
+          },
+          {
+              "songTitle": "Alfred - Intro",
+              "songDuration": "17",
+              "songImage": "https://i.scdn.co/image/ab67616d0000b2736851bc06fc0d85bbe74cffd7",
+              "_id": "611cb652faacba1d5b26b8",
+              "artistId": {
+                  "_id": "611cb64dfaacba1d5b26b802",
+                  "name": "Eminem",
+                  "id": "611cb64dfaacba1d5b26b802"
+              },
+              "id": "611cb652faacba1d5b26b85e"
+          },
+          {
+              "songTitle": "Alfred - Intro",
+              "songDuration": "17",
+              "songImage": "https://i.scdn.co/image/ab67616d0000b2736851bc06fc0d85bbe74cffd7",
+              "_id": "611cb652faacba1d5b26b85e",
+              "artistId": {
+                  "_id": "611cb64dfaacba1d5b26b802",
+                  "name": "Eminem",
+                  "id": "611cb64dfaacba1d5b26b802"
+              },
+              "id": "611cb652faacba1d5b26b85e"
+          }
+      ],
+      "playlistDuration": "6969",
+      "playlistImage": "/images/playlists/1629350221196.png",
+      "playlistRating": 0,
+      "deleted": false,
+      "_id": "611de94df5fc530c207e247f",
+      "description": "love it",
+      "author": {
+          "_id": "611a897c66d3b310404d832a",
+          "username": "kikikiki",
+          "fullname": "rezki ade pratama putra",
+          "id": "611a897c66d3b310404d832a"
+      },
+      "createdAt": "2021-08-19T05:17:01.201Z",
+      "updatedAt": "2021-08-19T07:04:19.109Z",
+      "__v": 0,
+      "id": "611de94df5fc530c207e247f"
+  }
+}
