@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/styles'
 import { Typography, FormControl, OutlinedInput, Button } from '@material-ui/core';
 import { useFormik } from 'formik';
-import ImageInputCircle from '../../components/commons/ImageInputCircle';
-import { RoundedButton } from '../../components/commons/CstButton';
+import ImageInputCircle from '../../../components/commons/ImageInputCircle';
+import { RoundedButton } from '../../../components/commons/CstButton';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -36,8 +36,21 @@ const useStyles = makeStyles(theme => ({
   },
   inputFullName: {
     margin: theme.spacing(0, 0, 1),
+    '& .MuiOutlinedInput-root':{
+      background: '#1F1D2B',
+      color: 'white',
+    },
+    '& .MuiOutlinedInput-notchedOutline':{
+      border: 'none'
+    },
     [theme.breakpoints.up('md')]: {
       width: 400
+    }
+  },
+  inputFullNameActive:{
+    '& .MuiOutlinedInput-root':{
+      background: '#3C4156',
+      color: 'white',
     }
   },
   actionButton: {
@@ -95,11 +108,11 @@ const ProfileSection = ({ photo, fullName }) => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className={classes.form}>
-        <ImageInputCircle className={classes.imageInput} value={formik.values.userPhoto} onChange={handlePhotoChange} />
+        <ImageInputCircle disabled={!enableEdit} className={classes.imageInput} value={formik.values.userPhoto} onChange={handlePhotoChange} />
         <div className={classes.sidePanel}>
           <Typography className={classes.label} variant="h6">Full Name</Typography>
           <div className={classes.textInput}>
-            <FormControl size="small" className={classes.inputFullName} fullWidth variant="outlined">
+            <FormControl size="small" className={`${classes.inputFullName} ${enableEdit && classes.inputFullNameActive}`} fullWidth variant="outlined">
               <OutlinedInput
                 id="fullName"
                 name="fullName"

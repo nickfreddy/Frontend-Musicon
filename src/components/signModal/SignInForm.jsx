@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import * as yup from 'yup';
-import { Typography, makeStyles, TextField, InputAdornment, IconButton } from '@material-ui/core'
+import { Typography, makeStyles, TextField, InputAdornment, IconButton, CircularProgress } from '@material-ui/core'
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { RoundedButton } from '../commons/CstButton';
+import InfoBar from '../commons/InfoBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { Warning } from '@material-ui/icons';
+import { useHistory } from 'react-router';
+import { signInUserAction } from '../../redux/actions/userAction';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -38,7 +43,9 @@ const validationSchema = yup.object({
 const SignInForm = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false)
-
+  const history = useHistory();
+  const dispatch = useDispatch()
+  const {openLoginInfoModal, loading, info} = useSelector(state => state.user);
   //FORMIK SETUP
   const formik = useFormik({
     initialValues: {
@@ -47,7 +54,9 @@ const SignInForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
+      alert(JSON.stringify(values, null, 2));
+      const {userNameOrEmail, password} = values;
+      dispatch(signInUserAction(userNameOrEmail, password, () => history.push('/user')));
     }
   })
 
@@ -56,6 +65,12 @@ const SignInForm = () => {
   return (
     <div>
       <Typography className={classes.title} variant="h5">Log In</Typography>
+      <InfoBar open={openLoginInfoModal}
+        startIcon={<Warning />}
+      >
+        <Typography>{info}</Typography>
+
+      </InfoBar>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -94,7 +109,7 @@ const SignInForm = () => {
           }}
         />
         <Typography variant="body1">Forgot Password ? </Typography>
-        <RoundedButton type="submit" className={classes.submitButton} fullWidth variant="primary">Login</RoundedButton>
+        <RoundedButton startIcon={loading && <CircularProgress size={20}/>} type="submit" className={classes.submitButton} fullWidth variant="primary">Login</RoundedButton>
       </form>
     </div>
   )

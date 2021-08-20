@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -13,8 +13,8 @@ import TestPage from './pages/TestPage';
 
 
 
+
 const App = ({ theme }) => {
-  // const dispatch = useDispatch()
   // const {loading} = useSelector(state => state.movies);
   // console.log(loading);
   const themeType = 'dark';
@@ -26,7 +26,7 @@ const App = ({ theme }) => {
         main: "#FFFFFF",
         dark: "#808080"
       },
-      background:{
+      background: {
         default: themeType === 'dark' ? "#252836" : "#fafafa",
       },
       // secondary: {
@@ -34,6 +34,19 @@ const App = ({ theme }) => {
       //   main: "#FE024E",
       //   dark: "#7C2326"
       // }
+    },
+    typography: {
+      fontFamily: [
+        'DM Sans',
+        'sans-serif',
+        // '"Helvetica Neue"',
+        // 'Roboto',
+        // 'Arial',
+        // 'sans-serif',
+        // '"Apple Color Emoji"',
+        // '"Segoe UI Emoji"',
+        // '"Segoe UI Symbol"',
+      ].join(',')
     },
     overrides: {
       // MuiTextField: {
@@ -48,12 +61,9 @@ const App = ({ theme }) => {
       //     // }
       //   }
       // }
+      
     }
   })
-
-  useEffect(() => {
-
-  }, [])
 
   return (
     <Router>

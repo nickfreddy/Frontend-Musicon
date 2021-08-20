@@ -10,6 +10,7 @@ import TitleDivider from "../commons/TitleDivider";
 import { RoundedButton } from "../commons/CstButton";
 import googleIcon from '../../assets/img/grommet-icons_google.svg'
 import facebookIcon from '../../assets/img/logos_facebook.svg'
+import { closeInfoLoginModalAction, closeRegisterInfoAction } from "../../redux/actions/userAction";
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
@@ -46,18 +47,21 @@ const SignModal = () => {
 
   const handleClose = () => {
     dispatch(closeModalAuthAction());
+    dispatch(closeRegisterInfoAction());
+    dispatch(closeInfoLoginModalAction());
   }
   const handleShowSignUp = () => {
-    setShowSignUp(true)
+    setShowSignUp(true);
+    dispatch(closeInfoLoginModalAction());
   }
 
   const handleShowSignIn = () => {
-    setShowSignUp(false)
+    setShowSignUp(false);
+    dispatch(closeRegisterInfoAction());
   }
   return (
     <CstModal isOpen={openAuthModal} handleClose={handleClose}>
       <Container className={classes.formContainer}>
-
         {showSignUp ? <SignUpForm /> : <SignInForm />}
 
         {!showSignUp ? 

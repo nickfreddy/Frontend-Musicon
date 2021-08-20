@@ -1,8 +1,11 @@
 import { all } from "redux-saga/effects";
+import { getLogedInUserWatcher, signInUserWatcher, signUpUserWatcher } from "./sagaWatcher/userWatcher";
 //Import Wathcer Here
 
 export default function* rootSaga(){
   yield all([
-    //Run Watcher Here
+    signUpUserWatcher(),
+    signInUserWatcher(),
+    getLogedInUserWatcher()
   ])
 }

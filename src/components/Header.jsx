@@ -18,12 +18,10 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-  },
   root: {
     color: "#92929D",
     background: "#1F1D2B",
+    zIndex: theme.zIndex.drawer + 1
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -33,10 +31,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    marginRight: theme.spacing(5),
+    // marginRight: theme.spacing(5),
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "block",
+      marginRight: '90px'
     },
   },
   bold: {
@@ -74,16 +73,17 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
+    height: '2em',
     [theme.breakpoints.up("md")]: {
       width: "100%",
     },
   },
   avatar: {
-    margin: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
   dropdownIcon: {
     color: "#FFFFFF",
-    margin: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
   sectionDesktop: {
     display: "none",
@@ -207,7 +207,7 @@ export default function Header() {
   );
 
   return (
-    <div className={classes.grow}>
+    <div>
       <AppBar position="fixed" className={classes.root}>
         <Toolbar>
           <IconButton
@@ -218,7 +218,9 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <img className={classes.logo} src={Logo} alt="logo" />
+          <div className={classes.logo}>
+            <img src={Logo} alt="logo" />
+          </div>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -233,7 +235,6 @@ export default function Header() {
               fullWidth={true}
             />
           </div>
-          <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Avatar className={classes.avatar} />
             <div>
