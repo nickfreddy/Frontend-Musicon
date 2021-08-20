@@ -101,7 +101,6 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     "& .MuiPaper-root": {
       backgroundColor: "#1F1D2B",
-      overflow: "visible",
     },
   },
   spacing: {
@@ -140,6 +139,7 @@ export default function Header() {
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
+      disableScrollLock
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={menuId}
@@ -168,6 +168,7 @@ export default function Header() {
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
+      disableScrollLock
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
@@ -207,7 +208,7 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" className={classes.root}>
+      <AppBar position="fixed" className={classes.root}>
         <Toolbar>
           <IconButton
             edge="start"
