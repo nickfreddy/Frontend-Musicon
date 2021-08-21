@@ -12,3 +12,4 @@ export function* signInUserWatcher() {
 export function* getLogedInUserWatcher(){
   yield takeLatest(type.GET_USER, getLogedInUserWorker);
 }
+

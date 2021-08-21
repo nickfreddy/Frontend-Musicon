@@ -36,18 +36,26 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const CreatePlaylistForm = () => {
+const CreatePlaylistForm = ({photo, title, description, actionUpdate}) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   //SETUP FORMIK
   const formik = useFormik({
     initialValues: {
-      coverPhoto: '',
-      playlistTitle: '',
-      playlistDescription: '',
+      coverPhoto: photo,
+      playlistTitle: title,
+      playlistDescription: description,
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      if(actionUpdate){
+        alert('Handle Action Update' + JSON.stringify(values, null, 2));
+        //onUpdate if photo is string indicate no update for photo 
+        //then dont update the photo,  only send  playlist title and description
+        //in saga worker
+      }else{
+        alert('Handle Action Create' + JSON.stringify(values, null, 2));
+
+      }
     }
   })
 

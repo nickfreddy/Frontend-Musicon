@@ -9,7 +9,6 @@ import {
   Typography,
   IconButton,
   alpha,
-  Container,
   Button,
 } from '@material-ui/core';
 import React from 'react';
@@ -17,8 +16,10 @@ import samplePhoto from '../../../assets/img/XMLID1383.svg';
 import editIcon from '../../../assets/img/editIcon.svg';
 import deleteIcon from '../../../assets/img/deleteIcon.svg';
 import { useHistory, useRouteMatch } from 'react-router';
-
-
+import { sourceUrl } from '../../../redux/Api/setupAPI';
+import { formatDate } from '../../../tools/dateReformat';
+import { useSelector } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
 //useStyles==========================================
 const useStyles = makeStyles(theme => ({
   table: {
@@ -38,7 +39,14 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   playlistIcon: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
+    borderRadius: '8px'
+  },
+  tableHead:{
+    background: "linear-gradient(90deg, #4399FD, #0065DA)",
+    '& > .MuiTableCell-root':{
+      fontWeight: 700
+    }
   },
   tableRowContent: {
     background: alpha('#FFFFFF', 0),
@@ -77,11 +85,11 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
   const classes = useStyles();
   const history = useHistory();
   const { url } = useRouteMatch()
-
+  const userPlaylist = useSelector(state => state.userPlaylist)
   const combineIconAndTitle = (icon, title) => (
     <div className={classes.playListTitleTable}>
       {icon ?
-        <img className={`${classes.playlistIcon}`} width="40px" src={icon} alt="" />
+        <img className={`${classes.playlistIcon}`} width="40px" src={sourceUrl+icon} alt="" />
         :
         <img className={`${classes.playlistIcon}`} width="40px" src={samplePhoto} alt="" />
       }
@@ -95,6 +103,13 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
 
 
   const renderTableContent = (data) => {
+  if(userPlaylist.loading) return (
+    <TableRow className={classes.tableRowContentEmpty}>
+      <TableCell colSpan={5}>
+        <Typography variant="h6" align="center"><CircularProgress/></Typography>
+      </TableCell>
+    </TableRow>
+  )
   if(data.length === 0) return (
     <TableRow className={classes.tableRowContentEmpty}>
       <TableCell colSpan={5}>
@@ -112,16 +127,16 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
           </Typography>
         </TableCell>
         <TableCell padding="none" style={{ width: 400 }} onClick={() => handleSongPlay(playList._id)}>
-          {combineIconAndTitle(playList.playlistIcon, playList.title)}
+          {combineIconAndTitle(playList.playlistImage, playList.playlistTitle)}
         </TableCell>
         <TableCell padding="none" onClick={() => handleSongPlay(playList._id)}>
           <Typography align="center">
-            {playList.totalSong}
+            {playList.songs.length}
           </Typography>
         </TableCell >
         <TableCell padding="none" onClick={() => handleSongPlay(playList._id)}>
           <Typography align="center">
-            {playList.dateCreated}
+            {formatDate(playList.createdAt)}
           </Typography>
         </TableCell>
         <TableCell padding="none" align="center">
@@ -137,10 +152,10 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
   }
 
   return (
-    <TableContainer component={Container} className={classes.tableContainer}>
+    <TableContainer className={classes.tableContainer}>
       <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
+        <TableHead >
+          <TableRow className={classes.tableHead}>
             <TableCell align="center">NO</TableCell>
             <TableCell align="left">TITLE</TableCell>
             <TableCell align="center">TOTAL SONGS</TableCell>

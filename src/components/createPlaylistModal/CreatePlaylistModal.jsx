@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 
   }
 }))
-const CreatePlaylistModal = () => {
+const CreatePlaylistModal = ({photo = "", title ="", description= "", actionUpdate=false}) => {
   const classes = useStyles();
   const dispatch = useDispatch()
   const { openCreatePlaylistModal } = useSelector(state => state.modals)
@@ -22,7 +22,7 @@ const CreatePlaylistModal = () => {
   return (
     <GeneralModal isOpen={openCreatePlaylistModal} handleClose={handleClose} title="Create Playlist">
       <Container className={classes.modalContent} >
-        <CreatePlaylistForm />
+        <CreatePlaylistForm photo={photo} title={title} description={description} actionUpdate={actionUpdate}/>
       </Container>
     </GeneralModal>
   )

@@ -93,7 +93,7 @@ const CstDrawer = ({ open, className }) => {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button className={classes.listItem} >
+          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/browse' && classes.pathSelected}`}  onClick={() => history.push(`${url}/browse`)} >
             <ListItemIcon>
               <MenuBookIcon />
             </ListItemIcon>
@@ -140,7 +140,7 @@ const CstDrawer = ({ open, className }) => {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button className={`${classes.listItem}`} >
+          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/browse' && classes.pathSelected}`}  onClick={() => history.push(`${url}/browse`)}>
             <ListItemIcon>
               <MenuBookIcon />
             </ListItemIcon>

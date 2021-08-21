@@ -9,7 +9,6 @@ import {
   Typography,
   IconButton,
   alpha,
-  Container,
   List,
 } from '@material-ui/core'
 // import { Delete } from '@material-ui/icons';
@@ -88,6 +87,13 @@ const useStyles = makeStyles(theme => ({
   songIcon: {
     marginRight: theme.spacing(2)
   },
+  tableHead:{
+    background: "linear-gradient(90deg, #4399FD, #0065DA)",
+    '& > .MuiTableCell-root':{
+      fontWeight: 700,
+      textTransform: 'uppercase'
+    }
+  },
   tableRowContent: {
     background: alpha('#FFFFFF', 0),
     transition: 'all 0.4s ease',
@@ -105,7 +111,8 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '0 8px 8px 0',
       },
     }
-  }
+  },
+
 }))
 
 const TopSongSection = () => {
@@ -167,10 +174,10 @@ const TopSongSection = () => {
 
   return (
     <>
-      <TableContainer component={Container} className={classes.tableContainer}>
+      <TableContainer className={classes.tableContainer}>
         <Table className={classes.table}>
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.tableHead}>
               <TableCell align="center">No</TableCell>
               <TableCell align="left">Title</TableCell>
               <TableCell align="center">Artist</TableCell>

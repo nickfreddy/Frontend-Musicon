@@ -9,7 +9,6 @@ import {
   Typography,
   IconButton,
   alpha,
-  Container,
 } from '@material-ui/core';
 import React from 'react';
 import samplePhoto from '../../../assets/img/XMLID1383.svg';
@@ -69,6 +68,12 @@ const useStyles = makeStyles(theme => ({
     textDecoration: 'underline',
     '&:hover':{
       cursor: 'pointer'
+    }
+  },
+  tableHead:{
+    background: "linear-gradient(90deg, #4399FD, #0065DA)",
+    '& > .MuiTableCell-root':{
+      fontWeight: 700
     }
   }
 }))
@@ -134,10 +139,10 @@ const SongListTable = ({ data, handleSongPlay, handleDelete, handleAddNewSong })
   }
 
   return (
-    <TableContainer component={Container} className={classes.tableContainer}>
+    <TableContainer className={classes.tableContainer}>
       <Table className={classes.table}>
         <TableHead >
-          <TableRow>
+          <TableRow className={classes.tableHead}>
             <TableCell align="center">NO</TableCell>
             <TableCell align="left">TITLE</TableCell>
             <TableCell align="center">ARTIST</TableCell>

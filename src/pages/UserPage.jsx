@@ -11,8 +11,10 @@ import ProfilePage from './profilePage/ProfilePage';
 import { makeStyles } from '@material-ui/styles';
 import Player from '../components/Player/Player';
 import AccountPage from './accountPage/AccountPage';
+import BrowsePage from './browsePage/BrowsePage';
 const useStyles = makeStyles(theme => ({
   root: {
+    paddingBottom: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
       display: 'flex',
       position: 'relative'
@@ -38,12 +40,14 @@ const UserPage = () => {
       <div className={classes.content}>
         <Switch>
           <Route exact path={match.path} component={() => <HomePage />} />
+          <Route exact path={`${match.path}/browse`} component={() => <BrowsePage/>}/>
           <Route exact path={`${match.path}/playlist`} component={() => <PlaylistPage />} />
           <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} />
           <Route exact path={`${match.path}/createdPlaylist`} component={() => <CreatedPlaylistPage />} />
           <Route path={`${match.path}/createdPlaylist/:playlist_id`} component={() => <SongList />} />
           <Route exact path={`${match.path}/profile`} component={() => <ProfilePage drawerOpen={drawerOpen} />} />
           <Route exact path={`${match.path}/account`} component={() => <AccountPage />}/>
+
         </Switch>
       </div>
       <Player />

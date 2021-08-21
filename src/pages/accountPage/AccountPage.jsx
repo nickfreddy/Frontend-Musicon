@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: '-80px',
     [theme.breakpoints.up('sm')]:{
       minHeight: 'initial',
-      marginTop: '0px'
+      marginTop: theme.spacing(4)
     },
     '& > .MuiTypography-root':{
       marginBottom: theme.spacing(2)

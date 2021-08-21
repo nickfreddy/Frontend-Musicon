@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import { connect } from 'react-redux';
-// import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import UserPage from './pages/UserPage';
 import TestPage from './pages/TestPage';
 
-
+import { useDispatch } from 'react-redux';
+import { getLogedInUserAction } from './redux/actions/userAction';
 
 
 
@@ -65,6 +65,12 @@ const App = ({ theme }) => {
     }
   })
 
+  const dispatch = useDispatch();
+
+
+  useEffect(()=> {
+    dispatch(getLogedInUserAction());
+  },[dispatch])
   return (
     <Router>
       <ThemeProvider theme={rootTheme}>

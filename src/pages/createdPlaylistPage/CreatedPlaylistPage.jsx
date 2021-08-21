@@ -6,15 +6,16 @@ import {
   Button,
   // Paper
 } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { dummyCreatedPlaylist } from '../../assets/example-response/dummyDataCreatedPlaylist';
 import CreatedPlaylistTable from './CreatedPlaylistComponent/CreatedPlaylistTable';
 import CreatedPlaylistList from './CreatedPlaylistComponent/CreatedPlaylistList';
 import addIcon from '../../assets/img/carbon_add.svg'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openCreatePlaylistModalAction } from '../../redux/actions/modalAction'
 import CreatePlaylistModal from '../../components/createPlaylistModal/CreatePlaylistModal';
 import ConfirmationDialog from '../../components/ConfirmationDialog/ConfirmationDialog';
+import { getUserPlaylistAction } from '../../redux/actions/userPlaylistAction';
 // import { useHistory, useRouteMatch } from 'react-router-dom'
 
 
@@ -23,6 +24,7 @@ const useStyles = makeStyles(theme => ({
   root: {},
   sectionTitle: {
     marginBottom: theme.spacing(2),
+    fontWeight: 700,
     textAlign: 'center',
     [theme.breakpoints.up('md')]: {
       textAlign: 'left'
@@ -44,6 +46,8 @@ const useStyles = makeStyles(theme => ({
   }
 
 }))
+
+
 const CreatedPlaylistPage = () => {
   // const history = useHistory();
   // const {url} = useRouteMatch();
@@ -53,6 +57,9 @@ const CreatedPlaylistPage = () => {
     open: false,
     idToDelete: ''
   })
+  const userPlaylist = useSelector(state => state.userPlaylist);
+
+
   const handleDelete = (_id) => {
     setDeleteConfirmation(state => ({
       ...state,
@@ -81,14 +88,20 @@ const CreatedPlaylistPage = () => {
   const handleOpenCreatePlaylistModal = () => {
     dispatch(openCreatePlaylistModalAction())
   }
+
+
+  useEffect(() => {
+    dispatch(getUserPlaylistAction());
+  },[dispatch]);
+
   return (
     <Container>
-      <Typography className={classes.sectionTitle} variant="h5">Created Playlist</Typography>
+      <Typography className={classes.sectionTitle} variant="h4">Created Playlist</Typography>
       {/* <Button variant="contained" color="primary" onClick={() => history.push(`${url}/123`)}>Goto Song List</Button> */}
       <div className={classes.buttonContainer}>
         <Button onClick={handleOpenCreatePlaylistModal} startIcon={<img src={addIcon} alt="..." />} variant="contained" color="primary">Create Playlist</Button>
       </div>
-      <CreatedPlaylistTable data={dummyCreatedPlaylist} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
+      <CreatedPlaylistTable data={userPlaylist.data} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
       <CreatedPlaylistList data={dummyCreatedPlaylist} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
       <CreatePlaylistModal />
       <ConfirmationDialog

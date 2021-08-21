@@ -120,7 +120,7 @@ const ChangePasswordForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       const { currentPassword, newPassword } = values;
       handlePasswordChanges(currentPassword, newPassword, resetForm);
     }

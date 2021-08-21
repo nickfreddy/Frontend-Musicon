@@ -14,7 +14,7 @@ export const openInfoLoginModalAction = (info) => ({ type: type.OPEN_LOGIN_INFO_
 export const closeInfoLoginModalAction = () => ({ type: type.CLOSE_LOGIN_INFO_MODAL });
 export const openRegisterInfoAction = (info) => ({ type: type.OPEN_REGISTER_INFO_MODAL, payload: info });
 export const closeRegisterInfoAction = () => ({ type: type.CLOSE_REGISTER_INFO_MODAL });
-export const logOutUser = () => {
+export const logOutUserAction = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('user_id');
   return { type: type.UNSET_USER };

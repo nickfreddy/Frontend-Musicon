@@ -16,6 +16,9 @@ import Divider from "@material-ui/core/Divider";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import { useHistory, useRouteMatch } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUserAction } from "../redux/actions/userAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,16 +112,36 @@ const useStyles = makeStyles((theme) => ({
   dividerSpacing: {
     margin: theme.spacing(1),
   },
+  blueTringale:{
+    width:'0',
+    height: '0',
+    borderTop: '50px solid #4399FD',
+    borderRight: '50px solid transparent',
+    borderLeft: '50px solid transparent',
+    transform: 'rotate(45deg)',
+    position: 'absolute',
+    bottom: '-8px',
+    left: '-32px',
+    display: 'none',
+    [theme.breakpoints.up('md')]:{
+      display: 'block'
+    }
+    
+  }
 }));
 
 export default function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const history = useHistory();
+  const {url} = useRouteMatch()
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const dispatch = useDispatch()
 
+
+  const user = useSelector(state => state.user);
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -136,6 +159,24 @@ export default function Header() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogOutUser = () => {
+    dispatch(logOutUserAction());
+    history.push('/');
+  }
+
+  const routeToProfilePage = () => {
+    history.push(`${url}/profile`);
+  }
+
+  const routeToAccountPage = () => {
+    history.push(`${url}/account`)
+  }
+
+  const handleSearchChange = (e) => {
+    // console.log(e.target.value);
+    history.push(`${url}/browse?pattern=${e.target.value}`)
+  }
+  
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -149,16 +190,16 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={routeToProfilePage}>
         <PersonIcon className={classes.spacing} />
         <Typography className={classes.spacing}>Profile</Typography>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={routeToAccountPage}>
         <AssignmentIndIcon className={classes.spacing} />
         <Typography className={classes.spacing}>Account</Typography>
       </MenuItem>
       <Divider className={classes.dividerSpacing} />
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleLogOutUser}>
         <ExitToAppIcon className={classes.spacing} />
         <Typography className={classes.spacing}>Logout</Typography>
       </MenuItem>
@@ -179,13 +220,13 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Avatar className={classes.avatar} />
+        <Avatar className={classes.avatar} src={user.data.photo}/>
         <div>
           <Typography variant="subtitle1" className={classes.bold}>
-            Remy Sharp
+            {user.data.fullname}
           </Typography>
           <Typography variant="body2" className={classes.spacing}>
-            remysharp@gmail.com
+            {user.data.email}
           </Typography>
         </div>
       </MenuItem>
@@ -209,6 +250,7 @@ export default function Header() {
   return (
     <div>
       <AppBar position="fixed" className={classes.root}>
+        <div className={classes.blueTringale}></div>
         <Toolbar>
           <IconButton
             edge="start"
@@ -232,16 +274,17 @@ export default function Header() {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
+              onChange={handleSearchChange}
               fullWidth={true}
             />
           </div>
           <div className={classes.sectionDesktop}>
-            <Avatar className={classes.avatar} />
+            <Avatar className={classes.avatar} src={user.data.photo}/>
             <div>
               <Typography variant="subtitle1" className={classes.bold}>
-                Remy Sharp
+                {user.data.fullname}
               </Typography>
-              <Typography variant="body2">remysharp@gmail.com</Typography>
+              <Typography variant="body2">{user.data.email}</Typography>
             </div>
             <div className={classes.dropdownIcon}>
               <ArrowDropDownIcon
