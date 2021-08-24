@@ -1,29 +1,32 @@
 import React from 'react'
 import { useFormik } from 'formik'
 import ImageInput from '../commons/ImageInput'
-import { TextField, makeStyles } from '@material-ui/core'
+import { TextField, makeStyles, CircularProgress } from '@material-ui/core'
 import { RoundedButton } from '../commons/CstButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { closeCreatePlaylistModalAction } from '../../redux/actions/modalAction';
+import { getUserPlaylistAction, postUserPlaylistAction } from '../../redux/actions/userPlaylistAction';
+import { updatePlaylistDetailAction } from '../../redux/actions/playlistDetailAction';
+import { getLogedInUserAction } from '../../redux/actions/userAction';
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
     textAlign: 'center',
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       display: 'flex',
       textAlign: 'right'
     }
   },
   imageInput: {
     margin: theme.spacing(1, 'auto'),
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       minWidth: '241px',
       margin: theme.spacing(0, 2, 0, 0),
     }
   },
   textInput: {
     margin: theme.spacing(1, 0),
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       margin: theme.spacing(0, 0, 1)
     }
   },
@@ -36,9 +39,12 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const CreatePlaylistForm = ({photo, title, description, actionUpdate}) => {
+const CreatePlaylistForm = ({ photo, title, description, actionUpdate, playlistId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const userPlaylist = useSelector(state => state.userPlaylist);
+  const playlistDetail = useSelector(state => state.playlistDetail);
+  const user = useSelector(state => state.user);
   //SETUP FORMIK
   const formik = useFormik({
     initialValues: {
@@ -47,13 +53,19 @@ const CreatePlaylistForm = ({photo, title, description, actionUpdate}) => {
       playlistDescription: description,
     },
     onSubmit: values => {
-      if(actionUpdate){
-        alert('Handle Action Update' + JSON.stringify(values, null, 2));
+      if (actionUpdate) {
+        // alert('Handle Action Update' + JSON.stringify(values, null, 2));
         //onUpdate if photo is string indicate no update for photo 
         //then dont update the photo,  only send  playlist title and description
         //in saga worker
-      }else{
-        alert('Handle Action Create' + JSON.stringify(values, null, 2));
+        dispatch(updatePlaylistDetailAction(playlistId, values.playlistTitle, values.coverPhoto, values.playlistDescription, () => dispatch(closeCreatePlaylistModalAction())));
+      } else {
+        // alert('Handle Action Create' + JSON.stringify(values, null, 2));
+        dispatch(postUserPlaylistAction(values.playlistTitle, values.coverPhoto, values.playlistDescription,
+          () => dispatch(getUserPlaylistAction(
+            () => dispatch(getLogedInUserAction(
+              () => dispatch(closeCreatePlaylistModalAction())
+            ))))));
 
       }
     }
@@ -63,7 +75,7 @@ const CreatePlaylistForm = ({photo, title, description, actionUpdate}) => {
     formik.setFieldValue('coverPhoto', e.target.files[0])
   }
 
-  const handleCloseModal =() => {
+  const handleCloseModal = () => {
     dispatch(closeCreatePlaylistModalAction());
   }
   return (
@@ -99,7 +111,12 @@ const CreatePlaylistForm = ({photo, title, description, actionUpdate}) => {
           className={`${classes.textInput}`}
         />
         <RoundedButton onClick={handleCloseModal} className={classes.inputButton} variant="secondary">Cancle</RoundedButton>
-        <RoundedButton className={classes.inputButton} type="submit" variant="primary">Save</RoundedButton>
+        <RoundedButton
+          startIcon={(userPlaylist.loading || playlistDetail.loading || user.loading) && <CircularProgress size={20} />} //Because it used by both saga worder userPlaylist and detail playlist
+          className={classes.inputButton}
+          type="submit"
+          variant="primary"
+        >Save</RoundedButton>
       </div>
     </form>
   )

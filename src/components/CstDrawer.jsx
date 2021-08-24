@@ -8,6 +8,7 @@ import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import AddIcon from '@material-ui/icons/Add';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useLocation } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 export const drawerWidth = "256px";
 const useStyles = makeStyles(theme => ({
@@ -64,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const CstDrawer = ({ open, className }) => {
+const CstDrawer = ({ className, drawer }) => {
   const history = useHistory();
   const { url } = useRouteMatch();
   const classes = useStyles();
@@ -77,9 +78,9 @@ const CstDrawer = ({ open, className }) => {
   return (
     <div className={classes.root}>
       <Drawer
-        className={`${classes.drawer} ${!open && classes.drawerHide} ${classes.mobileDrawer}`}
+        className={`${classes.drawer} ${!drawer.open && classes.drawerHide} ${classes.mobileDrawer}`}
         variant="persistent"
-        open={open}
+        open={drawer.open}
         anchor="left"
         classes={{
           paper: classes.drawerPaper
@@ -171,4 +172,7 @@ const CstDrawer = ({ open, className }) => {
   )
 }
 
-export default CstDrawer
+const mapStateToProps = (state) => ({
+  drawer: state.drawer
+})
+export default connect(mapStateToProps)(CstDrawer)

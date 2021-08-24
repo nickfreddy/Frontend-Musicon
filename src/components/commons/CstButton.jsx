@@ -36,15 +36,20 @@ const useStyles = makeStyles(theme => ({
   transparent: {
     ...buttonDefaultStyle,
     border: '1px solid #3C4156'
+  },
+  disabledClass:{
+    ...buttonDefaultStyle,
+    background: 'gray'
   }
 }));
 
-export function RoundedButton({ children, variant, className = "root", ...other }) {
+export function RoundedButton({ children, disabled = false, variant, className = "root", ...other }) {
   const classes = useStyles();
   return (
     <Button
       {...other}
-      className={`${classes[variant]} ${className}`}
+      disabled = {disabled}
+      className={`${classes[variant]} ${className} ${disabled && classes.disabledClass}`}
     >{children}
     </Button>
   );

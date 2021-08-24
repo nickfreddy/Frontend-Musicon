@@ -12,14 +12,14 @@ import {
   Button,
 } from '@material-ui/core';
 import React from 'react';
-import samplePhoto from '../../../assets/img/XMLID1383.svg';
+// import samplePhoto from '../../../assets/img/XMLID1383.svg';
 import editIcon from '../../../assets/img/editIcon.svg';
 import deleteIcon from '../../../assets/img/deleteIcon.svg';
 import { useHistory, useRouteMatch } from 'react-router';
 import { sourceUrl } from '../../../redux/Api/setupAPI';
 import { formatDate } from '../../../tools/dateReformat';
-import { useSelector } from 'react-redux';
-import { CircularProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { Skeleton } from '@material-ui/lab';
 //useStyles==========================================
 const useStyles = makeStyles(theme => ({
   table: {
@@ -40,12 +40,14 @@ const useStyles = makeStyles(theme => ({
   },
   playlistIcon: {
     marginRight: theme.spacing(2),
-    borderRadius: '8px'
+    borderRadius: '8px',
+    objectFit: 'cover',
+    objectPosition: 'top'
   },
-  tableHead:{
+  tableHead: {
     background: "linear-gradient(90deg, #4399FD, #0065DA)",
-    '& > .MuiTableCell-root':{
-      fontWeight: 700
+    '& > .MuiTableCell-root': {
+      fontWeight: 700,
     }
   },
   tableRowContent: {
@@ -53,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     transition: 'all 0.4s ease',
     '&:hover': {
       background: alpha('#2D304D', 0.9),
-      cursor: 'pointer'
+      // cursor: 'pointer'
     },
     '& .MuiTableCell-root': {
       border: 'none',
@@ -69,10 +71,14 @@ const useStyles = makeStyles(theme => ({
   tableRowContentEmpty: {
     background: alpha('#FFFFFF', 0),
     height: '25em',
-    '& .MuiButton-root':{
+    '& .MuiButton-root': {
       display: 'block',
       margin: '1em auto'
     }
+  },
+  tableListContentEmpty: {
+    height: '53px',
+    // borderRadius: theme.spacing(1)
   }
 }))
 //==================================================
@@ -81,18 +87,25 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCreatePlaylistModal }) => {
+const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCreatePlaylistModal, userPlaylist }) => {
   const classes = useStyles();
   const history = useHistory();
   const { url } = useRouteMatch()
-  const userPlaylist = useSelector(state => state.userPlaylist)
-  const combineIconAndTitle = (icon, title) => (
+
+  const combineIconAndTitle = (photo, title) => (
     <div className={classes.playListTitleTable}>
-      {icon ?
+      {// This mitigate type of received photo to prevent broken photo display
+        photo !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg' ? //check if photo is not empty string
+          typeof photo === 'string' ?
+            <img className={`${classes.playlistIcon}`} width="40px" height="40px" src={sourceUrl + photo} alt="..." /> //if type of photo is string mostli its a url from server so use it
+            : <img className={`${classes.playlistIcon}`} width="40px" height="40px" src={URL.createObjectURL(photo)} alt="..." /> //if type of photo is a file that inputed from form so use it
+          : <img className={`${classes.playlistIcon}`} width="40px" height="40px" src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
+      }
+      {/* {icon ?
         <img className={`${classes.playlistIcon}`} width="40px" src={sourceUrl+icon} alt="" />
         :
         <img className={`${classes.playlistIcon}`} width="40px" src={samplePhoto} alt="" />
-      }
+      } */}
       <Typography>{title}</Typography>
     </div>
   );
@@ -103,23 +116,25 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
 
 
   const renderTableContent = (data) => {
-  if(userPlaylist.loading) return (
-    <TableRow className={classes.tableRowContentEmpty}>
-      <TableCell colSpan={5}>
-        <Typography variant="h6" align="center"><CircularProgress/></Typography>
-      </TableCell>
-    </TableRow>
-  )
-  if(data.length === 0) return (
-    <TableRow className={classes.tableRowContentEmpty}>
-      <TableCell colSpan={5}>
-        <Typography variant="h6" align="center">Opps..., you don't have any playlist yet</Typography>
-        <Button onClick={handleOpenCreatePlaylistModal} variant="contained" color="primary">Create new playlist</Button>
-      </TableCell>
-    </TableRow>
-  )
+    if (userPlaylist.loading) return ([1, 2, 3, 4, 5].map((dummy, index) => (
+      <TableRow key={index} className={classes.tableRowContent} >
+        <TableCell padding="none" colSpan={5}>
+          {/* <Typography variant="h6" align="center"><CircularProgress/></Typography> */}
+          <Skeleton variant="rect" className={classes.tableListContentEmpty} />
+        </TableCell>
+      </TableRow>
+    ))
+    )
+    if (data.length === 0) return (
+      <TableRow className={classes.tableRowContentEmpty}>
+        <TableCell colSpan={5}>
+          <Typography variant="h6" align="center">Opps..., you don't have any playlist yet</Typography>
+          <Button onClick={handleOpenCreatePlaylistModal} variant="contained" color="primary">Create new playlist</Button>
+        </TableCell>
+      </TableRow>
+    )
 
-  return data.map((playList, index) => (
+    return data.map((playList, index) => (
       <TableRow key={index} className={classes.tableRowContent}>
         <TableCell padding="none" onClick={() => handleSongPlay(playList._id)}>
           <Typography align="center">
@@ -157,7 +172,7 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
         <TableHead >
           <TableRow className={classes.tableHead}>
             <TableCell align="center">NO</TableCell>
-            <TableCell align="left">TITLE</TableCell>
+            <TableCell style={{ width: 400 }} align="left">TITLE</TableCell>
             <TableCell align="center">TOTAL SONGS</TableCell>
             <TableCell align="center">DATE CREATED</TableCell>
             <TableCell align="center">ACTION</TableCell>
@@ -171,4 +186,7 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
   )
 }
 
-export default CreatedPlaylistTable
+const mapStateToProps = (state) => ({
+  userPlaylist: state.userPlaylist
+})
+export default connect(mapStateToProps)(CreatedPlaylistTable)

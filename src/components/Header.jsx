@@ -19,6 +19,9 @@ import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUserAction } from "../redux/actions/userAction";
+import { toggleDrawerOpenAction } from "../redux/actions/drawerAction";
+import { limitString } from "../tools/stringManipulation";
+import { sourceUrl } from "../redux/Api/setupAPI";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,6 +100,9 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
+    '& .MuiIconButton-root':{
+      paddingRight: theme.spacing(0)
+    },
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -139,9 +145,9 @@ export default function Header() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const dispatch = useDispatch()
-
-
   const user = useSelector(state => state.user);
+
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -177,6 +183,9 @@ export default function Header() {
     history.push(`${url}/browse?pattern=${e.target.value}`)
   }
   
+  const handleToggleDrawer = () => {
+    dispatch(toggleDrawerOpenAction());
+  }
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -220,27 +229,27 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Avatar className={classes.avatar} src={user.data.photo}/>
+        <Avatar className={classes.avatar} src={sourceUrl+user.data.photo}/>
         <div>
           <Typography variant="subtitle1" className={classes.bold}>
-            {user.data.fullname}
+            {limitString(user.data.fullname, 20)}
           </Typography>
           <Typography variant="body2" className={classes.spacing}>
-            {user.data.email}
+            {limitString(user.data.email, 21)}
           </Typography>
         </div>
       </MenuItem>
       <Divider className={classes.dividerSpacing} />
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={routeToProfilePage}>
         <PersonIcon className={classes.spacing} />
         <Typography className={classes.spacing}>Profile</Typography>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={routeToAccountPage}>
         <AssignmentIndIcon className={classes.spacing} />
         <Typography className={classes.spacing}>Account</Typography>
       </MenuItem>
       <Divider className={classes.dividerSpacing} />
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={handleLogOutUser}>
         <ExitToAppIcon className={classes.spacing} />
         <Typography className={classes.spacing}>Logout</Typography>
       </MenuItem>
@@ -256,7 +265,8 @@ export default function Header() {
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            aria-label="open drawer"
+            aria-label="open-drawer"
+            onClick={handleToggleDrawer}
           >
             <MenuIcon />
           </IconButton>
@@ -279,12 +289,12 @@ export default function Header() {
             />
           </div>
           <div className={classes.sectionDesktop}>
-            <Avatar className={classes.avatar} src={user.data.photo}/>
+            <Avatar className={classes.avatar} src={sourceUrl+user.data.photo}/>
             <div>
               <Typography variant="subtitle1" className={classes.bold}>
-                {user.data.fullname}
+                {limitString(user.data.fullname, 20)}
               </Typography>
-              <Typography variant="body2">{user.data.email}</Typography>
+              <Typography variant="body2">{limitString(user.data.email, 21)}</Typography>
             </div>
             <div className={classes.dropdownIcon}>
               <ArrowDropDownIcon
@@ -304,7 +314,7 @@ export default function Header() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <Avatar />
+              <Avatar src={sourceUrl+user.data.photo}/>
             </IconButton>
           </div>
         </Toolbar>

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/styles'
-import { Typography, FormControl, OutlinedInput, Button } from '@material-ui/core';
+import { Typography, FormControl, OutlinedInput, Button, CircularProgress } from '@material-ui/core';
 import { useFormik } from 'formik';
 import ImageInputCircle from '../../../components/commons/ImageInputCircle';
 import { RoundedButton } from '../../../components/commons/CstButton';
+import { useHistory, useRouteMatch } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getLogedInUserAction, updateUserAction } from '../../../redux/actions/userAction';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -36,19 +39,19 @@ const useStyles = makeStyles(theme => ({
   },
   inputFullName: {
     margin: theme.spacing(0, 0, 1),
-    '& .MuiOutlinedInput-root':{
+    '& .MuiOutlinedInput-root': {
       background: '#1F1D2B',
       color: 'white',
     },
-    '& .MuiOutlinedInput-notchedOutline':{
+    '& .MuiOutlinedInput-notchedOutline': {
       border: 'none'
     },
     [theme.breakpoints.up('md')]: {
       width: 400
     }
   },
-  inputFullNameActive:{
-    '& .MuiOutlinedInput-root':{
+  inputFullNameActive: {
+    '& .MuiOutlinedInput-root': {
       background: '#3C4156',
       color: 'white',
     }
@@ -63,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(0, 0, 1),
     color: 'gray'
   },
-  editButtonContainer:{
+  editButtonContainer: {
     [theme.breakpoints.up('md')]: {
       display: 'flex'
     }
@@ -74,15 +77,32 @@ const useStyles = makeStyles(theme => ({
     minWidth: theme.spacing(15),
     height: 37
   },
-  enableEditButton:{
+  enableEditButton: {
     whiteSpace: 'nowrap',
 
   }
 }))
-const ProfileSection = ({ photo, fullName }) => {
+const ProfileSection = ({ photo, fullName, createdPlaylist }) => {
   const classes = useStyles();
   const [enableEdit, setEnableEdit] = useState(false)
+  const history = useHistory();
+  const { url } = useRouteMatch();
+  const dispatch = useDispatch();
 
+  const user = useSelector(state => state.user);
+
+
+  const handleEnableEdit = () => {
+    setEnableEdit(true)
+  }
+  const handleDisableEdit = () => {
+    setEnableEdit(false);
+    history.push(url); //reset the state of photo, you know why ? let ask me (surya) it is long explanation
+  }
+
+  const handleAfterUpdate = () => {
+    setEnableEdit(false);
+  }
 
   //Formik SETUP
   const formik = useFormik({
@@ -90,8 +110,11 @@ const ProfileSection = ({ photo, fullName }) => {
       userPhoto: photo,
       fullName: fullName
     },
+    enableReinitialize: true,
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2))
+      // alert(JSON.stringify(values, null, 2));
+      dispatch(updateUserAction(values.fullName, values.userPhoto, () => dispatch(getLogedInUserAction(() => handleAfterUpdate()))));
+
     }
   })
 
@@ -99,16 +122,24 @@ const ProfileSection = ({ photo, fullName }) => {
     formik.setFieldValue('userPhoto', e.target.files[0])
   }
 
-  const handleEnableEdit = () => {
-    setEnableEdit(true)
-  }
-  const handleDisableEdit = () => {
-    setEnableEdit(false)
-  }
+
+
+
+
+
+
+
+
+
   return (
     <div>
       <form onSubmit={formik.handleSubmit} className={classes.form}>
-        <ImageInputCircle disabled={!enableEdit} className={classes.imageInput} value={formik.values.userPhoto} onChange={handlePhotoChange} />
+        <ImageInputCircle
+          disabled={!enableEdit}
+          className={classes.imageInput}
+          value={formik.values.userPhoto}
+          onChange={handlePhotoChange}
+        />
         <div className={classes.sidePanel}>
           <Typography className={classes.label} variant="h6">Full Name</Typography>
           <div className={classes.textInput}>
@@ -125,14 +156,14 @@ const ProfileSection = ({ photo, fullName }) => {
               {enableEdit ?
                 <div className={classes.editButtonContainer}>
                   <RoundedButton onClick={handleDisableEdit} className={classes.editButton} variant="secondary">Cancle</RoundedButton>
-                  <RoundedButton type="submit" className={classes.editButton} variant="primary">Save</RoundedButton>
+                  <RoundedButton startIcon={user.loading && <CircularProgress size={20} />} type="submit" className={classes.editButton} variant="primary">Save</RoundedButton>
                 </div>
                 :
-                <Button className={classes.enableEditButton} onClick={handleEnableEdit} color="primary" variant="contained">Edit Name</Button>
+                <Button className={classes.enableEditButton} onClick={handleEnableEdit} color="primary" variant="contained">Edit</Button>
               }
             </div>
           </div>
-          <Typography className={classes.info} variant="body1">20 Playlist Created</Typography>
+          <Typography className={classes.info} variant="body1">{createdPlaylist} Playlist Created</Typography>
         </div>
       </form>
 

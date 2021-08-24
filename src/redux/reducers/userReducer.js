@@ -58,6 +58,10 @@ const userReducer = (state = initialState, action) => {
       ...state,
       openRegisterInfoModal: false,
       info: ''
+    };
+    case type.UPDATE_LOCAL_USER: return {
+      ...state,
+      ...action.payload
     }
     default: return state
   }

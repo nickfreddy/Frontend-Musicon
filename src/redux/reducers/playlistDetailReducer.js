@@ -38,19 +38,44 @@ const initialState = {
 }
 
 const playlistDetailReducer = (state = initialState, action) => {
-  switch(action.type){
-    case type.SET_PLAYLIST_DETAIL: return{
+  switch (action.type) {
+    case type.SET_PLAYLIST_DETAIL: return {
       ...state,
       data: action.payload
     };
-    case type.SET_LOADING_PLAYLIST_DETAIL: return{
-      ...state, 
+    case type.SET_LOADING_PLAYLIST_DETAIL: return {
+      ...state,
       loading: true
     };
-    case type.UNSET_LOADING_PLAYLIST_DETAIL: return{
+    case type.UNSET_LOADING_PLAYLIST_DETAIL: return {
       ...state,
       loading: false
     };
+    case type.ADD_SONG_TO_LOCAL_PLAYLIST_DETAIL: return {
+      ...state,
+      data: {
+        ...state.data,
+        songs: [
+          ...state.data.songs,
+          action.payload // payload is an object of song details
+        ]
+      }
+    }
+    case type.DELETE_SONG_FROM_LOCAL_PLAYLIST_DETAIL: return {
+      ...state,
+      data: {
+        ...state.data,
+        songs: [...state.data.songs].filter(song => song._id !== action.payload)
+      }
+    };
+    case type.UPDATE_LOCAL_PLAYLIST_DETAIL: return {
+      ...state,
+      data: {
+        ...state.data,
+        ...action.payload // it contain {playlistTitle, playlistImage, playlistRating, description}
+      }
+    }
+  
     case type.RESET_PLAYLIST_DETAIL: return initialState
     default: return state
   }

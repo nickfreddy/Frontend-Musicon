@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import { alpha } from '@material-ui/core';
+import { selectPhotoSource } from '../../tools/checkPhotoSource';
+import { sourceUrl } from '../../redux/Api/setupAPI';
 
 
 const useStyle = makeStyles(theme => ({
@@ -60,14 +62,24 @@ const ImageInputCircle = ({ value, disabled, onChange, className }) => {
       <label className={`${classes.imageInput}`} htmlFor="image_select_125">
         {Boolean(value) ?
           <div className={classes.imageContainer}>
-            <img className={classes.imagePreview} src={typeof value === "string" ? value : URL.createObjectURL(value)} alt="" />
+            <img
+              className={classes.imagePreview}
+              src={
+                selectPhotoSource(value, sourceUrl)
+                // typeof value === "string" ?
+                //   checkPhotoSource(value) ? value
+                //     : sourceUrl + value
+                //   : URL.createObjectURL(value)
+              }
+              alt=""
+            />
             {disabled ||
-            <div className={classes.changeImageIcon}>
-              <div>
-              <AddAPhotoIcon />
-              <Typography variant='body1'>Change Photo</Typography>
+              <div className={classes.changeImageIcon}>
+                <div>
+                  <AddAPhotoIcon />
+                  <Typography variant='body1'>Change Photo</Typography>
+                </div>
               </div>
-            </div>
             }
           </div>
           :

@@ -17,7 +17,7 @@ const modalReducer = (state = initialState, action) => {
     };
     case type.OPEN_CREATE_PLAYLIST_MODAL: return {
       ...state,
-      openCreatePlaylistModal: true
+      openCreatePlaylistModal: true,
     };
     case type.CLOSE_CREATE_PLAYLIST_MODAL: return {
       ...state,

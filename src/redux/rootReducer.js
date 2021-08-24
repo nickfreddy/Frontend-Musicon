@@ -1,8 +1,12 @@
 import { combineReducers} from "redux";
+import currentPlaylistRatingReducer from "./reducers/currentPlaylistRatingReducer";
+import drawerReducer from "./reducers/drawerReducer";
 import modalReducer from "./reducers/modalReducer";
 import playlistDetailReducer from "./reducers/playlistDetailReducer";
 import userPlaylistReducer from "./reducers/userPlaylistReducer";
 import userReducer from "./reducers/userReducer";
+import userTopArtistReducer from "./reducers/userTopArtistsReducer";
+import userTopSongsReducer from "./reducers/userTopSongsReducer";
 //Import Reducer here
 
 const rootReducer = combineReducers({
@@ -10,7 +14,11 @@ const rootReducer = combineReducers({
   user: userReducer,
   modals: modalReducer,
   userPlaylist: userPlaylistReducer,
-  playlistDetail: playlistDetailReducer
+  playlistDetail: playlistDetailReducer,
+  drawer: drawerReducer,
+  userTopArtist: userTopArtistReducer,
+  userTopSongs: userTopSongsReducer,
+  currentPlaylistRating: currentPlaylistRatingReducer
 })
 
 export default rootReducer;
