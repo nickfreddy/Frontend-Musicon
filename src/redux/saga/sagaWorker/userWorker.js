@@ -1,6 +1,7 @@
 import { put } from 'redux-saga/effects';
-import { openInfoLoginModalAction, openRegisterInfoAction, setLoadingUserAction, setUserAction, unsetLoadingUserAction } from '../../actions/userAction'
-import { getUserById, signInUser, signUpUser } from '../../Api/userAPI';
+import { openInfoLoginModalAction, openRegisterInfoAction, setLoadingUserAction, setUserAction, unsetLoadingUserAction, updateLocalUserAction } from '../../actions/userAction'
+import { getUserById, signInUser, signUpUser, updateUserById } from '../../Api/userAPI';
+import FormData from 'form-data';
 
 export function* signUpUserWorker(action) {
   try {
@@ -26,9 +27,9 @@ export function* signUpUserWorker(action) {
       yield put(openRegisterInfoAction());
     }
   } catch (err) {
-    if(err.response.status === 401){
+    if (err.response.status === 401) {
       yield put(openRegisterInfoAction("email or username has been registered"));
-    }else{
+    } else {
       console.log('ERROR ON signUpUserWorker SAGA WORKER DETAILS:', err.message);
     }
     yield put(unsetLoadingUserAction());
@@ -57,9 +58,9 @@ export function* signInUserWorker(action) {
       yield put(openInfoLoginModalAction());
     }
   } catch (err) {
-    if(err){
+    if (err) {
       yield put(openInfoLoginModalAction(err.response.data.errors[0]));
-    }else{
+    } else {
       console.log('ERROR ON signInUserWorker SAGA WORKER DETAILS:', err.message);
     }
 
@@ -67,24 +68,51 @@ export function* signInUserWorker(action) {
   }
 }
 
-export function* getLogedInUserWorker(action){
+export function* getLogedInUserWorker(action) {
   yield put(setLoadingUserAction());
-  console.log("get loged in user worker called")
+  // console.log("get loged in user worker called")
   const user_id = localStorage.getItem('user_id');
   const token = localStorage.getItem('token');
-  if(Boolean(token) && Boolean(user_id)){
+  if (Boolean(token) && Boolean(user_id)) {
     //do action
-    try{
+    try {
       const response = yield getUserById(user_id, token);
       yield put(setUserAction(response.data.data));
       yield put(unsetLoadingUserAction());
       action.callback();
-    }catch(err){
+    } catch (err) {
       console.log('ERROR GETTING DATA USER DETAIL:', err.response);
       yield put(unsetLoadingUserAction());
+
     }
-  }else{
+  } else {
     console.log('NO USER LOGGED IN BRO');
     yield put(unsetLoadingUserAction());
+  }
+}
+
+export function* updateUserWorker(action) {
+  try {
+    yield put(setLoadingUserAction());
+    const { fullname, photo } = action.payload;
+    const token = localStorage.getItem('token');
+    const user_id = localStorage.getItem('user_id');
+    const data = new FormData();
+    data.append("fullname", fullname);
+    if(typeof photo !== "string"){
+      data.append("photo", photo);
+    }
+    const response = yield updateUserById(user_id, data, token);
+    if(response.data.data){
+      yield put(updateLocalUserAction(fullname,photo));
+      yield action.callback();
+      yield put(unsetLoadingUserAction())
+    }else{
+      console.log("ERROR DATA ON RESPONSE.DATA NOT FOUND");
+      yield put(unsetLoadingUserAction())
+    }
+  } catch (err) {
+    console.log('ERROR ON UPDATE USER DATA TO SERVER DETAIL : ', err);
+    yield put(unsetLoadingUserAction())
   }
 }

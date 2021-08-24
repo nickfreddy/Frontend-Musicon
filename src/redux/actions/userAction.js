@@ -1,10 +1,19 @@
 import * as type from './actionTypes';
 
 //used by saga
-export const signUpUserAction = (username, fullname, email, password, callback = () => { }) => ({ type: type.REGISTER_USER, payload: { username, fullname, email, password }, callback });
+export const signUpUserAction = (username, fullName, email, password, callback = () => { }) => ({ type: type.REGISTER_USER, payload: { username, fullName, email, password }, callback });
 export const signInUserAction = (username, password, callback = () => { }) => ({ type: type.SIGN_IN_USER, payload: { username, password }, callback })
 export const getLogedInUserAction = (callback = () => { }) => ({ type: type.GET_USER, callback });
-export const updateUserAction = (id, data) => ({ type: type.UPDATE_USER, payload: { id, data } });
+
+export const updateUserAction = (fullname, photo, callback = () => { }) => ({
+  type: type.UPDATE_USER,
+  payload: {
+    fullname,
+    photo
+  },
+  callback
+});
+
 
 //use by reducer
 export const setUserAction = (payload) => ({ type: type.SET_USER, payload })
@@ -19,3 +28,4 @@ export const logOutUserAction = () => {
   localStorage.removeItem('user_id');
   return { type: type.UNSET_USER };
 }
+export const updateLocalUserAction = (fullname, photo) => ({type: type.UPDATE_LOCAL_USER, payload: {fullname, photo}});

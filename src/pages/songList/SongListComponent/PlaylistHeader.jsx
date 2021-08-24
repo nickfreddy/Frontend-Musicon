@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Divider, IconButton, makeStyles, Typography, withStyles, Menu, MenuItem } from '@material-ui/core';
 import { secondsToHMS } from '../../../tools/timeConverter';
 import Rating from '@material-ui/lab/Rating';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { sourceUrl } from '../../../redux/Api/setupAPI';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openCreatePlaylistModalAction } from '../../../redux/actions/modalAction';
 import CreatePlaylistModal from '../../../components/createPlaylistModal/CreatePlaylistModal';
+import { getRatingCurrentPlaylistAction, postRatingCurrentPlaylistAction } from '../../../redux/actions/ratingCurrentPlaylistAction';
+import { Skeleton } from '@material-ui/lab';
 // import { sourceUrl } from '../../../redux/Api/setupAPI';
+// import samplePhoto from '../../../assets/img/XMLID1383.svg'
 
 const StyledRating = withStyles({
   iconEmpty: {
@@ -133,36 +136,73 @@ const useStyles = makeStyles(theme => ({
       width: '185px',
     },
   },
+
+  skeletonRating: {
+    borderRadius: theme.spacing(1),
+    height: '120px',
+
+    [theme.breakpoints.up('md')]: {
+      width: '185px',
+    }
+  },
+
   ratingContainer: {
     paddingTop: '10px',
     textAlign: 'center'
   },
-  editDetailMenu:{
-    '& .MuiList-root':{
+  editDetailMenu: {
+    '& .MuiList-root': {
       background: "#1F1D2B",
       padding: theme.spacing(1),
-      
+
     },
-    '& .MuiMenuItem-root':{
+    '& .MuiMenuItem-root': {
       transition: 'all 0.5s ease',
-      '&:first-child':{
-        borderRadius: theme.spacing(1,1,0,0),
+      '&:first-child': {
+        borderRadius: theme.spacing(1, 1, 0, 0),
         // '&:hover':{
         //   background: theme.palette.info.main,
         // }
       },
-      '&:last-child':{
-        borderRadius: theme.spacing(0,0,1,1),
-        '&:hover':{
+      '&:last-child': {
+        borderRadius: theme.spacing(0, 0, 1, 1),
+        '&:hover': {
           background: theme.palette.error.main,
         }
       }
     }
   }
 }))
-const PlaylistHeader = ({playlistId, playlistTitle, photo, description, author, totalSongs, duration, handleDelete }) => {
+
+
+
+
+const PlaylistHeader = ({ playlistId, playlistTitle, photo, description, author, totalSongs, duration, handleDelete, playlistRating, isOwner }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [isUpdateRating, setIsUpdateRating] = useState(false)
   const dispatch = useDispatch()
+  const classes = useStyles();
+  const currentPlaylistRating = useSelector(state => state.currentPlaylistRating)
+
+  const handleRatingChange = (event, newValue) => {
+    //then post rating to server asswell
+    setRating(newValue);
+    setIsUpdateRating(true);
+    dispatch(postRatingCurrentPlaylistAction(playlistId, newValue));
+  }
+
+  const handleReceivedRatingFromServer = (value) => {
+    if (value === null) { // this user had never rated this playlist before
+      setIsUpdateRating(false); //so is update rating is false, the user has to give new rating
+      setRating(0) // then set the rating to default 0
+
+    } else { // else this user had rated this playlist
+      setIsUpdateRating(true) // so is Update Rating to be true
+      setRating(value); // then set the rating as given rate before
+    }
+    //posting to server as well
+  }
 
 
   const handleClickMenu = (event) => {
@@ -177,14 +217,24 @@ const PlaylistHeader = ({playlistId, playlistTitle, photo, description, author, 
     dispatch(openCreatePlaylistModalAction());
   }
 
-  const classes = useStyles();
+
+
+  useEffect(() => {
+    dispatch(getRatingCurrentPlaylistAction(playlistId, (value) => handleReceivedRatingFromServer(value)))
+  }, [dispatch, playlistId])
   return (
     <div className={classes.root}>
       {/** LEFT SIDE */}
       <div className={classes.leftSide}>
         <Typography className={classes.playlistTitle} variant="h4">Created Playlist / <span>{playlistTitle}</span></Typography>
         <div className={classes.description}>
-          <img className={classes.playListPhoto} src={sourceUrl + photo} alt="..." />
+          {// This mitigate type of received photo to prevent broken photo display
+            photo !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg' ? //check if photo is not empty string
+              typeof photo === 'string' ?
+                <img className={classes.playListPhoto} src={sourceUrl + photo} alt="..." /> //if type of photo is string mostli its a url from server so use it
+                : <img className={classes.playListPhoto} src={URL.createObjectURL(photo)} alt="..." /> //if type of photo is a file that inputed from form so use it
+              : <img className={classes.playListPhoto} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
+          }
           <div className={classes.descriptionContent}>
             <Typography>{description}</Typography>
             <div className={classes.moreDetails}>
@@ -197,25 +247,36 @@ const PlaylistHeader = ({playlistId, playlistTitle, photo, description, author, 
           </div>
         </div>
         <div className={classes.actionHeaderContainer}>
-          <IconButton onClick={handleClickMenu}>
-            <MoreHorizIcon />
-          </IconButton>
+          {isOwner &&
+            <IconButton onClick={handleClickMenu}>
+              <MoreHorizIcon />
+            </IconButton>
+          }
         </div>
       </div>
       {/** RIGHT SIDE */}
       <div className={classes.rightSide}>
-        <div className={classes.ratingInput}>
-          <Typography>Give Rating</Typography>
-          <Divider />
-          <div className={classes.ratingContainer}>
-            <StyledRating
-              name="customized-color"
-              defaultValue={2}
-              precision={1}
-              emptyIcon={<StarBorderIcon fontSize="inherit" />}
-            />
-          </div>
-        </div>
+        {!isOwner ?
+          currentPlaylistRating.loading ?
+            <Skeleton variant="rect" className={classes.skeletonRating} />
+            :
+            <div className={classes.ratingInput}>
+              <Typography>{isUpdateRating ? 'Your Rating' : 'Give Rating'}</Typography>
+              <Divider />
+              <div className={classes.ratingContainer}>
+                <StyledRating
+                  name="customized-color"
+                  value={rating}
+                  onChange={handleRatingChange}
+                  precision={0.5}
+                  emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                />
+              </div>
+            </div>
+          :
+          null
+        }
+
       </div>
 
 
@@ -237,10 +298,16 @@ const PlaylistHeader = ({playlistId, playlistTitle, photo, description, author, 
         }}
       >
         <MenuItem onClick={handleOpenCreatePlaylistModal}>Edit Playlist</MenuItem>
-        <Divider/>
+        <Divider />
         <MenuItem onClick={() => handleDelete(playlistId)}>Delete Playlist</MenuItem>
       </Menu>
-      <CreatePlaylistModal photo={photo} title={playlistTitle} description={description} actionUpdate={true}/>
+      <CreatePlaylistModal
+        photo={photo}
+        title={playlistTitle}
+        description={description}
+        actionUpdate={true}
+        playlistId={playlistId}
+      />
     </div>
   )
 }

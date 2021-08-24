@@ -26,7 +26,9 @@ const useStyle = makeStyles(theme => ({
   imagePreview:{
     width: '100%',
     height: '100%',
-    borderRadius: theme.spacing(1)
+    borderRadius: theme.spacing(1),
+    objectFit: 'cover',
+    objectPosition: 'top'
   }
 }))
 
@@ -39,9 +41,21 @@ const ImageInput = ({value, onChange, className}) => {
 
   const renderPhoto = (value) =>{
     if(Boolean(value)){
-      console.log(value);
-      if(typeof value === "string") return <img className={classes.imagePreview} src={sourceUrl+value} alt=""/>
-      return <img className={classes.imagePreview} src={URL.createObjectURL(value)} alt=""/>
+      // console.log(value);
+      console.log('INI FOTONYA', value)
+      // This mitigate type of received photo to prevent broken photo display
+
+        if(value !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg'){
+          if(typeof value === 'string'){
+            return <img className={classes.imagePreview} src={sourceUrl + value} alt="..." />
+          }else{
+            return <img className={classes.imagePreview} src={URL.createObjectURL(value)} alt="..." />
+          }
+        }else{
+          return <img className={classes.imagePreview} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." />;
+        }    
+      // if(typeof value === "string") return <img className={classes.imagePreview} src={sourceUrl+value} alt=""/>
+      // return <img className={classes.imagePreview} src={URL.createObjectURL(value)} alt=""/>
     }else{
       return <AddAPhotoIcon/>
     }

@@ -51,11 +51,11 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const SongItem = ({ className, number, id, image, title, artist, duration, onPlay, onDelete }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+const SongItem = ({ isOwner, className, number, id, image, title, artist, duration, onPlay, onDelete }) => {
 
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = useState(null);
   const handleMenuClose = (e) => {
     setAnchorEl(null)
   }
@@ -87,7 +87,7 @@ const SongItem = ({ className, number, id, image, title, artist, duration, onPla
               >
                 {`By ${artist}`}
               </Typography>
-              
+
               <Typography component="span">
                 {` - Duration: ${secondsDuration(duration)}`}
               </Typography>
@@ -95,14 +95,16 @@ const SongItem = ({ className, number, id, image, title, artist, duration, onPla
             </React.Fragment>
           }
         />
-        <ListItemSecondaryAction>
-          <IconButton
-            edge="end"
-            onClick={handleMenuOpen}
-          >
-            <MoreVertIcon />
-          </IconButton>
-        </ListItemSecondaryAction>
+        {isOwner &&
+          <ListItemSecondaryAction>
+            <IconButton
+              edge="end"
+              onClick={handleMenuOpen}
+            >
+              <MoreVertIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
+        }
       </ListItem>
       <Menu
         id={`song-menu${id}`}
@@ -120,8 +122,6 @@ const SongItem = ({ className, number, id, image, title, artist, duration, onPla
           horizontal: 'center',
         }}
       >
-
-
         <MenuItem onClick={onDelete}>
           <ListItemIcon className={classes.menuIcon}>
             <img src={deleteIcon} alt="..." />
@@ -136,7 +136,7 @@ const SongItem = ({ className, number, id, image, title, artist, duration, onPla
 
 
 
-const SongListList = ({ data, handleSongPlay, handleDelete }) => {
+const SongListList = ({ isOwner, data, handleSongPlay, handleDelete }) => {
   const classes = useStyles()
 
 
@@ -149,7 +149,7 @@ const SongListList = ({ data, handleSongPlay, handleDelete }) => {
       </div>
     )
     return data.map((song, index) => (
-      <SongItem key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId.name} duration={song.songDuration} onPlay={() => handleSongPlay(song._id)} onDelete={() => handleDelete(song._id)} />
+      <SongItem isOwner={isOwner} key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId.name} duration={song.songDuration} onPlay={() => handleSongPlay(song._id)} onDelete={() => handleDelete(song._id)} />
     ))
   }
 

@@ -65,6 +65,10 @@ const userPlaylistReducer = (state = initialState, action) => {
         message: '',
         isFail: false
       }
+    };
+    case type.DELETE_LOCAL_USER_PLAYLIST: return {
+      ...state,
+      data: [...state.data].filter(playlist => playlist._id !== action.payload)
     }
     default: return state 
   }

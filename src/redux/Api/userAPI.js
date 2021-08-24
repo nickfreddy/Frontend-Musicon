@@ -13,3 +13,12 @@ export const getUserById = (user_id, token) => musiconAPI.get(`/users/${user_id}
   headers: { "Authorization": token }
 })
 //===========================================
+
+export const updateUserById = (user_id, formData, token) => musiconAPI.put(`/users/updatedata/${user_id}`,formData, {
+  headers:{
+    "Authorization": token,
+    "accept": "application/json",
+    "Accept-Language": 'en-US,en;q=0.8',
+    'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+  }
+})

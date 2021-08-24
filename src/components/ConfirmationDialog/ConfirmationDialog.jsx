@@ -1,4 +1,4 @@
-import { Container, Typography, makeStyles } from '@material-ui/core'
+import { Container, Typography, makeStyles, CircularProgress } from '@material-ui/core'
 import React from 'react'
 import SmallModal from '../commons/SmallModal'
 import { RoundedButton } from '../commons/CstButton'
@@ -33,6 +33,7 @@ const ConfirmationDialog = ({
   handleClose,
   buttonOk = "Save",
   buttonVariant = "primary",
+  loading //from redux connect
 }) => {
   const classes = useStyles();
   return (
@@ -43,7 +44,7 @@ const ConfirmationDialog = ({
         <Typography>{secondaryText}</Typography>
         <div className={classes.buttonContainer}>
           <RoundedButton onClick={handleClose} variant="secondary">Cancle</RoundedButton>
-          <RoundedButton onClick={actionTrue} variant={buttonVariant}>{buttonOk}</RoundedButton>
+          <RoundedButton startIcon={loading && <CircularProgress size={20}/>} onClick={actionTrue} variant={buttonVariant}>{buttonOk}</RoundedButton>
         </div>
       </Container>
     </SmallModal>

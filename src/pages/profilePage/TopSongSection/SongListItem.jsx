@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import {
-  IconButton,
+  // IconButton,
   ListItem,
   ListItemAvatar,
   ListItemIcon,
-  ListItemSecondaryAction,
+  // ListItemSecondaryAction,
   ListItemText,
   makeStyles,
   Typography,
   Menu,
   MenuItem
 } from '@material-ui/core'
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import defaultSongIcon from '../../../assets/img/XMLID1383.svg'
 // import { Delete } from '@material-ui/icons';
 import deleteIcon from '../../../assets/img/deleteIcon.svg';
@@ -30,6 +30,11 @@ const useStyles = makeStyles(theme => ({
   },
   menuIcon:{
     minWidth: theme.spacing(4)
+  },
+  songImage:{
+    width: '50px',
+    height: '50px',
+    borderRadius: theme.spacing(1)
   }
 }))
 const SongListItem = ({ className, number, id, image, title, artist, duration, onPlay, onDelete }) => {
@@ -40,9 +45,9 @@ const SongListItem = ({ className, number, id, image, title, artist, duration, o
   const handleMenuClose = (e) => {
     setAnchorEl(null)
   }
-  const handleMenuOpen = (e) => {
-    setAnchorEl(e.currentTarget)
-  }
+  // const handleMenuOpen = (e) => {
+  //   setAnchorEl(e.currentTarget)
+  // }
   return (
     <div>
       <ListItem className={`${classes.listItem} ${className}`} onClick={onPlay}>
@@ -51,7 +56,7 @@ const SongListItem = ({ className, number, id, image, title, artist, duration, o
         </ListItemIcon>
         <ListItemAvatar>
           {Boolean(image) ?
-            <img src={image} alt="..." />
+            <img className={classes.songImage} src={image} alt="..." />
             :
             <img src={defaultSongIcon} alt="..." />
           }
@@ -71,14 +76,14 @@ const SongListItem = ({ className, number, id, image, title, artist, duration, o
             </React.Fragment>
           }
         />
-        <ListItemSecondaryAction>
+        {/* <ListItemSecondaryAction>
           <IconButton
             edge="end"
             onClick={handleMenuOpen}
           >
             <MoreVertIcon />
           </IconButton>
-        </ListItemSecondaryAction>
+        </ListItemSecondaryAction> */}
       </ListItem>
       <Menu
         id={`song-menu${id}`}

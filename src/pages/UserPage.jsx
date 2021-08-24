@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 import HomePage from './homePage/HomePage';
 import Header from '../components/Header';
@@ -27,16 +27,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 const UserPage = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const classes = useStyles()
   let match = useRouteMatch();
-  const handleToggleDrawerOpen = () => {
-    setDrawerOpen(state => !state)
-  }
+
   return (
     <div className={classes.root}>
-      <Header handleToggleDrawerOpen={handleToggleDrawerOpen} />
-      <CstDrawer open={drawerOpen} />
+      <Header/>
+      <CstDrawer/>
       <div className={classes.content}>
         <Switch>
           <Route exact path={match.path} component={() => <HomePage />} />
@@ -45,7 +42,7 @@ const UserPage = () => {
           <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} />
           <Route exact path={`${match.path}/createdPlaylist`} component={() => <CreatedPlaylistPage />} />
           <Route path={`${match.path}/createdPlaylist/:playlist_id`} component={() => <SongList />} />
-          <Route exact path={`${match.path}/profile`} component={() => <ProfilePage drawerOpen={drawerOpen} />} />
+          <Route exact path={`${match.path}/profile`} component={() => <ProfilePage />} />
           <Route exact path={`${match.path}/account`} component={() => <AccountPage />}/>
 
         </Switch>

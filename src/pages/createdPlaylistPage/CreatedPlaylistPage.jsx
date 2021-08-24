@@ -7,15 +7,15 @@ import {
   // Paper
 } from '@material-ui/core'
 import React, { useState, useEffect } from 'react'
-import { dummyCreatedPlaylist } from '../../assets/example-response/dummyDataCreatedPlaylist';
 import CreatedPlaylistTable from './CreatedPlaylistComponent/CreatedPlaylistTable';
 import CreatedPlaylistList from './CreatedPlaylistComponent/CreatedPlaylistList';
 import addIcon from '../../assets/img/carbon_add.svg'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { openCreatePlaylistModalAction } from '../../redux/actions/modalAction'
 import CreatePlaylistModal from '../../components/createPlaylistModal/CreatePlaylistModal';
 import ConfirmationDialog from '../../components/ConfirmationDialog/ConfirmationDialog';
-import { getUserPlaylistAction } from '../../redux/actions/userPlaylistAction';
+import { deleteUserPlaylistAction, getUserPlaylistAction } from '../../redux/actions/userPlaylistAction';
+import { connect } from 'react-redux';
 // import { useHistory, useRouteMatch } from 'react-router-dom'
 
 
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const CreatedPlaylistPage = () => {
+const CreatedPlaylistPage = ({ userPlaylist }) => {
   // const history = useHistory();
   // const {url} = useRouteMatch();
   const classes = useStyles();
@@ -57,8 +57,7 @@ const CreatedPlaylistPage = () => {
     open: false,
     idToDelete: ''
   })
-  const userPlaylist = useSelector(state => state.userPlaylist);
-
+  // const userPlaylist = useSelector(state => state.userPlaylist);
 
   const handleDelete = (_id) => {
     setDeleteConfirmation(state => ({
@@ -69,15 +68,17 @@ const CreatedPlaylistPage = () => {
   }
 
   // ACTION FOR DELETE CONFIRMATION =======================
-  const actionTrueDeleteConfirmation = (_id) => {
-    alert(`This id ${_id} playList will be deleted`)
-  }
+
   const handleCloseDeleteConfirmation = () => {
     setDeleteConfirmation(state => ({
       ...state,
       open: false,
       idToDelete: ''
     }))
+  }
+  const actionTrueDeleteConfirmation = (_id) => {
+    // alert(`This id ${_id} playList will be deleted`)
+    dispatch(deleteUserPlaylistAction(_id, handleCloseDeleteConfirmation));
   }
   //========================================================
 
@@ -92,7 +93,7 @@ const CreatedPlaylistPage = () => {
 
   useEffect(() => {
     dispatch(getUserPlaylistAction());
-  },[dispatch]);
+  }, [dispatch]);
 
   return (
     <Container>
@@ -101,8 +102,10 @@ const CreatedPlaylistPage = () => {
       <div className={classes.buttonContainer}>
         <Button onClick={handleOpenCreatePlaylistModal} startIcon={<img src={addIcon} alt="..." />} variant="contained" color="primary">Create Playlist</Button>
       </div>
+
       <CreatedPlaylistTable data={userPlaylist.data} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
-      <CreatedPlaylistList data={dummyCreatedPlaylist} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
+      <CreatedPlaylistList data={userPlaylist.data} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
+
       <CreatePlaylistModal />
       <ConfirmationDialog
         open={deleteConfirmation.open}
@@ -113,9 +116,25 @@ const CreatedPlaylistPage = () => {
         handleClose={handleCloseDeleteConfirmation}
         buttonOk="Delete"
         buttonVariant="danger"
+        loading={userPlaylist.loading}
       />
+
+      {/* <ConnectedConfirmationDialog
+        open={deleteConfirmation.open}
+        title="DeletePlaylist"
+        mainText="Are you sure want to delete this Playlist ?"
+        secondaryText="Note: After deletion, the action cannot be undoned"
+        actionTrue={() => actionTrueDeleteConfirmation(deleteConfirmation.idToDelete)}
+        handleClose={handleCloseDeleteConfirmation}
+        buttonOk="Delete"
+        buttonVariant="danger"
+      /> */}
     </Container>
   )
 }
 
-export default CreatedPlaylistPage
+
+const mapStateToProps = (state) => ({
+  userPlaylist: state.userPlaylist
+})
+export default connect(mapStateToProps)(CreatedPlaylistPage)
