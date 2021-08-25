@@ -5,6 +5,7 @@ import {
   getPlaylistDetailWatcher, 
   updatePlaylistDetailWatcher
 } from "./sagaWatcher/playlistDetailWatcher";
+import { getPlaylistWatcher } from "./sagaWatcher/playlistWatcher";
 import { getRatingCurrentPlaylistWatcher, postRatingCurrentPlaylistWatcher } from "./sagaWatcher/ratingCurrentPlaylistWatcher";
 import { 
   deleteUserPlaylistWatcher, 
@@ -37,6 +38,7 @@ export default function* rootSaga(){
     getUserTopArtistWatcher(),
     getUserTopSongsWatcher(),
     getRatingCurrentPlaylistWatcher(),
-    postRatingCurrentPlaylistWatcher()
+    postRatingCurrentPlaylistWatcher(),
+    getPlaylistWatcher()
   ])
 }

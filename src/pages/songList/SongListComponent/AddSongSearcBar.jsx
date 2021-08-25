@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiOutlinedInput-notchedOutline': {
       border: 'none'
     },
+  },
+  searchBarTitle: {
+    marginBottom: theme.spacing(2)
   }
 }));
 
@@ -54,7 +57,7 @@ const AddSongSearcBar = ({ open }) => {
     <div>
       <Collapse in={open}>
         <Paper elevation={4} className={classes.paper}>
-          <Typography variant="h5">Let's find song for your playlist</Typography>
+          <Typography className={classes.searchBarTitle} variant="h5">Let's find song for your playlist</Typography>
           <FormControl fullWidth size="small" className={classes.searchInput}>
             <OutlinedInput
               onChange={handleChangeSearchPattern}

@@ -3,6 +3,7 @@ import currentPlaylistRatingReducer from "./reducers/currentPlaylistRatingReduce
 import drawerReducer from "./reducers/drawerReducer";
 import modalReducer from "./reducers/modalReducer";
 import playlistDetailReducer from "./reducers/playlistDetailReducer";
+import playlistReducer from "./reducers/playlistReducer";
 import userPlaylistReducer from "./reducers/userPlaylistReducer";
 import userReducer from "./reducers/userReducer";
 import userTopArtistReducer from "./reducers/userTopArtistsReducer";
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   drawer: drawerReducer,
   userTopArtist: userTopArtistReducer,
   userTopSongs: userTopSongsReducer,
-  currentPlaylistRating: currentPlaylistRatingReducer
+  currentPlaylistRating: currentPlaylistRatingReducer,
+  playlist: playlistReducer
 })
 
 export default rootReducer;

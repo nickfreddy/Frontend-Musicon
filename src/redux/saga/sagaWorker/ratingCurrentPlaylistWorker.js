@@ -6,7 +6,7 @@ export function* getRatingCurrentPlaylistWorker(action){
   try{
     yield put(setLoadingRatingCurrentPlaylistAction());
     const playlistId = action.payload;
-    console.log('PLAYLIST ID ON SAGA WORKER', playlistId);
+    // console.log('PLAYLIST ID ON SAGA WORKER', playlistId);
     const token = localStorage.getItem('token');
     const response = yield getCurrentPlaylistRating(playlistId,token);
     if(response.data){ //null and integer value is expected value of response.data.rating

@@ -101,11 +101,11 @@ const SearchResultItem = ({ result }) => {
                 component="span"
                 className={classes.inline}
               >
-                {`By ${result.artistId.name}`}
+                {`${result.artistId.name}`}
               </Typography>
 
               <Typography component="span">
-                {` - Album: ${result.albumId.albumTitle}`}
+                {` - ${result.albumId.albumTitle}`}
               </Typography>
 
             </React.Fragment>

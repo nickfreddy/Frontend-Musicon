@@ -2,32 +2,50 @@ import React from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import {
   Card,
-  CardActionArea,
+  // CardActionArea,
   CardMedia,
   Typography,
   makeStyles,
+  alpha,
 } from "@material-ui/core";
 import StarRateIcon from "@material-ui/icons/StarRate";
 
 const useStyles = makeStyles((theme) => ({
   cardwrapper: {
-    margin: [[10, 10, 60, 10]],
+    margin: [[8, 8, 30, 8]],
+
   },
   card: {
     background: "#1F1D2B",
     borderRadius: "8px",
-    maxWidth: 200,
-    height: 200,
+    width: '246px',
+    height: '246px',
+    transition: 'all 0.2s linear',
+    '&:hover':{
+      background: '#4399FD',      //'#0065DA',
+      cursor: 'pointer',
+      transform: 'rotate(-1deg) scale(1.03)',
+
+    }
   },
   media: {
-    margin: 20,
+    margin: '24px auto',
     borderRadius: "8px",
-    width: 160,
-    height: 160,
+    width: '200px',
+    height: '200px',
+    boxShadow: `0px 0px 15px ${alpha('#000000', 0.5)}`,
+    transition: 'all 0.3s linear',
+    '&:hover':{
+      transform: 'rotate(2deg) scale(1.1)',
+    }
   },
   actionarea: {
     borderRadius: "8px",
-    width: 200,
+    // width: 246,
+    '&:hover':{
+      transition: 'all 1s ease',
+      background: "blue"
+    }
   },
   title: {
     width: 200,
@@ -37,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#C4C4C4",
   },
   textbox: {
-    marginTop: 20,
+    marginTop: 10,
     width: 200,
   },
   titletext: {
@@ -70,7 +88,7 @@ const PlaylistCard = ({
   playlistImage,
   playlistMaker,
   playlistTitle,
-  playlistUrl,
+  playlistId,
   ratingValue,
 }) => {
   const classes = useStyles();
@@ -86,17 +104,14 @@ const PlaylistCard = ({
     // </Card>
 
     <div className={`${classes.cardwrapper}`}>
-      <Card className={classes.card}>
-        <CardActionArea
-          className={classes.actionarea}
-          onClick={() => history.push(`${url}/${playlistUrl}`)}
-        >
+      <Card className={classes.card} onClick={() => history.push(`${url}/${playlistId}`)}>
+        <div>
           <CardMedia
             className={classes.media}
             image={playlistImage}
             title={playlistTitle}
           />
-        </CardActionArea>
+        </div>
       </Card>
       <div className={classes.textbox}>
         <Typography gutterBottom variant="h6" className={classes.titletext}>

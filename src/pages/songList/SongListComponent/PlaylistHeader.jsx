@@ -12,6 +12,7 @@ import { getRatingCurrentPlaylistAction, postRatingCurrentPlaylistAction } from 
 import { Skeleton } from '@material-ui/lab';
 // import { sourceUrl } from '../../../redux/Api/setupAPI';
 // import samplePhoto from '../../../assets/img/XMLID1383.svg'
+import { selectPhotoSource } from '../../../tools/checkPhotoSource';
 
 const StyledRating = withStyles({
   iconEmpty: {
@@ -100,10 +101,13 @@ const useStyles = makeStyles(theme => ({
     },
   },
   playListPhoto: {
-    width: '120px',
+    width: '150px',
+    height: '150px',
     display: 'block',
     borderRadius: theme.spacing(1),
     margin: '1em auto',
+    objectFit: 'cover',
+    objectPosition: 'top',
     [theme.breakpoints.up('md')]: {
       margin: '0',
     }
@@ -177,7 +181,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const PlaylistHeader = ({ playlistId, playlistTitle, photo, description, author, totalSongs, duration, handleDelete, playlistRating, isOwner }) => {
+const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, description, author, totalSongs, duration, handleDelete, playlistRating, isOwner }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [rating, setRating] = useState(0);
   const [isUpdateRating, setIsUpdateRating] = useState(false)
@@ -226,15 +230,16 @@ const PlaylistHeader = ({ playlistId, playlistTitle, photo, description, author,
     <div className={classes.root}>
       {/** LEFT SIDE */}
       <div className={classes.leftSide}>
-        <Typography className={classes.playlistTitle} variant="h4">Created Playlist / <span>{playlistTitle}</span></Typography>
+        <Typography className={classes.playlistTitle} variant="h4">{`${nowLocation} / `}<span>{playlistTitle}</span></Typography>
         <div className={classes.description}>
-          {// This mitigate type of received photo to prevent broken photo display
+          <img className={classes.playListPhoto} src={selectPhotoSource(photo, sourceUrl)} alt="..." />
+          {/* {// This mitigate type of received photo to prevent broken photo display
             photo !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg' ? //check if photo is not empty string
               typeof photo === 'string' ?
                 <img className={classes.playListPhoto} src={sourceUrl + photo} alt="..." /> //if type of photo is string mostli its a url from server so use it
                 : <img className={classes.playListPhoto} src={URL.createObjectURL(photo)} alt="..." /> //if type of photo is a file that inputed from form so use it
               : <img className={classes.playListPhoto} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
-          }
+          } */}
           <div className={classes.descriptionContent}>
             <Typography>{description}</Typography>
             <div className={classes.moreDetails}>

@@ -74,7 +74,7 @@ const SignUpForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       const {fullName, userName, email, password} = values;
       dispatch(signUpUserAction(userName,fullName, email, password, () => history.push('/user')));
     }
