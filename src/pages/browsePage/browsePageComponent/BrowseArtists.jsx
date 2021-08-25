@@ -80,6 +80,7 @@ const BrowseArtists = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
+  console.log(result,loading)
   return (
     <div className={classes.root}>
       <Typography>{pattern}</Typography>

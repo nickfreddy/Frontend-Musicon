@@ -54,7 +54,7 @@ const SignInForm = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       const {userNameOrEmail, password} = values;
       dispatch(signInUserAction(userNameOrEmail, password, () => history.push('/user')));
     }

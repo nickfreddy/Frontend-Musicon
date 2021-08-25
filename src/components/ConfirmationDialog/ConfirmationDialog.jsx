@@ -43,7 +43,7 @@ const ConfirmationDialog = ({
         <Typography variant="h5">{mainText}</Typography>
         <Typography>{secondaryText}</Typography>
         <div className={classes.buttonContainer}>
-          <RoundedButton onClick={handleClose} variant="secondary">Cancle</RoundedButton>
+          <RoundedButton onClick={handleClose} variant="secondary">Cancel</RoundedButton>
           <RoundedButton startIcon={loading && <CircularProgress size={20}/>} onClick={actionTrue} variant={buttonVariant}>{buttonOk}</RoundedButton>
         </div>
       </Container>

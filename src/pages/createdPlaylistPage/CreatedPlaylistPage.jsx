@@ -109,7 +109,7 @@ const CreatedPlaylistPage = ({ userPlaylist }) => {
       <CreatePlaylistModal />
       <ConfirmationDialog
         open={deleteConfirmation.open}
-        title="DeletePlaylist"
+        title="Delete Playlist"
         mainText="Are you sure want to delete this Playlist ?"
         secondaryText="Note: After deletion, the action cannot be undoned"
         actionTrue={() => actionTrueDeleteConfirmation(deleteConfirmation.idToDelete)}

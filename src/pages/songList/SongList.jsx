@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPlaylistDetailAction, resetPlaylistDetailAction } from '../../redux/actions/playlistDetailAction';
 import { deleteUserPlaylistAction } from '../../redux/actions/userPlaylistAction';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { deleteSongFromPlaylistAction } from '../../redux/actions/playlistDetailAction';
 
 
@@ -47,6 +47,10 @@ const SongList = ({ userPlaylist }) => {
   const playlistDetailData = playlistDetail.data;
   const history = useHistory();
   const user_id = localStorage.getItem('user_id');
+  const location = useLocation();
+  const nowLocation = location.pathname.split('/')[2];
+  console.log(nowLocation);
+
 
   const [deleteSongConfirmation, setDeleteSongConfirmation] = useState({
     open: false,
@@ -149,6 +153,7 @@ const SongList = ({ userPlaylist }) => {
   return (
     <Container>
       <PlaylistHeader
+        nowLocation = {nowLocation === "playlist" ? "Playlist" : "Created Playlist"}
         playlistId={playlist_id}
         playlistTitle={playlistDetailData.playlistTitle}
         author={playlistDetailData.author}

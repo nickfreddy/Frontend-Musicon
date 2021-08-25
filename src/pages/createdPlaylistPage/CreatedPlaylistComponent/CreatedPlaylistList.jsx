@@ -19,6 +19,8 @@ import deleteIcon from '../../../assets/img/deleteIcon.svg';
 import { formatDate } from '../../../tools/dateReformat';
 import { sourceUrl } from '../../../redux/Api/setupAPI';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => ({
   playListContainer: {
@@ -45,9 +47,14 @@ const useStyles = makeStyles(theme => ({
   menuIcon: {
     minWidth: theme.spacing(4)
   },
-  imageIcon:{
+  imageIcon: {
     width: 45,
     borderRadius: '8px'
+  },
+  listPlaylistSkeleton: {
+    height: '80px',
+    borderRadius: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   }
 }))
 
@@ -58,14 +65,14 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
   const history = useHistory()
   const classes = useStyles();
   const { url } = useRouteMatch()
- 
+
   const handleMenuClose = (e) => {
     setAnchorEl(null)
   }
   const handleMenuOpen = (e) => {
     setAnchorEl(e.currentTarget)
   }
-  
+
   const routeToPlaylistContent = (playlist_id) => {
     history.push(`${url}/${playlist_id}`)
   }
@@ -78,11 +85,11 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
         <ListItemAvatar>
           {// This mitigate type of received photo to prevent broken photo display
             image !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg' ? //check if photo is not empty string
-            typeof image === 'string' ?
-              <img className={classes.imageIcon} src={sourceUrl + image} alt="..." /> //if type of photo is string mostli its a url from server so use it
-            : <img className={classes.imageIcon} src={URL.createObjectURL(image)} alt="..." /> //if type of photo is a file that inputed from form so use it
-          : <img className={classes.imageIcon} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
-        }
+              typeof image === 'string' ?
+                <img className={classes.imageIcon} src={sourceUrl + image} alt="..." /> //if type of photo is string mostli its a url from server so use it
+                : <img className={classes.imageIcon} src={URL.createObjectURL(image)} alt="..." /> //if type of photo is a file that inputed from form so use it
+              : <img className={classes.imageIcon} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
+          }
           {/* {Boolean(image) ?
             <img className={classes.imageIcon} src={sourceUrl+image} alt="..." />
             :
@@ -130,8 +137,8 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
         }}
       >
 
-        <MenuItem onClick={() => { }}>
-          <ListItemIcon onClick={() => routeToPlaylistContent(id)} className={classes.menuIcon}>
+        <MenuItem onClick={() => routeToPlaylistContent(id)}>
+          <ListItemIcon className={classes.menuIcon}>
             <img src={editIcon} alt="..." />
           </ListItemIcon>
           <ListItemText primary="Edit" />
@@ -150,12 +157,16 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
 
 
 
-const CreatedPlaylistList = ({ data, handleSongPlay, handleDelete, handleOpenCreatePlaylistModal }) => {
+const CreatedPlaylistList = ({ userPlaylist, data, handleSongPlay, handleDelete, handleOpenCreatePlaylistModal }) => {
   const classes = useStyles()
 
 
   //RENDERING LIST CONTENT
   const renderListItem = (data) => {
+    if (userPlaylist.loading) return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(data => (
+      <Skeleton key={data} variant="rect" className={classes.listPlaylistSkeleton} />
+    ));
+
     if (data.length === 0) return (
       <div className={`${classes.listItem} ${classes.listItemEmpty}`} onClick={() => { }}>
         <Typography>Oops...</Typography>
@@ -175,4 +186,9 @@ const CreatedPlaylistList = ({ data, handleSongPlay, handleDelete, handleOpenCre
   )
 }
 
-export default CreatedPlaylistList
+
+const mapStateToProps = (state) => ({
+  userPlaylist: state.userPlaylist
+})
+
+export default connect(mapStateToProps)(CreatedPlaylistList)

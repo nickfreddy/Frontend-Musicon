@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import CstDrawer from '../components/CstDrawer';
 import PlaylistPage from './playListPage/PlaylistPage';
 import CreatedPlaylistPage from './createdPlaylistPage/CreatedPlaylistPage';
-import DetailPlaylist from './playListPage/DetailPlaylist';
+// import DetailPlaylist from './playListPage/DetailPlaylist';
 import SongList from './songList/SongList';
 import ProfilePage from './profilePage/ProfilePage';
 import { makeStyles } from '@material-ui/styles';
@@ -39,7 +39,8 @@ const UserPage = () => {
           <Route exact path={match.path} component={() => <HomePage />} />
           <Route exact path={`${match.path}/browse`} component={() => <BrowsePage/>}/>
           <Route exact path={`${match.path}/playlist`} component={() => <PlaylistPage />} />
-          <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} />
+          {/* <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} /> */}
+          <Route path={`${match.path}/playlist/:playlist_id`} component={() => <SongList />} />
           <Route exact path={`${match.path}/createdPlaylist`} component={() => <CreatedPlaylistPage />} />
           <Route path={`${match.path}/createdPlaylist/:playlist_id`} component={() => <SongList />} />
           <Route exact path={`${match.path}/profile`} component={() => <ProfilePage />} />

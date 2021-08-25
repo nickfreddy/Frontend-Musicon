@@ -81,6 +81,7 @@ const BrowseAlbums = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
+  console.log(result, loading);
   return (
     <div className={classes.root}>
       <ArtistCard className={classes.card}>

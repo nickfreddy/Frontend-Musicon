@@ -1,5 +1,5 @@
 export const checkPhotoSource = (photo) => {
-  const urlCheckRgx = /^https:.*$/gi
+  const urlCheckRgx = /^[https:|http:].*$/gi
   return urlCheckRgx.test(photo)
 }
 
