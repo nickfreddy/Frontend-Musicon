@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const SongItem = ({ isOwner, className, number, id, image, title, artist, duration, onPlay, onDelete }) => {
+const SongItem = ({song, isOwner, className, number, id, image, title, artist, duration, handleSongPlay, onDelete }) => {
 
   const classes = useStyles();
 
@@ -65,7 +65,7 @@ const SongItem = ({ isOwner, className, number, id, image, title, artist, durati
 
   return (
     <div>
-      <ListItem className={`${classes.listItem} ${className}`} onClick={onPlay}>
+      <ListItem className={`${classes.listItem} ${className}`} onClick={() => handleSongPlay(song)}>
         <ListItemIcon className={classes.listIcon}>
           <Typography>{number}</Typography>
         </ListItemIcon>
@@ -149,7 +149,18 @@ const SongListList = ({ isOwner, data, handleSongPlay, handleDelete }) => {
       </div>
     )
     return data.map((song, index) => (
-      <SongItem isOwner={isOwner} key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId.name} duration={song.songDuration} onPlay={() => handleSongPlay(song._id)} onDelete={() => handleDelete(song._id)} />
+      <SongItem 
+        song={song} 
+        isOwner={isOwner} 
+        key={song._id} 
+        number={index + 1} 
+        id={song._id} 
+        image={song.songImage} 
+        title={song.songTitle} 
+        artist={song.artistId.name} 
+        duration={song.songDuration} 
+        handleSongPlay={handleSongPlay} 
+        onDelete={() => handleDelete(song._id)} />
     ))
   }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useRouteMatch, Switch, Route } from 'react-router-dom';
 import HomePage from './homePage/HomePage';
 import Header from '../components/Header';
@@ -12,6 +12,12 @@ import { makeStyles } from '@material-ui/styles';
 import Player from '../components/Player/Player';
 import AccountPage from './accountPage/AccountPage';
 import BrowsePage from './browsePage/BrowsePage';
+// import { AUTH_SPOTIFY_URL } from '../redux/Api/spotifyAPI';
+// import useAuthSpotify from '../components/customHook/useAuthSpotify';
+
+// const code = new URLSearchParams(window.location.search).get('code');
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     paddingBottom: theme.spacing(2),
@@ -23,12 +29,23 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    paddingTop: "80px"//"120px" //space to the top spare to header
+    paddingTop: "80px",//"120px" //space to the top spare to header
+    paddingBottom: "210px",
+    [theme.breakpoints.up('sm')]:{
+      paddingBottom: "160px"
+    },
+    [theme.breakpoints.up('md')]:{
+      paddingBottom: "100px"
+    },
   }
 }))
+
+
 const UserPage = () => {
+  // const accessToken = useAuthSpotify(code);
   const classes = useStyles()
   let match = useRouteMatch();
+
 
   return (
     <div className={classes.root}>

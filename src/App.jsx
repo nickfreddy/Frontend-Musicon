@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import { connect } from 'react-redux';
@@ -6,11 +6,20 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import UserPage from './pages/UserPage';
 import TestPage from './pages/TestPage';
-
 import { useDispatch } from 'react-redux';
 import { getLogedInUserAction } from './redux/actions/userAction';
+// import { AUTH_SPOTIFY_URL } from './redux/Api/spotifyAPI';
 
+// import axios from 'axios';
+// import { CLIENT_ID,CLIENT_SECRET } from './redux/Api/spotifyAPI';
 
+// var SpotifyWebApi = require('spotify-web-api-node');
+
+// var spotifyApi = new SpotifyWebApi({
+//   clientId: CLIENT_ID,
+//   clientSecret: CLIENT_SECRET,
+//   // redirectUri: 'http://www.example.com/callback'
+// });
 
 
 
@@ -61,16 +70,17 @@ const App = ({ theme }) => {
       //     // }
       //   }
       // }
-      
+
     }
   })
-
   const dispatch = useDispatch();
 
 
-  useEffect(()=> {
+
+
+  useEffect(() => {
     dispatch(getLogedInUserAction());
-  },[dispatch])
+  }, [dispatch])
   return (
     <Router>
       <ThemeProvider theme={rootTheme}>
@@ -79,6 +89,17 @@ const App = ({ theme }) => {
           <Route exact path="/" component={() => (<LandingPage />)} /> {/**Loading page */}
           <Route path="/user" component={() => (<UserPage />)} />
           <Route path="/test" component={() => (<TestPage />)} />
+
+
+
+          {/**=========== USED TO GET SPOTIFY CODE ========== */}
+          {/* <Route path="/spotifyLogin" component={() => { //redirect to spotify auth URL and then back to localhost:300/user
+            window.location.href = AUTH_SPOTIFY_URL;
+            // window.location.href= "https://musicon.gabatch13.my.id/auth/spotify/login"
+            return null;
+          }} /> */}
+          {/**=============================================== */}
+
         </Switch>
       </ThemeProvider>
     </Router>

@@ -77,6 +77,8 @@ const SignUpForm = () => {
       // alert(JSON.stringify(values, null, 2));
       const {fullName, userName, email, password} = values;
       dispatch(signUpUserAction(userName,fullName, email, password, () => history.push('/user')));
+      // dispatch(signUpUserAction(userName,fullName, email, password, () => history.push('/'))); //route to landing page
+
     }
   })
 

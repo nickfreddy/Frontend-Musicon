@@ -15,6 +15,7 @@ import { deleteUserPlaylistAction } from '../../redux/actions/userPlaylistAction
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { deleteSongFromPlaylistAction } from '../../redux/actions/playlistDetailAction';
+import { setCurrentPlayingAction, setPlayCurrentPlayingAction, unsetPlayCurrentPlayingAction } from '../../redux/actions/currentPlayingAction';
 
 
 const useStyles = makeStyles(theme => ({
@@ -39,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const SongList = ({ userPlaylist }) => {
+const SongList = ({ userPlaylist, currentPlaying }) => {
   const { playlist_id } = useParams() // its used to getting response from API
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -116,8 +117,14 @@ const SongList = ({ userPlaylist }) => {
   //========================================================
 
 
-  const handleSongPlay = (id) => {
-    console.log(`SONG WITH ID: ${id} WILL BE PLAYED`)
+  const handleSongPlay = (songData) => {
+    console.log(`SONG BE PLAYED IS`, songData);
+    dispatch(setCurrentPlayingAction(songData));
+    if(currentPlaying.isPlaying){
+      dispatch(unsetPlayCurrentPlayingAction());
+    }else{
+      dispatch(setPlayCurrentPlayingAction());
+    }
   }
 
 
@@ -210,6 +217,7 @@ const SongList = ({ userPlaylist }) => {
 }
 
 const mapStateToProps = (state) => ({
-  userPlaylist: state.userPlaylist
+  userPlaylist: state.userPlaylist,
+  currentPlaying: state.currentPlaying
 })
 export default connect(mapStateToProps)(SongList)

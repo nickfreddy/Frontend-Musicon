@@ -10,6 +10,9 @@ import React from 'react';
 import samplePhoto from '../../../../assets/img/XMLID1383.svg';
 import deleteIcon from '../../../../assets/img/deleteIcon.svg';
 import { secondsDuration } from '../../../../tools/timeConverter';
+import { connect } from 'react-redux';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
 
 //useStyles==========================================
 const useStyles = makeStyles(theme => ({
@@ -39,7 +42,13 @@ const useStyles = makeStyles(theme => ({
     transition: 'all 0.4s ease',
     '&:hover': {
       background: alpha('#2D304D', 0.9),
-      cursor: 'pointer'
+      cursor: 'pointer',
+      '& .playNumberIcon':{
+        display: 'block',
+      },
+      '& .numberIcon':{
+        display: 'none'
+      }
     },
     '& .MuiTableCell-root': {
       border: 'none',
@@ -63,11 +72,21 @@ const useStyles = makeStyles(theme => ({
     '& > .MuiTableCell-root': {
       fontWeight: 700
     }
+  },
+  playArrowIcon: {
+    textAlign: 'center'
+  },
+  songNumber:{
+    '& .playNumberIcon':{
+      display: 'none',
+      textAlign: 'center'
+    }
+
   }
 }))
 //==================================================
 
-const SongListTableItem = ({ isOwner, song, handleDelete, handleSongPlay, index }) => {
+const SongListTableItem = ({ currentPlaying, isOwner, song, handleDelete, handleSongPlay, index }) => {
   const classes = useStyles();
 
   const combineIconAndTitle = (icon, title) => (
@@ -82,22 +101,34 @@ const SongListTableItem = ({ isOwner, song, handleDelete, handleSongPlay, index 
   );
 
 
+
   return (
     <TableRow className={classes.tableRowContent}>
-      <TableCell padding="none" onClick={handleSongPlay}> {/** Play song */}
-        <Typography align="center">
-          {Number(index) + 1}
-        </Typography>
+      <TableCell padding="none" onClick={() => handleSongPlay(song)}> {/** Play song */}
+        {song._id === currentPlaying.songDetail._id ?
+          <div className={classes.playArrowIcon}>
+            {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+          </div>
+          :
+          <div className={classes.songNumber}>
+            <div className="playNumberIcon">
+              <PlayArrowIcon />
+            </div>
+            <Typography className="numberIcon" align="center">
+              {Number(index) + 1}
+            </Typography>
+          </div>
+        }
       </TableCell>
-      <TableCell padding="none" style={{ width: 400 }} onClick={handleSongPlay}>
+      <TableCell padding="none" style={{ width: 400 }} onClick={() => handleSongPlay(song)}>
         {combineIconAndTitle(song.songImage, song.songTitle)}
       </TableCell>
-      <TableCell padding="none" onClick={handleSongPlay}>
+      <TableCell padding="none" onClick={() => handleSongPlay(song)}>
         <Typography align="center">
           {song.artistId.name}
         </Typography>
       </TableCell >
-      <TableCell padding="none" onClick={handleSongPlay}>
+      <TableCell padding="none" onClick={() => handleSongPlay(song)}>
         <Typography align="center">
           {secondsDuration(song.songDuration)}
         </Typography>
@@ -113,4 +144,7 @@ const SongListTableItem = ({ isOwner, song, handleDelete, handleSongPlay, index 
   )
 }
 
-export default SongListTableItem
+const mapStateToProps = (state) => ({
+  currentPlaying: state.currentPlaying
+})
+export default connect(mapStateToProps)(SongListTableItem)

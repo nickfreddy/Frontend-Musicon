@@ -16,12 +16,15 @@ const LandingPage = ({isUserLoggedIn}) => {
   // useEffect(()=> {
   //   dispatch(getLogedInUserAction(()=> history.push('/user')));
   // },[dispatch, history])
+
   if(isUserLoggedIn) return <Redirect to="/user"/>
+  // if(isUserLoggedIn) return <Redirect to="/spotifyLogin"/>
+  // if(isUserLoggedIn) return <Redirect to="https://musicon.gabatch13.my.id/auth/spotify/login"/>
+
   return (
     <div>
       <Typography>LANDING PAGE</Typography>
       <Button variant="contained" color="primary" onClick={() => history.push('/user')}>After Login Go To UserPage</Button>
-
     </div>
   )
 }

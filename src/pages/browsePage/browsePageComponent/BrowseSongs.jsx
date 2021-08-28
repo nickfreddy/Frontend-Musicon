@@ -72,7 +72,7 @@ const BrowseSongs = ({ pattern }) => {
         ...state,
         data: [],
         error: true,
-        errorMessage: err.response.data.errors[0],
+        errorMessage: err.response,
       }));
       setLoading(false);
     }

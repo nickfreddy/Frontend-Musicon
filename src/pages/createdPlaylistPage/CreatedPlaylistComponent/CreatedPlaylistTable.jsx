@@ -79,6 +79,11 @@ const useStyles = makeStyles(theme => ({
   tableListContentEmpty: {
     height: '53px',
     // borderRadius: theme.spacing(1)
+  },
+  titleCell:{
+    [theme.breakpoints.up('md')]:{
+      width: 300
+    }
   }
 }))
 //==================================================
@@ -141,7 +146,7 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
             {index + 1}
           </Typography>
         </TableCell>
-        <TableCell padding="none" style={{ width: 400 }} onClick={() => handleSongPlay(playList._id)}>
+        <TableCell padding="none" className={classes.titleCell} onClick={() => handleSongPlay(playList._id)}>
           {combineIconAndTitle(playList.playlistImage, playList.playlistTitle)}
         </TableCell>
         <TableCell padding="none" onClick={() => handleSongPlay(playList._id)}>
@@ -172,7 +177,7 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
         <TableHead >
           <TableRow className={classes.tableHead}>
             <TableCell align="center">NO</TableCell>
-            <TableCell style={{ width: 400 }} align="left">TITLE</TableCell>
+            <TableCell className={classes.titleCell} align="left">TITLE</TableCell>
             <TableCell align="center">TOTAL SONGS</TableCell>
             <TableCell align="center">DATE CREATED</TableCell>
             <TableCell align="center">ACTION</TableCell>
