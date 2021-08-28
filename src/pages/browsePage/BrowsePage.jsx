@@ -21,15 +21,15 @@ const BrowsePage = () => {
     //   <BrowseArtists pattern={pattern} />
     // </div>
     <Container>
-      <Typography variant="h4" style={{ fontWeight: "bolder" }}>
+      <Typography variant="h4" style={{ fontWeight: "bolder", margin: 10 }}>
         Songs
       </Typography>
       <BrowseSongs pattern={pattern} />
-      <Typography variant="h4" style={{ fontWeight: "bolder" }}>
+      <Typography variant="h4" style={{ fontWeight: "bolder", margin: 10 }}>
         Albums
       </Typography>
       <BrowseAlbums pattern={pattern} />
-      <Typography variant="h4" style={{ fontWeight: "bolder" }}>
+      <Typography variant="h4" style={{ fontWeight: "bolder", margin: 10 }}>
         Artists
       </Typography>
       <BrowseArtists pattern={pattern} />

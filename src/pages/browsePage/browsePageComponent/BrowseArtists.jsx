@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { musiconAPI } from "../../../redux/Api/setupAPI";
+import BrowseArtistCard from "./BrowseArtistCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(3),
+    display: "flex",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+    },
+    [theme.breakpoints.up("sm")]: {
+      justifyContent: "left",
+    },
   },
 }));
 
@@ -63,7 +70,7 @@ const BrowseArtists = ({ pattern }) => {
       );
       setResult((state) => ({
         ...state,
-        data: null,
+        data: [],
         error: true,
         errorMessage: err.response.data.errors[0],
       }));
@@ -80,10 +87,26 @@ const BrowseArtists = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
-  console.log(result,loading)
+  console.log(result, loading);
+  console.log("artist", result.data);
+
   return (
     <div className={classes.root}>
-      <Typography>{pattern}</Typography>
+      {result.data.length !== 0 ? (
+        result.data.map((data) => (
+          <BrowseArtistCard
+            key={data._id}
+            artistImage={data.photo}
+            artistName={data.name}
+            artistUrl={data.id}
+            className={classes.artistcard}
+          />
+        ))
+      ) : (
+        <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
+          Oops!... Can't find the artist...
+        </Typography>
+      )}
     </div>
   );
 };

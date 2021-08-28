@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { musiconAPI } from "../../../redux/Api/setupAPI";
+import BrowseSongCard from "./BrowseSongCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(3),
+    display: "flex",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+    },
+    [theme.breakpoints.up("sm")]: {
+      justifyContent: "left",
+    },
   },
 }));
 
@@ -63,7 +70,7 @@ const BrowseSongs = ({ pattern }) => {
       );
       setResult((state) => ({
         ...state,
-        data: null,
+        data: [],
         error: true,
         errorMessage: err.response.data.errors[0],
       }));
@@ -80,10 +87,27 @@ const BrowseSongs = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
-  console.log(result, loading)
+  console.log(result, loading);
+  console.log("song", result.data);
+
   return (
     <div className={classes.root}>
-      <Typography>{pattern}</Typography>
+      {result.data.length !== 0 ? (
+        result.data.map((data) => (
+          <BrowseSongCard
+            key={data._id}
+            songImage={data.songImage}
+            songTitle={data.songTitle}
+            albumTitle={data.albumId.albumTitle}
+            songUrl={data.id}
+            className={classes.songcard}
+          />
+        ))
+      ) : (
+        <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
+          Oops!... Can't find the song...
+        </Typography>
+      )}
     </div>
   );
 };
