@@ -57,6 +57,8 @@ const SignInForm = () => {
       // alert(JSON.stringify(values, null, 2));
       const {userNameOrEmail, password} = values;
       dispatch(signInUserAction(userNameOrEmail, password, () => history.push('/user')));
+      // dispatch(signInUserAction(userNameOrEmail, password, () => history.push('/'))); //route to landing page
+
     }
   })
 
