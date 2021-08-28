@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { musiconAPI } from "../../../redux/Api/setupAPI";
-import ArtistCard from "../../../components/artistCard/ArtistCard";
+import BrowseAlbumCard from "./BrowseAlbumCard";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(3),
+    display: "flex",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+    },
+    [theme.breakpoints.up("sm")]: {
+      justifyContent: "left",
+    },
   },
 }));
 
@@ -40,10 +47,10 @@ const BrowseAlbums = ({ pattern }) => {
           },
         }
       );
-      if (response.data.album) {
+      if (response.data.albums) {
         setResult((state) => ({
           ...state,
-          data: [...response.data.album],
+          data: [...response.data.albums],
           error: false,
           errorMessage: "",
         }));
@@ -64,7 +71,7 @@ const BrowseAlbums = ({ pattern }) => {
       );
       setResult((state) => ({
         ...state,
-        data: null,
+        data: [],
         error: true,
         errorMessage: err.response.data.errors[0],
       }));
@@ -82,11 +89,25 @@ const BrowseAlbums = ({ pattern }) => {
     };
   }, [pattern]);
   console.log(result, loading);
+  console.log("album", result.data);
+
   return (
     <div className={classes.root}>
-      <ArtistCard className={classes.card}>
-        <Typography>{pattern}</Typography>
-      </ArtistCard>
+      {result.data.length !== 0 ? (
+        result.data.map((data) => (
+          <BrowseAlbumCard
+            key={data._id}
+            albumImage={data.albumImage}
+            albumTitle={data.albumTitle}
+            albumUrl={data.id}
+            className={classes.albumcard}
+          />
+        ))
+      ) : (
+        <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
+          Oops!... Can't find the album...
+        </Typography>
+      )}
     </div>
   );
 };
