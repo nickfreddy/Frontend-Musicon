@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const songLyricReducer = (state = initialState, action) => {
-  switch(action.type){
+  switch (action.type) {
     case type.SET_SONG_LYRIC: return {
       ...state,
       data: action.payload
@@ -18,6 +18,10 @@ const songLyricReducer = (state = initialState, action) => {
     case type.UNSET_LOADING_SONG_LYRIC: return {
       ...state,
       loading: false
+    };
+    case type.RESET_SONG_LYRIC: return {
+      ...state,
+      data: ""
     }
     default: return state
   }

@@ -108,7 +108,7 @@ const useStyles = makeStyles(theme => ({
 const Hero = ({handleOpenAuthModal}) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div id="home" className={classes.root}>
       <div className="side left-side">
         <div className="hero-text">
           <Typography variant="h2" component="h2">Listening to The Music</Typography>

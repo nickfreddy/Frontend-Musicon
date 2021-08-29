@@ -7,16 +7,14 @@ import Audio from './Audio';
 import TrackAction from './TrackAction/TrackAction';
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { disablePlayerAction, enablePlayerAction, setCurrentPlayingAction } from '../../redux/actions/currentPlayingAction';
-import { getSongLyricAction } from '../../redux/actions/songLyricAction';
+import { disablePlayerAction, enablePlayerAction, setCurrentPlayingAction, setPlayCurrentPlayingAction } from '../../redux/actions/currentPlayingAction';
+import { getSongLyricAction, resetSongLyricAction } from '../../redux/actions/songLyricAction';
 import LyricViewer from '../lyricViewer/LyricViewer';
-import { getRandomRangedNumber } from '../../tools/numberManipulation';
-// import SpotifyPlayer from 'react-spotify-web-playback';
+import { getRandomNumberExcept } from '../../tools/numberManipulation';
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    // height: '136px',//'136px',
     background: '#252836',
     left: 0,
     right: 0,
@@ -36,7 +34,6 @@ const useStyles = makeStyles(theme => ({
       width: "100%"
     },
     [theme.breakpoints.up('md')]: {
-      // display: 'grid',
       gridTemplateColumns: '1fr 2fr 1fr',
       columnGap: theme.spacing(2),
       width: "100%"
@@ -56,16 +53,9 @@ const Player = ({ currentPlaying, playlistDetail }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
   const songList = playlistDetail.data.songs;
-  //const currentPlayingSongIndex = songList.findIndex(song => song._id === currentPlaying.songDetail._id);
-  // console.log('CURRENT SONG INDEX',currentPlayingSongIndex)
-  const getCurrentPlayingSongIndex = (currentPlayingSongId, songList) => {
-    return songList.findIndex(song => song._id === currentPlayingSongId);
-  }
 
-  // console.log('ini lama lagunya broh',duration)
   const handleCurrentTimeChange = (newPosition) => {
     audioRef.current.currentTime = newPosition
-    // console.log('audionya', newPosition)
   }
 
   const handlePlayTrack = () => {
@@ -78,7 +68,6 @@ const Player = ({ currentPlaying, playlistDetail }) => {
   const handleVolumeChange = (newVolume) => {
     audioRef.current.volume = newVolume
   }
-
 
   useEffect(() => {
     handleVolumeChange(volume);
@@ -102,34 +91,41 @@ const Player = ({ currentPlaying, playlistDetail }) => {
 
   useEffect(() => {
     dispatch(getSongLyricAction(currentPlaying.songDetail._id));
+    return () => {
+      dispatch(resetSongLyricAction());
+    }
   }, [currentPlaying.songDetail._id, dispatch])
 
+
   useEffect(() => {
-    if (!songList) return; //if no songList skip
-    if (songList.length < 1) return;//if no song in playlist skip
-    if (!currentPlaying.songDetail._id) return; //if no playing song
-    if (currentTime < (duration - 2)) return; //if running song time is les then its maximum duration so skip
-    const currentPlayingSongIndex = getCurrentPlayingSongIndex(currentPlaying.songDetail._id, songList);
-
-    if (currentPlaying.isRepeatOn) { // if repeat mode not activated skip
-      if (currentPlayingSongIndex < songList.length - 1) {
-        return dispatch(setCurrentPlayingAction(songList[currentPlayingSongIndex + 1]))
-      }
-      if (currentPlayingSongIndex === songList.length - 1) {
-        return dispatch(setCurrentPlayingAction(songList[0]))
+    // if (currentPlaying.isRepeatOn) {
+    if (currentTime === duration) {
+      // console.log('PLAY NEXT SONG BROH');
+      // dispatch(unsetPlayCurrentPlayingAction());
+      if (songList) {
+        if (currentPlaying.isRepeatOn) {
+          setCurrentTime(0);
+          if (songList.length !== 0) { //check if songList exist
+            const currentSongIndex = songList.findIndex(song => song._id === currentPlaying.songDetail._id);
+            if (!currentPlaying.isShuffleOn) {
+              if (currentSongIndex < songList.length - 1) {
+                dispatch(setCurrentPlayingAction(songList[currentSongIndex + 1]))
+              } else {
+                dispatch(setCurrentPlayingAction(songList[0]))
+              }
+            } else {
+              const newSongIndex = getRandomNumberExcept(0, songList.length, currentSongIndex);
+              console.log('LAGU BARU', newSongIndex)
+              dispatch(setCurrentPlayingAction(songList[newSongIndex]));
+              dispatch(setPlayCurrentPlayingAction());
+            }
+          }
+        }
       }
     }
+    // }
+  }, [currentPlaying.isRepeatOn, currentPlaying.isShuffleOn, currentPlaying.songDetail._id, currentTime, dispatch, duration, songList])
 
-    if (currentPlaying.isShuffleOn){
-      let nextSongIndex = 0;
-      do{
-        nextSongIndex = getRandomRangedNumber(0, songList.length);
-        if(currentPlayingSongIndex !== nextSongIndex) {
-          return dispatch(setCurrentPlayingAction(songList[nextSongIndex]));
-        } 
-      }while(currentPlayingSongIndex === nextSongIndex)
-    }
-  }, [currentPlaying.isRepeatOn, currentPlaying.isShuffleOn, currentPlaying.songDetail._id, currentPlaying.songDetail_id, currentTime, dispatch, duration, songList])
 
 
   return (
@@ -162,17 +158,6 @@ const Player = ({ currentPlaying, playlistDetail }) => {
         />
       </Container>
 
-
-
-
-
-      {/* <SpotifyPlayer
-        styles={{
-          bgColor: '#252836'
-        }}
-        token="BQBYLmDc3DMbk87sA0Gq47Hu20-KXQUPoXFvAoc5mDXPRbNL22OyXh_547DMM6ZheKdjbyUn_3MmYTRmjhQ"
-        uris={["spotify:track:0H4tn2HKN03NXrN4293MBZ"]}
-      /> */}
       <LyricViewer />
     </div>
   )
