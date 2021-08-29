@@ -120,8 +120,8 @@ const NavBar = ({handleOpenAuthModal}) => {
           <img src={navLogo} alt="..." />
         </div>
         <div className={classes.navLinks}>
-          <RoundedButton variant="link">Home</RoundedButton>
-          <RoundedButton variant="link">About</RoundedButton>
+          <RoundedButton href="#home" variant="link">Home</RoundedButton>
+          <RoundedButton href="#about" variant="link">About</RoundedButton>
           <RoundedButton onClick={handleOpenAuthModal} variant="gold">Login</RoundedButton>
         </div>
         <IconButton

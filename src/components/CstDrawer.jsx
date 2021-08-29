@@ -8,7 +8,8 @@ import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import AddIcon from '@material-ui/icons/Add';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
+import { toggleDrawerOpenAction } from '../redux/actions/drawerAction';
 
 export const drawerWidth = "256px";
 const useStyles = makeStyles(theme => ({
@@ -70,9 +71,12 @@ const CstDrawer = ({ className, drawer }) => {
   const { url } = useRouteMatch();
   const classes = useStyles();
   const location = useLocation();
+  const dispatch = useDispatch();
 
 
-
+  const handleToggleDrawer = () => {
+    dispatch(toggleDrawerOpenAction());
+  }
 
 
   return (
@@ -88,26 +92,26 @@ const CstDrawer = ({ className, drawer }) => {
       >
         <Toolbar />
         <List>
-          <ListItem button className={`${classes.listItem} ${location.pathname === url && classes.pathSelected}`} onClick={() => history.push(`${url}`)}>
+          <ListItem button className={`${classes.listItem} ${location.pathname === url && classes.pathSelected}`} onClick={() => {history.push(`${url}`); handleToggleDrawer();}}>
             <ListItemIcon>
               <Home />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/browse' && classes.pathSelected}`}  onClick={() => history.push(`${url}/browse`)} >
+          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/browse' && classes.pathSelected}`}  onClick={() => {history.push(`${url}/browse`); handleToggleDrawer()}} >
             <ListItemIcon>
               <MenuBookIcon />
             </ListItemIcon>
             <ListItemText primary="Browse" />
           </ListItem>
-          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/playlist' && classes.pathSelected}`} onClick={() => history.push(`${url}/playlist`)}>
+          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/playlist' && classes.pathSelected}`} onClick={() => {history.push(`${url}/playlist`); handleToggleDrawer()}}>
             <ListItemIcon>
               <QueueMusicIcon />
             </ListItemIcon>
             <ListItemText primary="Playlist" />
           </ListItem>
           <Divider />
-          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/createdPlaylist' && classes.pathSelected}`} onClick={() => history.push(`${url}/createdPlaylist`)}>
+          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/createdPlaylist' && classes.pathSelected}`} onClick={() => {history.push(`${url}/createdPlaylist`); handleToggleDrawer()}}>
             <ListItemIcon>
               <AddIcon />
             </ListItemIcon>

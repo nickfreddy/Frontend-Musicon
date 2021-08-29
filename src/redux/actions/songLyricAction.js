@@ -4,3 +4,4 @@ export const getSongLyricAction = (songId, callback = () => { }) => ({type: type
 export const setSongLyricAction = (songLyric) => ({type: type.SET_SONG_LYRIC, payload: songLyric});
 export const setLoadingSongLyricAction = () => ({type: type.SET_LOADING_SONG_LYRIC});
 export const unsetLoadingSongLyricAction = () => ({type: type.UNSET_LOADING_SONG_LYRIC});
+export const resetSongLyricAction = () => ({type: type.RESET_SONG_LYRIC});

@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   aboutDetail: {
     background: "#252836",
     paddingTop: theme.spacing(0),
-    paddingBottom: theme.spacing(5),
+    paddingBottom: theme.spacing(10),
     textAlign: 'center',
 
 
@@ -88,7 +88,7 @@ const useStyles = makeStyles(theme => ({
 const Footer = () => {
   const classes = useStyles();
   return (
-    <Container>
+    <Container id="about">
       <div className={classes.logo}>
         <img src={logoMusicon} alt="" />
       </div>
