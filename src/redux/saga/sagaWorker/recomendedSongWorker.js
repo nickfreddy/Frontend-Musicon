@@ -15,7 +15,7 @@ export function* getRecomendedSongWorker(action) {
     if (response.data.songs) {
       yield put(setRecomendedSongAction(response.data.songs));
       yield put(unsetLoadingRecomendedSongAction());
-      action.callback();
+      yield action.callback();
     } else {
       console.log('ERROR DATA STRUCTURE IS UNKNOWN DETAILS :', response);
       yield put(unsetLoadingRecomendedSongAction());

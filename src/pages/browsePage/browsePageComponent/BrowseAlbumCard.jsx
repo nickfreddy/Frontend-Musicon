@@ -11,7 +11,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    margin: [[10, 10, 30, 10]],
+    margin: [[5, 5, 5, 5]],
     background: "#1F1D2B",
     borderRadius: "8px",
     [theme.breakpoints.down("md")]: {

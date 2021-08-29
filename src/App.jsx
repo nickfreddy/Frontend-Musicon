@@ -48,6 +48,7 @@ const App = ({ theme }) => {
       fontFamily: [
         'DM Sans',
         'sans-serif',
+        'Poppins'
         // '"Helvetica Neue"',
         // 'Roboto',
         // 'Arial',

@@ -42,8 +42,8 @@ const newReleaseSongReducer = (state = initialState, action) => {
       ...state,
       loading: false
     };
-    case type.RESET_NEW_RELEASE_SONG: return initialState
-    default: return initialState;
+    case type.RESET_NEW_RELEASE_SONG: return initialState;
+    default: return state;
   }
 }
 

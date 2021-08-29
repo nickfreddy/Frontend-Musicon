@@ -1,4 +1,4 @@
-import { Container, Typography } from "@material-ui/core";
+import { Container, Divider, Typography } from "@material-ui/core";
 import React from "react";
 import { useLocation } from "react-router";
 import BrowseAlbums from "./browsePageComponent/BrowseAlbums";
@@ -25,10 +25,12 @@ const BrowsePage = () => {
         Songs
       </Typography>
       <BrowseSongs pattern={pattern} />
+      <Divider/>
       <Typography variant="h4" style={{ fontWeight: "bolder", margin: 10 }}>
         Albums
       </Typography>
       <BrowseAlbums pattern={pattern} />
+      <Divider/>
       <Typography variant="h4" style={{ fontWeight: "bolder", margin: 10 }}>
         Artists
       </Typography>

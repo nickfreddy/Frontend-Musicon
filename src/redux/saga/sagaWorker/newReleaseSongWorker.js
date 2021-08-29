@@ -11,7 +11,7 @@ export function* getNewReleaseSongWorker (action) { //action.payload isinya valu
     if(response.data.songs){
       yield put(setNewReleaseSongAction(response.data.songs));
       yield put(unsetLoadingNewReleaseSongAction()); // end loading
-      action.callback();
+      yield action.callback();
     }else{
       console.log('RECEIVED DATA STRUCTURE IS UNKNOWN DETAIL:', response);
       yield put(unsetLoadingNewReleaseSongAction());

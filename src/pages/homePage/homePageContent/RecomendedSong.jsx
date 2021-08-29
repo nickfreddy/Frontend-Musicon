@@ -35,6 +35,7 @@ const RecomendedSong = ({ recomendedSong }) => {
 
   const renderRecomendedSong = recomendedSong.data.map((song) => (
     <SongCard
+      songDetail={song}
       key={song._id}
       songImage={song.songImage}
       songTitle={song.songTitle}
@@ -67,7 +68,7 @@ const RecomendedSong = ({ recomendedSong }) => {
           </Typography>
         </Box>
       </Box>
-      <Collapse in={open} collapsedSize={170}>
+      <Collapse in={open} collapsedSize={140}>
         <div className={classes.songlist}>{renderRecomendedSong}</div>
       </Collapse>
     </div>
