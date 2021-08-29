@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const MobileMenu = ({open, anchorRef, handleListKeyDown, handleClose}) => {
+const MobileMenu = ({open, anchorRef, handleListKeyDown, handleClose, actions}) => {
   const classes = useStyles();
   return (
     <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
@@ -33,7 +33,7 @@ const MobileMenu = ({open, anchorRef, handleListKeyDown, handleClose}) => {
               <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                 <MenuItem onClick={handleClose}><RoundedButton fullWidth variant="link">Home</RoundedButton></MenuItem>
                 <MenuItem onClick={handleClose}><RoundedButton fullWidth variant="link">About</RoundedButton></MenuItem>
-                <MenuItem onClick={handleClose}><RoundedButton fullWidth variant="gold">Login</RoundedButton></MenuItem>
+                <MenuItem onClick={actions.handleOpenAuthModal}><RoundedButton fullWidth variant="gold">Login</RoundedButton></MenuItem>
               </MenuList>
             </ClickAwayListener>
           </Paper>

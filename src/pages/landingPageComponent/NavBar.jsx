@@ -4,9 +4,9 @@ import navLogo from '../../assets/img/Logo.svg';
 import { RoundedButton } from '../../components/commons/CstButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MobileMenu from './navBarComponent/MobileMenu';
-import SignModal from '../../components/signModal/SignModal';
-import { useDispatch } from 'react-redux';
-import { openModalAuthAction } from '../../redux/actions/modalAction';
+// import SignModal from '../../components/signModal/SignModal';
+// import { useDispatch } from 'react-redux';
+// import { openModalAuthAction } from '../../redux/actions/modalAction';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,16 +50,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const NavBar = () => {
+const NavBar = ({handleOpenAuthModal}) => {
   const menuButtonEl = useRef(null)
   const [open, setOpen] = React.useState(false);
   const [y, setY] = useState(window.scrollY);
   const classes = useStyles();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleOpenAuthModal = () => {
-    dispatch(openModalAuthAction());
-  }
+  // const handleOpenAuthModal = () => {
+  //   dispatch(openModalAuthAction());
+  // }
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -138,9 +138,12 @@ const NavBar = () => {
           open={open}
           handleListKeyDown={handleListKeyDown}
           handleClose={handleClose}
+          actions ={{
+            handleOpenAuthModal
+          }}
         />
       </Container>
-      <SignModal />
+      {/* <SignModal /> */}
     </div>
   )
 }

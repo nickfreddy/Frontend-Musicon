@@ -105,7 +105,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Hero = () => {
+const Hero = ({handleOpenAuthModal}) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -113,7 +113,7 @@ const Hero = () => {
         <div className="hero-text">
           <Typography variant="h2" component="h2">Listening to The Music</Typography>
           <Typography variant="subtitle1" component="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur orci quam est nisl, turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
-          <RoundedButton variant="gold">Start Now</RoundedButton>
+          <RoundedButton onClick={handleOpenAuthModal} variant="gold">Start Now</RoundedButton>
 
         </div>
       </div>
