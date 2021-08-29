@@ -23,6 +23,12 @@ const useStyles = makeStyles((theme) => ({
   lyricText: {
     marginTop: theme.spacing(2),
     textAlign: 'center'
+  },
+  lyricNotFound: {
+    fontSize: '1.3em',
+    fontWeight: 'bold',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   }
 }))
 const LyricViewer = ({ currentPlaying, songLyric, modals }) => {
@@ -40,7 +46,11 @@ const LyricViewer = ({ currentPlaying, songLyric, modals }) => {
           <Typography align="center" className={classes.songTitle} variant="h5">{currentPlaying?.songDetail?.songTitle || "Song Title"}</Typography>
           <Divider />
           <Typography className={classes.lyricText} component="pre">
-            <span>{songLyric.data}</span>
+            {songLyric.data !== "" ?
+              <span>{songLyric.data}</span>
+              :
+              <span className={classes.lyricNotFound}>Oops.. Lyric not available yet...</span>
+            }
           </Typography>
         </Paper>
       </Container>

@@ -155,7 +155,7 @@ const ProfileSection = ({ photo, fullName, createdPlaylist }) => {
             <div className={classes.actionButton}>
               {enableEdit ?
                 <div className={classes.editButtonContainer}>
-                  <RoundedButton onClick={handleDisableEdit} className={classes.editButton} variant="secondary">Cancle</RoundedButton>
+                  <RoundedButton onClick={handleDisableEdit} className={classes.editButton} variant="secondary">Cancel</RoundedButton>
                   <RoundedButton startIcon={user.loading && <CircularProgress size={20} />} type="submit" className={classes.editButton} variant="primary">Save</RoundedButton>
                 </div>
                 :
