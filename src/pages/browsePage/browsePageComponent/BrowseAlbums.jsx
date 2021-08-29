@@ -8,6 +8,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
     [theme.breakpoints.down("sm")]: {
       justifyContent: "center",
     },
@@ -15,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "left",
     },
   },
+  albumsCardSkeleton:{
+    width: 200,
+    height: 230,
+    borderRadius: '8px',
+    margin: theme.spacing(0.8)
+  }
 }));
 
 const BrowseAlbums = ({ pattern }) => {
@@ -73,7 +81,7 @@ const BrowseAlbums = ({ pattern }) => {
         ...state,
         data: [],
         error: true,
-        errorMessage: err.response.data.errors[0],
+        errorMessage: err.response?.data?.errors[0],
       }));
       setLoading(false);
     }
@@ -81,19 +89,39 @@ const BrowseAlbums = ({ pattern }) => {
   useEffect(() => {
     const fetchData = setTimeout(
       () => getSongByTitle(pattern), // sebenarnya dia getsong by tagName
-      1200
+      50
     );
     return () => {
       clearTimeout(fetchData);
       resetAllState();
     };
   }, [pattern]);
-  console.log(result, loading);
-  console.log("album", result.data);
+  // console.log(result, loading);
+  // console.log("album", result.data);
+
+
+  const dummyData = [1, 2, 3, 4];
+  const renderBrowsedAlbums = (result) => {
+    if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.albumsCardSkeleton} />)
+    if (result.data.length === 0) return (
+      <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
+        Oops!... Can't find the song...
+      </Typography>
+    )
+    return result.data.map((data) => (
+      <BrowseAlbumCard
+        key={data._id}
+        albumImage={data.albumImage}
+        albumTitle={data.albumTitle}
+        albumUrl={data.id}
+        className={classes.albumcard}
+      />
+    ))
+  }
 
   return (
     <div className={classes.root}>
-      {result.data.length !== 0 ? (
+      {/* {result.data.length !== 0 ? (
         result.data.map((data) => (
           <BrowseAlbumCard
             key={data._id}
@@ -107,7 +135,8 @@ const BrowseAlbums = ({ pattern }) => {
         <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
           Oops!... Can't find the album...
         </Typography>
-      )}
+      )} */}
+      {renderBrowsedAlbums(result)}
     </div>
   );
 };

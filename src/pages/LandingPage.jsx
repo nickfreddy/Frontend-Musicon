@@ -1,21 +1,15 @@
-import { Button, Typography } from '@material-ui/core'
+// import { Button, Typography } from '@material-ui/core'
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
-// import { getLogedInUserAction } from '../redux/actions/userAction';
-
+import NavBar from './landingPageComponent/NavBar';
+import Hero from './landingPageComponent/Hero';
+import Footer from './landingPageComponent/Footer';
 
 const LandingPage = ({isUserLoggedIn}) => {
 
-  const history = useHistory();
-  // const dispatch = useDispatch();
-
-
-  // useEffect(()=> {
-  //   dispatch(getLogedInUserAction(()=> history.push('/user')));
-  // },[dispatch, history])
+  // const history = useHistory();
 
   if(isUserLoggedIn) return <Redirect to="/user"/>
   // if(isUserLoggedIn) return <Redirect to="/spotifyLogin"/>
@@ -23,8 +17,9 @@ const LandingPage = ({isUserLoggedIn}) => {
 
   return (
     <div>
-      <Typography>LANDING PAGE</Typography>
-      <Button variant="contained" color="primary" onClick={() => history.push('/user')}>After Login Go To UserPage</Button>
+      <NavBar/>
+      <Hero/>
+      <Footer/>
     </div>
   )
 }

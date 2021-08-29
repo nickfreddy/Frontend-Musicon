@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { musiconAPI } from "../../../redux/Api/setupAPI";
 import BrowseSongCard from "./BrowseSongCard";
+import { Skeleton } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+
     [theme.breakpoints.down("sm")]: {
       justifyContent: "center",
     },
@@ -14,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "left",
     },
   },
+  songSkeleton:{
+    width: 325,
+    height: 120,
+    borderRadius: '8px',
+    margin: theme.spacing(0.8)
+  }
 }));
 
 const BrowseSongs = ({ pattern }) => {
@@ -72,7 +82,7 @@ const BrowseSongs = ({ pattern }) => {
         ...state,
         data: [],
         error: true,
-        errorMessage: err.response,
+        errorMessage: err.response?.data?.errors[0],
       }));
       setLoading(false);
     }
@@ -80,19 +90,41 @@ const BrowseSongs = ({ pattern }) => {
   useEffect(() => {
     const fetchData = setTimeout(
       () => getSongByTitle(pattern), // sebenarnya dia getsong by tagName
-      1200
+      50
     );
     return () => {
       clearTimeout(fetchData);
       resetAllState();
     };
   }, [pattern]);
-  console.log(result, loading);
-  console.log("song", result.data);
+  // console.log(result, loading);
+  // console.log("song", result.data);
+
+
+  const dummyData = [1, 2, 3];
+  const renderBrowsedSongs = (result) => {
+    if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.songSkeleton} />)
+    if (result.data.length === 0) return (
+      <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
+        Oops!... Can't find the song...
+      </Typography>
+    )
+    return result.data.map((data) => (
+      <BrowseSongCard
+        key={data._id}
+        songDetails={data}
+        songImage={data.songImage}
+        songTitle={data.songTitle}
+        albumTitle={data.albumId.albumTitle}
+        songUrl={data.id}
+        className={classes.songcard}
+      />
+    ))
+  }
 
   return (
     <div className={classes.root}>
-      {result.data.length !== 0 ? (
+      {/* {result.data.length !== 0 ? (
         result.data.map((data) => (
           <BrowseSongCard
             key={data._id}
@@ -107,7 +139,8 @@ const BrowseSongs = ({ pattern }) => {
         <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
           Oops!... Can't find the song...
         </Typography>
-      )}
+      )} */}
+     {renderBrowsedSongs(result)}
     </div>
   );
 };

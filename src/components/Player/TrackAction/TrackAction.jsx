@@ -3,6 +3,8 @@ import React from 'react'
 import volumeIcon from '../../../assets/img/volumeIcon.svg';
 import loveAction from '../../../assets/img/loveIcon.svg'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import { useDispatch, connect } from 'react-redux';
+import { openLyricModalAction } from '../../../redux/actions/modalAction';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +50,13 @@ const VolumeSlider = withStyles({
   },
 })(Slider);
 
-const TrackAction = ({ volume, setVolume }) => {
+const TrackAction = ({ volume, setVolume, songLyric }) => {
+  const dispatch = useDispatch()
+
+  const handleOpenLyricModal = () => {
+    dispatch(openLyricModalAction())
+  }
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -63,11 +71,14 @@ const TrackAction = ({ volume, setVolume }) => {
       <IconButton>
         <img src={loveAction} alt="..." />
       </IconButton>
-      <IconButton>
+      <IconButton disabled={songLyric.data === "" ? true : false } onClick={handleOpenLyricModal} >
         <LibraryBooksIcon />
       </IconButton>
     </div>
   )
 }
 
-export default TrackAction
+const mapStateToProps = (state) => ({
+  songLyric: state.songLyric
+})
+export default connect(mapStateToProps)(TrackAction)

@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useRouteMatch } from "react-router";
+import { useDispatch } from "react-redux";
 import {
   Card,
   CardActionArea,
@@ -8,10 +8,11 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import { setCurrentPlayingAction, setPlayCurrentPlayingAction } from "../../../redux/actions/currentPlayingAction";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    margin: [[10, 20, 30, 0]],
+    margin: [[5, 5, 5, 5]],
     background: "#1F1D2B",
     borderRadius: "8px",
     height: 120,
@@ -76,15 +77,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SongCard = ({ songImage, songTitle, albumTitle, songUrl }) => {
+const SongCard = ({songDetail, songImage, songTitle, albumTitle, songUrl }) => {
   const classes = useStyles();
-  const history = useHistory();
-  const { url } = useRouteMatch();
+  const dispatch = useDispatch();
+
+
+  const handleSongPlay = (songDetail) => {
+    dispatch(setCurrentPlayingAction(songDetail));
+    dispatch(setPlayCurrentPlayingAction())
+  }
   return (
     <Card className={classes.card}>
       <CardActionArea
         className={classes.actionarea}
-        onClick={() => history.push(`${url}/${songUrl}`)}
+        onClick={() => handleSongPlay(songDetail)}
       >
         <CardMedia
           className={classes.media}

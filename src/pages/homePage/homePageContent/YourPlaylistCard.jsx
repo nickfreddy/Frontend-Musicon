@@ -8,10 +8,12 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import { sourceUrl } from "../../../redux/Api/setupAPI";
+import { selectPhotoSource } from "../../../tools/checkPhotoSource";
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    margin: [[10, 20, 30, 0]],
+    margin: [[5, 5, 5, 5]],
     background: "#1F1D2B",
     borderRadius: "8px",
     [theme.breakpoints.down("sm")]: {
@@ -65,11 +67,11 @@ const YourPlaylistCard = ({ playlistImage, playlistTitle, playlistUrl }) => {
     <Card className={classes.card}>
       <CardActionArea
         className={classes.actionarea}
-        onClick={() => history.push(`${url}/${playlistUrl}`)}
+        onClick={() => history.push(`${url}/createdPlaylist/${playlistUrl}`)}
       >
         <CardMedia
           className={classes.media}
-          image={playlistImage}
+          image={selectPhotoSource(playlistImage, sourceUrl)}
           title={playlistTitle}
         />
         <CardContent>

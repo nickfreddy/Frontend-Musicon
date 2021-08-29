@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     transition: 'all 0.4s ease',
     '&:hover': {
       background: alpha('#2D304D', 0.9),
-      // cursor: 'pointer'
+      cursor: 'pointer'
     },
     '& .MuiTableCell-root': {
       border: 'none',
@@ -141,20 +141,20 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
 
     return data.map((playList, index) => (
       <TableRow key={index} className={classes.tableRowContent}>
-        <TableCell padding="none" onClick={() => handleSongPlay(playList._id)}>
+        <TableCell padding="none" onClick={() => routeToPlaylistContent(playList._id)}>
           <Typography align="center">
             {index + 1}
           </Typography>
         </TableCell>
-        <TableCell padding="none" className={classes.titleCell} onClick={() => handleSongPlay(playList._id)}>
+        <TableCell padding="none" className={classes.titleCell} onClick={() => routeToPlaylistContent(playList._id)}>
           {combineIconAndTitle(playList.playlistImage, playList.playlistTitle)}
         </TableCell>
-        <TableCell padding="none" onClick={() => handleSongPlay(playList._id)}>
+        <TableCell padding="none" onClick={() => routeToPlaylistContent(playList._id)}>
           <Typography align="center">
             {playList.songs.length}
           </Typography>
         </TableCell >
-        <TableCell padding="none" onClick={() => handleSongPlay(playList._id)}>
+        <TableCell padding="none" onClick={() => routeToPlaylistContent(playList._id)}>
           <Typography align="center">
             {formatDate(playList.createdAt)}
           </Typography>

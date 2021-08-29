@@ -7,7 +7,10 @@ import Audio from './Audio';
 import TrackAction from './TrackAction/TrackAction';
 import { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { disablePlayerAction, enablePlayerAction } from '../../redux/actions/currentPlayingAction';
+import { disablePlayerAction, enablePlayerAction, setCurrentPlayingAction } from '../../redux/actions/currentPlayingAction';
+import { getSongLyricAction } from '../../redux/actions/songLyricAction';
+import LyricViewer from '../lyricViewer/LyricViewer';
+import { getRandomRangedNumber } from '../../tools/numberManipulation';
 // import SpotifyPlayer from 'react-spotify-web-playback';
 
 const useStyles = makeStyles(theme => ({
@@ -26,13 +29,13 @@ const useStyles = makeStyles(theme => ({
   playerContainer: {
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
-    [theme.breakpoints.up('sm')]:{
+    [theme.breakpoints.up('sm')]: {
       display: 'grid',
       gridTemplateColumns: '2fr 1fr',
       columnGap: theme.spacing(2),
       width: "100%"
     },
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       // display: 'grid',
       gridTemplateColumns: '1fr 2fr 1fr',
       columnGap: theme.spacing(2),
@@ -45,7 +48,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const Player = ({currentPlaying, playlistDetail}) => {
+const Player = ({ currentPlaying, playlistDetail }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const audioRef = useRef(null);
@@ -53,8 +56,11 @@ const Player = ({currentPlaying, playlistDetail}) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
   const songList = playlistDetail.data.songs;
-  // const currentPlayingSongIndex = songList.findIndex(song => song._id === currentPlaying.songDetail._id);
+  //const currentPlayingSongIndex = songList.findIndex(song => song._id === currentPlaying.songDetail._id);
   // console.log('CURRENT SONG INDEX',currentPlayingSongIndex)
+  const getCurrentPlayingSongIndex = (currentPlayingSongId, songList) => {
+    return songList.findIndex(song => song._id === currentPlayingSongId);
+  }
 
   // console.log('ini lama lagunya broh',duration)
   const handleCurrentTimeChange = (newPosition) => {
@@ -79,37 +85,59 @@ const Player = ({currentPlaying, playlistDetail}) => {
   }, [volume])
 
   useEffect(() => {
-    if(currentPlaying.isPlaying === true){
+    if (currentPlaying.isPlaying === true) {
       handlePlayTrack()
-    }else{
+    } else {
       handlePauseTrack()
     }
-  },[currentPlaying.isPlaying])
+  }, [currentPlaying.isPlaying])
 
   useEffect(() => {
-    if(songList){
+    if (songList) {
       dispatch(enablePlayerAction())
-    }else{
+    } else {
       dispatch(disablePlayerAction())
     }
-  },[dispatch, songList])
+  }, [dispatch, songList])
 
-  // useEffect(() => {
-  //   if(currentTime >= duration){
-  //     // console.log('NEXT SONG BROHH')
-  //     //if current song index is less then maximum index in songList so play nex song
-  //     // if(currentPlayingSongIndex < songList.length){
-  //     //   dispatch(setCurrentPlayingAction(songList[currentPlayingSongIndex + 1]))
-  //     // }
-  //   }
-  // },[])
+  useEffect(() => {
+    dispatch(getSongLyricAction(currentPlaying.songDetail._id));
+  }, [currentPlaying.songDetail._id, dispatch])
+
+  useEffect(() => {
+    if (!songList) return; //if no songList skip
+    if (songList.length < 1) return;//if no song in playlist skip
+    if (!currentPlaying.songDetail._id) return; //if no playing song
+    if (currentTime < (duration - 2)) return; //if running song time is les then its maximum duration so skip
+    const currentPlayingSongIndex = getCurrentPlayingSongIndex(currentPlaying.songDetail._id, songList);
+
+    if (currentPlaying.isRepeatOn) { // if repeat mode not activated skip
+      if (currentPlayingSongIndex < songList.length - 1) {
+        return dispatch(setCurrentPlayingAction(songList[currentPlayingSongIndex + 1]))
+      }
+      if (currentPlayingSongIndex === songList.length - 1) {
+        return dispatch(setCurrentPlayingAction(songList[0]))
+      }
+    }
+
+    if (currentPlaying.isShuffleOn){
+      let nextSongIndex = 0;
+      do{
+        nextSongIndex = getRandomRangedNumber(0, songList.length);
+        if(currentPlayingSongIndex !== nextSongIndex) {
+          return dispatch(setCurrentPlayingAction(songList[nextSongIndex]));
+        } 
+      }while(currentPlayingSongIndex === nextSongIndex)
+    }
+  }, [currentPlaying.isRepeatOn, currentPlaying.isShuffleOn, currentPlaying.songDetail._id, currentPlaying.songDetail_id, currentTime, dispatch, duration, songList])
+
 
   return (
     <div className={classes.root}>
       <Container className={classes.playerContainer}>
-        
 
-        <TrackInfo 
+
+        <TrackInfo
           songDetail={currentPlaying}
         />
 
@@ -121,7 +149,7 @@ const Player = ({currentPlaying, playlistDetail}) => {
 
         <TrackAction
           volume={volume}
-          setVolume = {setVolume}
+          setVolume={setVolume}
         />
 
 
@@ -145,6 +173,7 @@ const Player = ({currentPlaying, playlistDetail}) => {
         token="BQBYLmDc3DMbk87sA0Gq47Hu20-KXQUPoXFvAoc5mDXPRbNL22OyXh_547DMM6ZheKdjbyUn_3MmYTRmjhQ"
         uris={["spotify:track:0H4tn2HKN03NXrN4293MBZ"]}
       /> */}
+      <LyricViewer />
     </div>
   )
 }
