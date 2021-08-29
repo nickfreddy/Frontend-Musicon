@@ -101,7 +101,6 @@ const SongListTableItem = ({ currentPlaying, isOwner, song, handleDelete, handle
   );
 
 
-
   return (
     <TableRow className={classes.tableRowContent}>
       <TableCell padding="none" onClick={() => handleSongPlay(song)}> {/** Play song */}

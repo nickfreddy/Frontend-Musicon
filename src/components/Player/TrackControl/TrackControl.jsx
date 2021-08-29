@@ -86,7 +86,7 @@ const TrackControl = ({ currentPlaying, playlistDetail, currentTime, duration, h
         boxShadow: 'inherit',
       },
     },
-    // active: {},
+    active: {},
     // valueLabel: {
     //   left: 'calc(-50% - 1px)',
     // },

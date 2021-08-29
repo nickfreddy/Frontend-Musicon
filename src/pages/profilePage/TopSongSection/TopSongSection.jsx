@@ -18,10 +18,13 @@ import samplePhoto from '../../../assets/img/XMLID1383.svg'
 import SongListItem from './SongListItem';
 // import editIcon from '../../../assets/img/editIcon.svg';
 // import deleteIcon from '../../../assets/img/deleteIcon.svg'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import { getUserTopSongsAction } from '../../../redux/actions/userTopSongsAction.js'
 import { Skeleton } from '@material-ui/lab';
 import { secondsDuration } from '../../../tools/timeConverter';
+import { setCurrentPlayingAction, setPlayCurrentPlayingAction } from '../../../redux/actions/currentPlayingAction';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
 
 
 const dummyData = [
@@ -106,7 +109,13 @@ const useStyles = makeStyles(theme => ({
     transition: 'all 0.4s ease',
     '&:hover': {
       background: alpha('#2D304D', 0.9),
-      cursor: 'pointer'
+      cursor: 'pointer',
+      '& .playNumberIcon':{
+        display: 'block',
+      },
+      '& .numberIcon':{
+        display: 'none'
+      }
     },
     '& .MuiTableCell-root': {
       border: 'none',
@@ -134,10 +143,20 @@ const useStyles = makeStyles(theme => ({
   },
   emptyTableList:{
     borderRadius: theme.spacing(1),
+  },
+  playArrowIcon: {
+    textAlign: 'center'
+  },
+  songNumber:{
+    '& .playNumberIcon':{
+      display: 'none',
+      textAlign: 'center'
+    }
+
   }
 }))
 
-const TopSongSection = () => {
+const TopSongSection = ({currentPlaying}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const userTopSongs = useSelector(state => state.userTopSongs);
@@ -157,8 +176,10 @@ const TopSongSection = () => {
     alert(`This id ${_id} song will be deleted`)
   }
 
-  const handleSongPlay = (_id) => {
-    console.log(`This song with id ${_id} will be played`)
+  const handleSongPlay = (song) => {
+    console.log(`This song with id ${song._id} will be played`);
+    dispatch(setCurrentPlayingAction(song));
+    dispatch(setPlayCurrentPlayingAction());
   }
 
   // RENDERING TABLE CONTENT
@@ -182,20 +203,34 @@ const TopSongSection = () => {
 
     return userTopSongs.data.map((song, index) => (
       <TableRow key={index} className={classes.tableRowContent}>
-        <TableCell padding="none" onClick={() => handleSongPlay(song._id)}>
-          <Typography align="center">
+        <TableCell padding="none" onClick={() => handleSongPlay(song)}>
+          {/* <Typography align="center">
             {index + 1}
-          </Typography>
+          </Typography> */}
+          {song._id === currentPlaying.songDetail._id ?
+          <div className={classes.playArrowIcon}>
+            {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+          </div>
+          :
+          <div className={classes.songNumber}>
+            <div className="playNumberIcon">
+              <PlayArrowIcon />
+            </div>
+            <Typography className="numberIcon" align="center">
+              {Number(index) + 1}
+            </Typography>
+          </div>
+        }
         </TableCell>
-        <TableCell padding="none" style={{ width: 400 }} onClick={() => handleSongPlay(song._id)}>
+        <TableCell padding="none" style={{ width: 400 }} onClick={() => handleSongPlay(song)}>
           {combineIconAndTitle(song.songImage, song.songTitle)}
         </TableCell>
-        <TableCell padding="none" onClick={() => handleSongPlay(song._id)}>
+        <TableCell padding="none" onClick={() => handleSongPlay(song)}>
           <Typography align="center">
             {song.artistId?.name || 'under maintenance'}
           </Typography>
         </TableCell >
-        <TableCell padding="none" onClick={() => handleSongPlay(song._id)}>
+        <TableCell padding="none" onClick={() => handleSongPlay(song)}>
           <Typography align="center">
             {secondsDuration(song.songDuration)|| 'under maintenance'}
           </Typography>
@@ -216,7 +251,7 @@ const TopSongSection = () => {
         <ListItem key={index}>
           <Skeleton variant="rect" className={classes.skeletonListSong} />
         </ListItem>
-        //<SongListItem key={song._id} number={index + 1} id={song._id} image={song.songIcon} title={song.title} artist={song.artist} duration={song.duration} onPlay={() => handleSongPlay(song._id)} onDelete={() => handleDelete(song._id)} />
+        //<SongListItem key={song._id} number={index + 1} id={song._id} image={song.songIcon} title={song.title} artist={song.artist} duration={song.duration} onPlay={() => handleSongPlay(song)} onDelete={() => handleDelete(song._id)} />
       ))
     )
     if (userTopSongs.data.length === 0) return (
@@ -226,7 +261,7 @@ const TopSongSection = () => {
     )
     return (
       userTopSongs.data.map((song, index) => (
-        <SongListItem key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId?.name || 'under maintenance'} duration={secondsDuration(song.songDuration)  || 'under maintenance'} onPlay={() => handleSongPlay(song._id)} onDelete={() => handleDelete(song._id)} />
+        <SongListItem key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId?.name || 'under maintenance'} duration={secondsDuration(song.songDuration)  || 'under maintenance'} onPlay={() => handleSongPlay(song)} onDelete={() => handleDelete(song._id)} />
       ))
     )
 
@@ -262,4 +297,7 @@ const TopSongSection = () => {
   )
 }
 
-export default TopSongSection
+const mapStateToProps = (state) => ({
+  currentPlaying: state.currentPlaying
+})
+export default connect(mapStateToProps)(TopSongSection)

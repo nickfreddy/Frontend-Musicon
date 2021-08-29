@@ -15,7 +15,11 @@ import { deleteUserPlaylistAction } from '../../redux/actions/userPlaylistAction
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { deleteSongFromPlaylistAction } from '../../redux/actions/playlistDetailAction';
-import { setCurrentPlayingAction, setPlayCurrentPlayingAction, unsetPlayCurrentPlayingAction } from '../../redux/actions/currentPlayingAction';
+import { 
+  setCurrentPlayingAction, 
+  setPlayCurrentPlayingAction, 
+  // unsetPlayCurrentPlayingAction 
+} from '../../redux/actions/currentPlayingAction';
 
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +54,7 @@ const SongList = ({ userPlaylist, currentPlaying }) => {
   const user_id = localStorage.getItem('user_id');
   const location = useLocation();
   const nowLocation = location.pathname.split('/')[2];
-  console.log(nowLocation);
+  // console.log(nowLocation);
 
 
   const [deleteSongConfirmation, setDeleteSongConfirmation] = useState({
@@ -120,9 +124,7 @@ const SongList = ({ userPlaylist, currentPlaying }) => {
   const handleSongPlay = (songData) => {
     console.log(`SONG BE PLAYED IS`, songData);
     dispatch(setCurrentPlayingAction(songData));
-    if(currentPlaying.isPlaying){
-      dispatch(unsetPlayCurrentPlayingAction());
-    }else{
+    if(! currentPlaying.isPlaying){
       dispatch(setPlayCurrentPlayingAction());
     }
   }
@@ -148,7 +150,6 @@ const SongList = ({ userPlaylist, currentPlaying }) => {
   //CLEANUP
   useEffect(() => {
     return () => {
-      // console.log('COMPONENT WILL UNMOUNT')
       dispatch(resetPlaylistDetailAction());
     }
   }, [dispatch])
