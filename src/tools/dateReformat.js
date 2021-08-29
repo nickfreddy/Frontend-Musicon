@@ -15,6 +15,9 @@ export const selectMonth =(date) => {
     default: return "December";
   }
 }
-export const formatDate = (date) => {
+export const formatDate = (dateString) => {
+  const date = new Date(dateString);
   return `${selectMonth(date)} ${date.getDate()}, ${date.getFullYear()}`;
 }
+
+// console.log(formatDate("2021-08-20T07:58:02.209Z"))

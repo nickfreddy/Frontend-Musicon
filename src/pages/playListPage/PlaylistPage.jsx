@@ -1,17 +1,26 @@
-import { Button, Typography } from '@material-ui/core'
-import React from 'react';
-import { useHistory, useParams, useRouteMatch } from 'react-router';
+import { 
+  Typography, 
+  Container, 
+} from "@material-ui/core";
+import React from "react";
+import { useParams } from "react-router";
+import PlaylistItems from "./PlaylistItems";
 
 const PlaylistPage = () => {
   const params = useParams();
-  const history = useHistory();
-  const {url} = useRouteMatch()
+  // const history = useHistory();
+  // const { url } = useRouteMatch();
   return (
-    <div>
-      <Typography variant="h4">PLAYLIST PAGE {params.topicId}</Typography>
-      <Button variant="contained" color="primary" onClick={() => history.push(`${url}/12344`)}>Go to Detail Playlist Page</Button>
-    </div>
-  )
-}
+    <Container>
+      <Typography
+        variant="h4"
+        style={{ fontWeight: "bolder", marginLeft: 10, marginBottom: 20 }}
+      >
+        Playlist {params.topicId}
+      </Typography>
+      <PlaylistItems />
+    </Container>
+  );
+};
 
-export default PlaylistPage
+export default PlaylistPage;
