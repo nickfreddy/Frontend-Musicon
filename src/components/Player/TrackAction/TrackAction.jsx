@@ -1,6 +1,7 @@
 import { IconButton, Slider, makeStyles, withStyles } from '@material-ui/core'
 import React from 'react'
-import volumeIcon from '../../../assets/img/volumeIcon.svg';
+import volumeIcon from '../../../assets/img/volume1.svg';
+import volumeMuteIcon from '../../../assets/img/volume1mute.svg'
 import loveAction from '../../../assets/img/loveIcon.svg'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { useDispatch, connect } from 'react-redux';
@@ -50,18 +51,23 @@ const VolumeSlider = withStyles({
   },
 })(Slider);
 
-const TrackAction = ({ volume, setVolume, songLyric }) => {
+const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric }) => {
   const dispatch = useDispatch()
 
   const handleOpenLyricModal = () => {
     dispatch(openLyricModalAction())
   }
 
+  const handleToggleMuted = () => {
+    setMuted(state => !state);
+  }
+
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <IconButton className={classes.iconVolume}><img src={volumeIcon} alt="..." /></IconButton>
-      <VolumeSlider 
+      <IconButton onClick={handleToggleMuted} className={classes.iconVolume}><img src={(volume !== 0) && (!muted) ? volumeIcon : volumeMuteIcon} alt="..." /></IconButton>
+      <VolumeSlider
         value={volume}
         min={0}
         max={1}
@@ -71,7 +77,7 @@ const TrackAction = ({ volume, setVolume, songLyric }) => {
       <IconButton>
         <img src={loveAction} alt="..." />
       </IconButton>
-      <IconButton disabled={songLyric.data === "" ? true : false } onClick={handleOpenLyricModal} >
+      <IconButton disabled={songLyric.data === "" ? true : false} onClick={handleOpenLyricModal} >
         <LibraryBooksIcon />
       </IconButton>
     </div>

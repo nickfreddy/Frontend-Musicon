@@ -9,7 +9,10 @@ import { makeStyles } from '@material-ui/core';
 import plusIcon from '../../assets/img/carbon_add.svg'
 import ConfirmationDialog from '../../components/ConfirmationDialog/ConfirmationDialog';
 import AddSongSearcBar from './SongListComponent/AddSongSearcBar';
-import { useDispatch, useSelector } from 'react-redux';
+import { 
+  useDispatch, 
+  // useSelector 
+} from 'react-redux';
 import { getPlaylistDetailAction, resetPlaylistDetailAction } from '../../redux/actions/playlistDetailAction';
 import { deleteUserPlaylistAction } from '../../redux/actions/userPlaylistAction';
 import { connect } from 'react-redux';
@@ -44,11 +47,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-const SongList = ({ userPlaylist, currentPlaying }) => {
+const SongList = ({ userPlaylist, currentPlaying, playlistDetail }) => {
   const { playlist_id } = useParams() // its used to getting response from API
   const classes = useStyles();
   const dispatch = useDispatch();
-  const playlistDetail = useSelector(state => state.playlistDetail);
+  // const playlistDetail = useSelector(state => state.playlistDetail);
   const playlistDetailData = playlistDetail.data;
   const history = useHistory();
   const user_id = localStorage.getItem('user_id');
@@ -166,7 +169,12 @@ const SongList = ({ userPlaylist, currentPlaying }) => {
         playlistTitle={playlistDetailData.playlistTitle}
         author={playlistDetailData.author}
         description={playlistDetailData.description}
-        duration={playlistDetailData.playlistDuration}
+        // duration={playlistDetailData.playlistDuration}
+        duration={playlistDetailData.songs.reduce((acc, cur) => { 
+          // console.log('INI DARI REDUCER', cur.songDuration);
+          return (acc + cur.songDuration)
+        },0)}
+
         photo={playlistDetailData.playlistImage}
         totalSongs={playlistDetailData.songs.length}
         key={playlistDetailData._id}
@@ -219,6 +227,7 @@ const SongList = ({ userPlaylist, currentPlaying }) => {
 
 const mapStateToProps = (state) => ({
   userPlaylist: state.userPlaylist,
-  currentPlaying: state.currentPlaying
+  currentPlaying: state.currentPlaying,
+  playlistDetail: state.playlistDetail
 })
 export default connect(mapStateToProps)(SongList)
