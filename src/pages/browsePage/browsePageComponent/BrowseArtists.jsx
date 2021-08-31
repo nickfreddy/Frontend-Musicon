@@ -88,7 +88,7 @@ const BrowseArtists = ({ pattern }) => {
   };
   useEffect(() => {
     const fetchData = setTimeout(
-      () => getSongByTitle(pattern), // sebenarnya dia getsong by tagName
+      () => getSongByTitle(pattern),
       50
     );
     return () => {
@@ -96,8 +96,7 @@ const BrowseArtists = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
-  // console.log(result, loading);
-  // console.log("artist", result.data);
+
 
 
 
@@ -106,7 +105,7 @@ const BrowseArtists = ({ pattern }) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.artistCardSkeleton} />)
     if (result.data.length === 0) return (
       <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
-        Oops!... Can't find the song...
+        Oops!... Can't find the artist...
       </Typography>
     )
     return result.data.map((data) => (
@@ -123,21 +122,6 @@ const BrowseArtists = ({ pattern }) => {
 
   return (
     <div className={classes.root}>
-      {/* {result.data.length !== 0 ? (
-        result.data.map((data) => (
-          <BrowseArtistCard
-            key={data._id}
-            artistImage={data.photo}
-            artistName={data.name}
-            artistUrl={data.id}
-            className={classes.artistcard}
-          />
-        ))
-      ) : (
-        <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
-          Oops!... Can't find the artist...
-        </Typography>
-      )} */}
       {renderBrowsedArtist(result)}
     </div>
   );

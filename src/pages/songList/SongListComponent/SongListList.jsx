@@ -1,21 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
-  IconButton,
-  ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText,
   makeStyles,
   Typography,
-  Menu,
-  MenuItem,
   List
 } from '@material-ui/core'
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import defaultSongIcon from '../../../assets/img/XMLID1383.svg'
-import deleteIcon from '../../../assets/img/deleteIcon.svg'
-import { secondsDuration } from '../../../tools/timeConverter';
+import SongListListItem from './SongListListComponent/SongListListItem';
 
 const useStyles = makeStyles(theme => ({
   playListContainer: {
@@ -51,87 +40,87 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const SongItem = ({song, isOwner, className, number, id, image, title, artist, duration, handleSongPlay, onDelete }) => {
+// const SongItem = ({song, isOwner, className, number, id, image, title, artist, duration, handleSongPlay, onDelete }) => {
 
-  const classes = useStyles();
+//   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const handleMenuClose = (e) => {
-    setAnchorEl(null)
-  }
-  const handleMenuOpen = (e) => {
-    setAnchorEl(e.currentTarget)
-  }
+//   const [anchorEl, setAnchorEl] = useState(null);
+//   const handleMenuClose = (e) => {
+//     setAnchorEl(null)
+//   }
+//   const handleMenuOpen = (e) => {
+//     setAnchorEl(e.currentTarget)
+//   }
 
-  return (
-    <div>
-      <ListItem className={`${classes.listItem} ${className}`} onClick={() => handleSongPlay(song)}>
-        <ListItemIcon className={classes.listIcon}>
-          <Typography>{number}</Typography>
-        </ListItemIcon>
-        <ListItemAvatar>
-          {Boolean(image) ?
-            <img className={classes.songImageDisplay} src={image} alt="..." />
-            :
-            <img className={classes.songImageDisplay} src={defaultSongIcon} alt="..." />
-          }
-        </ListItemAvatar>
-        <ListItemText
-          primary={title}
-          secondary={
-            <React.Fragment>
-              <Typography
-                variant="body2"
-                component="span"
-                className={classes.inline}
-              >
-                {`By ${artist}`}
-              </Typography>
+//   return (
+//     <div>
+//       <ListItem className={`${classes.listItem} ${className}`} onClick={() => handleSongPlay(song)}>
+//         <ListItemIcon className={classes.listIcon}>
+//           <Typography>{number}</Typography>
+//         </ListItemIcon>
+//         <ListItemAvatar>
+//           {Boolean(image) ?
+//             <img className={classes.songImageDisplay} src={image} alt="..." />
+//             :
+//             <img className={classes.songImageDisplay} src={defaultSongIcon} alt="..." />
+//           }
+//         </ListItemAvatar>
+//         <ListItemText
+//           primary={title}
+//           secondary={
+//             <React.Fragment>
+//               <Typography
+//                 variant="body2"
+//                 component="span"
+//                 className={classes.inline}
+//               >
+//                 {`By ${artist}`}
+//               </Typography>
 
-              <Typography component="span">
-                {` - Duration: ${secondsDuration(duration)}`}
-              </Typography>
+//               <Typography component="span">
+//                 {` - Duration: ${secondsDuration(duration)}`}
+//               </Typography>
 
-            </React.Fragment>
-          }
-        />
-        {isOwner &&
-          <ListItemSecondaryAction>
-            <IconButton
-              edge="end"
-              onClick={handleMenuOpen}
-            >
-              <MoreVertIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        }
-      </ListItem>
-      <Menu
-        id={`song-menu${id}`}
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-      >
-        <MenuItem onClick={onDelete}>
-          <ListItemIcon className={classes.menuIcon}>
-            <img src={deleteIcon} alt="..." />
-          </ListItemIcon>
-          <ListItemText primary="Delete" />
-        </MenuItem>
-      </Menu>
-    </div>
-  )
-}
+//             </React.Fragment>
+//           }
+//         />
+//         {isOwner &&
+//           <ListItemSecondaryAction>
+//             <IconButton
+//               edge="end"
+//               onClick={handleMenuOpen}
+//             >
+//               <MoreVertIcon />
+//             </IconButton>
+//           </ListItemSecondaryAction>
+//         }
+//       </ListItem>
+//       <Menu
+//         id={`song-menu${id}`}
+//         anchorEl={anchorEl}
+//         keepMounted
+//         open={Boolean(anchorEl)}
+//         onClose={handleMenuClose}
+//         getContentAnchorEl={null}
+//         anchorOrigin={{
+//           vertical: 'top',
+//           horizontal: 'center',
+//         }}
+//         transformOrigin={{
+//           vertical: 'bottom',
+//           horizontal: 'center',
+//         }}
+//       >
+//         <MenuItem onClick={onDelete}>
+//           <ListItemIcon className={classes.menuIcon}>
+//             <img src={deleteIcon} alt="..." />
+//           </ListItemIcon>
+//           <ListItemText primary="Delete" />
+//         </MenuItem>
+//       </Menu>
+//     </div>
+//   )
+// }
 
 
 
@@ -149,7 +138,7 @@ const SongListList = ({ isOwner, data, handleSongPlay, handleDelete }) => {
       </div>
     )
     return data.map((song, index) => (
-      <SongItem 
+      <SongListListItem 
         song={song} 
         isOwner={isOwner} 
         key={song._id} 

@@ -89,7 +89,7 @@ const BrowseSongs = ({ pattern }) => {
   };
   useEffect(() => {
     const fetchData = setTimeout(
-      () => getSongByTitle(pattern), // sebenarnya dia getsong by tagName
+      () => getSongByTitle(pattern),
       50
     );
     return () => {
@@ -97,8 +97,7 @@ const BrowseSongs = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
-  // console.log(result, loading);
-  // console.log("song", result.data);
+
 
 
   const dummyData = [1, 2, 3];
@@ -124,22 +123,6 @@ const BrowseSongs = ({ pattern }) => {
 
   return (
     <div className={classes.root}>
-      {/* {result.data.length !== 0 ? (
-        result.data.map((data) => (
-          <BrowseSongCard
-            key={data._id}
-            songImage={data.songImage}
-            songTitle={data.songTitle}
-            albumTitle={data.albumId.albumTitle}
-            songUrl={data.id}
-            className={classes.songcard}
-          />
-        ))
-      ) : (
-        <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
-          Oops!... Can't find the song...
-        </Typography>
-      )} */}
      {renderBrowsedSongs(result)}
     </div>
   );

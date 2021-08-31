@@ -125,7 +125,6 @@ const SongList = ({ userPlaylist, currentPlaying, playlistDetail }) => {
 
 
   const handleSongPlay = (songData) => {
-    console.log(`SONG BE PLAYED IS`, songData);
     dispatch(setCurrentPlayingAction(songData));
     if(! currentPlaying.isPlaying){
       dispatch(setPlayCurrentPlayingAction());
@@ -142,10 +141,10 @@ const SongList = ({ userPlaylist, currentPlaying, playlistDetail }) => {
   useEffect(() => {
     if (!playlistDetail.data.author) return; //check if data is fullfiled, if not skip this effect
     if (playlistDetail.data.author?._id === user_id) {
-      console.log('I AM THE OWNER OF THIS PLAYLIST');
+      // console.log('I AM THE OWNER OF THIS PLAYLIST');
       setIsOwner(true)
     } else {
-      console.log('I AM NOT THE OWNER OF THIS PLAYLIST')
+      // console.log('I AM NOT THE OWNER OF THIS PLAYLIST')
       setIsOwner(false)
     }
   }, [playlistDetail.data.author, playlistDetail.data.author?._id, user_id])
