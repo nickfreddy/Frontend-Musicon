@@ -53,7 +53,7 @@ const validationSchema = yup.object({
     })
 })
 
-const SignUpForm = () => {
+const SignUpForm = ({handleClose}) => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -76,7 +76,7 @@ const SignUpForm = () => {
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       const {fullName, userName, email, password} = values;
-      dispatch(signUpUserAction(userName,fullName, email, password, () => history.push('/user')));
+      dispatch(signUpUserAction(userName,fullName, email, password, () => {history.push('/user'); handleClose()}));
       // dispatch(signUpUserAction(userName,fullName, email, password, () => history.push('/'))); //route to landing page
 
     }

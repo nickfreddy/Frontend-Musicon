@@ -41,8 +41,7 @@ const ImageInput = ({value, onChange, className}) => {
 
   const renderPhoto = (value) =>{
     if(Boolean(value)){
-      // console.log(value);
-      console.log('INI FOTONYA', value)
+      // console.log('INI FOTONYA', value)
       // This mitigate type of received photo to prevent broken photo display
 
         if(value !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg'){
@@ -54,8 +53,6 @@ const ImageInput = ({value, onChange, className}) => {
         }else{
           return <img className={classes.imagePreview} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." />;
         }    
-      // if(typeof value === "string") return <img className={classes.imagePreview} src={sourceUrl+value} alt=""/>
-      // return <img className={classes.imagePreview} src={URL.createObjectURL(value)} alt=""/>
     }else{
       return <AddAPhotoIcon/>
     }
@@ -63,11 +60,6 @@ const ImageInput = ({value, onChange, className}) => {
   return (
     <div className={`${classes.root} ${className}`}>
       <label className={`${classes.imageInput}`} htmlFor="image_select_125">
-        {/* {Boolean(value) ?
-        <img className={classes.imagePreview} src={URL.createObjectURL(value)} alt=""/>
-        :
-        <AddAPhotoIcon/>
-        } */}
         {renderPhoto(value)}
       </label>
       <input accept="image/*" id="image_select_125" onChange={onChange} style={{ display: 'none' }} type="file" />
