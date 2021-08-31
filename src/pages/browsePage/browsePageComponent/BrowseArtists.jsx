@@ -96,8 +96,8 @@ const BrowseArtists = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
-  console.log(result, loading);
-  console.log("artist", result.data);
+  // console.log(result, loading);
+  // console.log("artist", result.data);
 
 
 

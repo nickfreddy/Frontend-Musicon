@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const NavBar = ({handleOpenAuthModal}) => {
+const NavBar = ({ handleOpenAuthModal }) => {
   const menuButtonEl = useRef(null)
   const [open, setOpen] = React.useState(false);
   const [y, setY] = useState(window.scrollY);
@@ -81,18 +81,6 @@ const NavBar = ({handleOpenAuthModal}) => {
   }
 
 
-  // const handleNavigation = (e) => {
-  //   const window = e.currentTarget;
-  //   // console.log('INI NILAI SCROLL NYA ',y)
-  //   if (y > window.scrollY) {
-  //     console.log("scrolling up");
-  //   } else if (y < window.scrollY) {
-  //     console.log("scrolling down");
-  //   }
-  //   setY(window.scrollY);
-  // };
-
-
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -107,12 +95,13 @@ const NavBar = ({handleOpenAuthModal}) => {
 
 
   useEffect(() => {
-    window.addEventListener("scroll", (e) => setY(e.currentTarget.scrollY));
-
+    const handleSetScroll = (e) => setY(e.currentTarget.scrollY);
+    window.addEventListener("scroll", handleSetScroll);
     return () => { // return a cleanup function to unregister our function since its gonna run multiple times
-      window.removeEventListener("scroll", (e) => setY(e.currentTarget.scrollY));
+      window.removeEventListener("scroll", handleSetScroll);
     };
   }, [y]);
+
   return (
     <div className={`${classes.root} ${y > 30 && classes.scrolledNavbar}`}>
       <Container className={classes.navContainer}>
@@ -138,7 +127,7 @@ const NavBar = ({handleOpenAuthModal}) => {
           open={open}
           handleListKeyDown={handleListKeyDown}
           handleClose={handleClose}
-          actions ={{
+          actions={{
             handleOpenAuthModal
           }}
         />

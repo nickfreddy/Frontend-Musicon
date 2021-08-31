@@ -188,7 +188,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
   const dispatch = useDispatch()
   const classes = useStyles();
   const currentPlaylistRating = useSelector(state => state.currentPlaylistRating)
-
+  // console.log('INI DURASINYA, ', duration);
   const handleRatingChange = (event, newValue) => {
     //then post rating to server asswell
     setRating(newValue);

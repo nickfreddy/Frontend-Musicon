@@ -52,6 +52,7 @@ const Player = ({ currentPlaying, playlistDetail }) => {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [muted, setMuted] = useState(false);
   const songList = playlistDetail.data.songs;
 
   const handleCurrentTimeChange = (newPosition) => {
@@ -68,6 +69,14 @@ const Player = ({ currentPlaying, playlistDetail }) => {
   const handleVolumeChange = (newVolume) => {
     audioRef.current.volume = newVolume
   }
+
+  const handleAudioMuted = (isMuted) => {
+    audioRef.current.muted = isMuted
+  }
+
+  useEffect(() => {
+    handleAudioMuted(muted);
+  },[muted])
 
   useEffect(() => {
     handleVolumeChange(volume);
@@ -90,7 +99,9 @@ const Player = ({ currentPlaying, playlistDetail }) => {
   }, [dispatch, songList])
 
   useEffect(() => {
-    dispatch(getSongLyricAction(currentPlaying.songDetail._id));
+    if(currentPlaying.songDetail?._id){
+      dispatch(getSongLyricAction(currentPlaying.songDetail._id));
+    }
     return () => {
       dispatch(resetSongLyricAction());
     }
@@ -146,6 +157,8 @@ const Player = ({ currentPlaying, playlistDetail }) => {
         <TrackAction
           volume={volume}
           setVolume={setVolume}
+          muted={muted}
+          setMuted={setMuted}
         />
 
 
