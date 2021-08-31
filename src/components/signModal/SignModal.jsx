@@ -62,7 +62,7 @@ const SignModal = () => {
   return (
     <CstModal isOpen={openAuthModal} handleClose={handleClose}>
       <Container className={classes.formContainer}>
-        {showSignUp ? <SignUpForm /> : <SignInForm />}
+        {showSignUp ? <SignUpForm handleClose={handleClose} /> : <SignInForm handleClose={handleClose}/>}
 
         {!showSignUp ? 
         <Typography className={classes.switchSign} align="center" variant="body1" onClick={handleShowSignUp}>Don't have an account ? <span>Sign Up Here</span></Typography>

@@ -52,21 +52,7 @@ const HomePage = () => {
 
   return (
     <Container>
-      {/* {userPlaylist.data.length === 0 ? (
-        <div>
-          <Typography
-            variant="h5"
-            style={{ fontWeight: "bold", marginTop: 20 }}
-          >
-            Hi {user.data.fullname},
-          </Typography>
-          <WelcomeBanner />
-        </div>
-      ) : (
-        <YourPlaylist />
-      )} */}
       {renderUserPlaylist(userPlaylist)}
-
       <Divider />
       <NewReleaseSong />
       <Divider />
@@ -74,9 +60,5 @@ const HomePage = () => {
     </Container>
   );
 };
-
-// const mapStateToProps = (state) => ({
-//   userPlaylist: state.userPlaylist
-// })
 
 export default HomePage;

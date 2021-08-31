@@ -292,7 +292,7 @@ export default function Header() {
             <Avatar className={classes.avatar} src={sourceUrl+user.data.photo}/>
             <div>
               <Typography variant="subtitle1" className={classes.bold}>
-                {limitString(user.data.fullname, 20)}
+                {limitString(user.data.fullname, 17)}
               </Typography>
               <Typography variant="body2">{limitString(user.data.email, 21)}</Typography>
             </div>

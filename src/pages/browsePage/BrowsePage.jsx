@@ -11,7 +11,7 @@ function useQuery() {
 
 const BrowsePage = () => {
   const query = useQuery();
-  const pattern = query.get("pattern");
+  const pattern = query.get("pattern")||"";
 
   return (
     // <div>
