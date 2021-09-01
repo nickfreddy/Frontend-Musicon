@@ -14,7 +14,9 @@ const useStyles = makeStyles((theme) => ({
   lyricPaper: {
     // marginTop: theme.spacing(2),
     // marginBottom: theme.spacing(2),
-    padding: theme.spacing(2)
+    padding: theme.spacing(2),
+    overflow: 'auto'
+    
   },
   songTitle: {
     fontWeight: 'bold',
@@ -22,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
   lyricText: {
     marginTop: theme.spacing(2),
-    textAlign: 'center'
+    textAlign: 'center',
+    wordWrap: 'break-word'
   },
   lyricNotFound: {
     fontSize: '1.3em',

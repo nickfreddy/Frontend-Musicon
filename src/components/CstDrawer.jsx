@@ -117,7 +117,7 @@ const CstDrawer = ({ className, drawer }) => {
             </ListItemIcon>
             <ListItemText primary="Created Playlist" />
           </ListItem>
-          <ListItem button className={classes.listItem}>
+          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/likedSong' && classes.pathSelected}`} onClick={() => {history.push(`${url}/likedSong`); handleToggleDrawer()}}>
             <ListItemIcon>
               <FavoriteBorderIcon />
             </ListItemIcon>
@@ -164,7 +164,7 @@ const CstDrawer = ({ className, drawer }) => {
             </ListItemIcon>
             <ListItemText primary="Created Playlist" />
           </ListItem>
-          <ListItem button className={`${classes.listItem}`}>
+          <ListItem button className={`${classes.listItem} ${location.pathname === url+'/likedSong' && classes.pathSelected}`} onClick={() => history.push(`${url}/likedSong`)}>
             <ListItemIcon>
               <FavoriteBorderIcon />
             </ListItemIcon>

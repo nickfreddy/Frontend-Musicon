@@ -173,11 +173,10 @@ const TopSongSection = ({currentPlaying}) => {
   );
 
   const handleDelete = (_id) => {
-    alert(`This id ${_id} song will be deleted`)
+    // alert(`This id ${_id} song will be deleted`)
   }
 
   const handleSongPlay = (song) => {
-    console.log(`This song with id ${song._id} will be played`);
     dispatch(setCurrentPlayingAction(song));
     dispatch(setPlayCurrentPlayingAction());
   }
@@ -204,9 +203,6 @@ const TopSongSection = ({currentPlaying}) => {
     return userTopSongs.data.map((song, index) => (
       <TableRow key={index} className={classes.tableRowContent}>
         <TableCell padding="none" onClick={() => handleSongPlay(song)}>
-          {/* <Typography align="center">
-            {index + 1}
-          </Typography> */}
           {song._id === currentPlaying.songDetail._id ?
           <div className={classes.playArrowIcon}>
             {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
@@ -235,11 +231,6 @@ const TopSongSection = ({currentPlaying}) => {
             {secondsDuration(song.songDuration)|| 'under maintenance'}
           </Typography>
         </TableCell>
-        {/* <TableCell padding="none" align="center">
-        <IconButton onClick={() => handleDelete(song._id)}>
-          <img src={deleteIcon} alt="..." />
-        </IconButton>
-      </TableCell> */}
       </TableRow>
     ))
   }

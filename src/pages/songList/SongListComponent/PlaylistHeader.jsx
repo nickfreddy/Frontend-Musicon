@@ -226,6 +226,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
   useEffect(() => {
     dispatch(getRatingCurrentPlaylistAction(playlistId, (value) => handleReceivedRatingFromServer(value)))
   }, [dispatch, playlistId])
+  
   return (
     <div className={classes.root}>
       {/** LEFT SIDE */}

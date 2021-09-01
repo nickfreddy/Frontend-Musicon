@@ -12,6 +12,9 @@ import { makeStyles } from '@material-ui/styles';
 import Player from '../components/Player/Player';
 import AccountPage from './accountPage/AccountPage';
 import BrowsePage from './browsePage/BrowsePage';
+import ArtistPage from './artistPage/ArtistPage';
+import ArtistAlbumDetail from './artistPage/artistAlbumDetail/ArtistAlbumDetail';
+import LikedSong from './likedSong/LikedSong';
 // import { AUTH_SPOTIFY_URL } from '../redux/Api/spotifyAPI';
 // import useAuthSpotify from '../components/customHook/useAuthSpotify';
 
@@ -55,6 +58,8 @@ const UserPage = () => {
         <Switch>
           <Route exact path={match.path} component={() => <HomePage />} />
           <Route exact path={`${match.path}/browse`} component={() => <BrowsePage/>}/>
+          <Route path={`${match.path}/browse/artist/:artist_id`} component={() => <ArtistPage />}/>
+          <Route path={`${match.path}/browse/album/:album_id`} component={() => <ArtistAlbumDetail />}/>
           <Route exact path={`${match.path}/playlist`} component={() => <PlaylistPage />} />
           {/* <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} /> */}
           <Route path={`${match.path}/playlist/:playlist_id`} component={() => <SongList />} />
@@ -62,6 +67,7 @@ const UserPage = () => {
           <Route path={`${match.path}/createdPlaylist/:playlist_id`} component={() => <SongList />} />
           <Route exact path={`${match.path}/profile`} component={() => <ProfilePage />} />
           <Route exact path={`${match.path}/account`} component={() => <AccountPage />}/>
+          <Route exact path={`${match.path}/likedSong`} component={() => <LikedSong />}/>
 
         </Switch>
       </div>
