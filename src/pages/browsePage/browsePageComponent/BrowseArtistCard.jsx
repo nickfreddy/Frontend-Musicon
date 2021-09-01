@@ -67,7 +67,7 @@ const BrowseArtistCard = ({
     <Card className={`${classes.card} ${className}`}>
       <CardActionArea
         className={classes.actionarea}
-        onClick={() => history.push(`${url}/${artistUrl}`)}
+        onClick={() => history.push(`${url}/artist/${artistUrl}`)}
       >
         <Avatar
           className={classes.artistimage}

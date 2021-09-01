@@ -51,7 +51,7 @@ const VolumeSlider = withStyles({
   },
 })(Slider);
 
-const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric }) => {
+const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric, songId }) => {
   const dispatch = useDispatch()
 
   const handleOpenLyricModal = () => {
@@ -74,7 +74,7 @@ const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric }) => {
         step={0.01}
         onChange={(e, newVal) => setVolume(newVal)}
       />
-      <IconButton>
+      <IconButton onClick={() => {console.log(songId)}}>
         <img src={loveAction} alt="..." />
       </IconButton>
       <IconButton disabled={songLyric.data === "" ? true : false} onClick={handleOpenLyricModal} >

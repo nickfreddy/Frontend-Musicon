@@ -65,7 +65,7 @@ const BrowseSongs = ({ pattern }) => {
         }));
         setLoading(false);
       } else {
-        console.log("ERROR SETTING DATA TO STATE");
+        // console.log("ERROR SETTING DATA TO STATE");
         setResult({
           data: [],
           error: false,
@@ -74,10 +74,10 @@ const BrowseSongs = ({ pattern }) => {
         setLoading(false);
       }
     } catch (err) {
-      console.log(
-        "ERROR GET SONG BY TITLE ON BROWSE SONG, DETAILS: ",
-        err.response
-      );
+      // console.log(
+      //   "ERROR GET SONG BY TITLE ON BROWSE SONG, DETAILS: ",
+      //   err.response
+      // );
       setResult((state) => ({
         ...state,
         data: [],

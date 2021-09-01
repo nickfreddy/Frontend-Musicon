@@ -159,6 +159,7 @@ const Player = ({ currentPlaying, playlistDetail }) => {
           setVolume={setVolume}
           muted={muted}
           setMuted={setMuted}
+          songId ={currentPlaying.songDetail._id}
         />
 
 
