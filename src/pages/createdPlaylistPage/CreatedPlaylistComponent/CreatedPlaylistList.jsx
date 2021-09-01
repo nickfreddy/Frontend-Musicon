@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCreated, onPlay, onDelete }) => {
+const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCreated, onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory()
   const classes = useStyles();
@@ -78,7 +78,7 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
   }
   return (
     <div>
-      <ListItem className={`${classes.listItem} ${className}`} onClick={onPlay}>
+      <ListItem className={`${classes.listItem} ${className}`} onClick={() => routeToPlaylistContent(id)}>
         <ListItemIcon className={classes.listIcon}>
           <Typography>{number}</Typography>
         </ListItemIcon>
@@ -90,11 +90,6 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
                 : <img className={classes.imageIcon} src={URL.createObjectURL(image)} alt="..." /> //if type of photo is a file that inputed from form so use it
               : <img className={classes.imageIcon} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
           }
-          {/* {Boolean(image) ?
-            <img className={classes.imageIcon} src={sourceUrl+image} alt="..." />
-            :
-            <img src={defaultSongIcon} alt="..." />
-          } */}
         </ListItemAvatar>
         <ListItemText
           primary={title}
@@ -157,7 +152,7 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
 
 
 
-const CreatedPlaylistList = ({ userPlaylist, data, handleSongPlay, handleDelete, handleOpenCreatePlaylistModal }) => {
+const CreatedPlaylistList = ({ userPlaylist, data, handleDelete }) => {
   const classes = useStyles()
 
 
@@ -174,7 +169,15 @@ const CreatedPlaylistList = ({ userPlaylist, data, handleSongPlay, handleDelete,
       </div>
     )
     return data.map((playlist, index) => (
-      <PlaylistItem key={playlist._id} number={index + 1} id={playlist._id} image={playlist.playlistImage} title={playlist.playlistTitle} totalSong={playlist.songs.length} dateCreated={playlist.createdAt} onPlay={() => handleSongPlay(playlist._id)} onDelete={() => handleDelete(playlist._id)} />
+      <PlaylistItem 
+        key={playlist._id} 
+        number={index + 1} 
+        id={playlist._id} 
+        image={playlist.playlistImage} 
+        title={playlist.playlistTitle} 
+        totalSong={playlist.songs.length} 
+        dateCreated={playlist.createdAt} 
+        onDelete={() => handleDelete(playlist._id)} />
     ))
   }
 

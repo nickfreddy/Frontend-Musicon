@@ -62,7 +62,7 @@ const BrowseAlbumCard = ({ albumImage, albumTitle, albumUrl }) => {
     <Card className={classes.card}>
       <CardActionArea
         className={classes.actionarea}
-        onClick={() => history.push(`${url}/${albumUrl}`)}
+        onClick={() => history.push(`${url}/album/${albumUrl}`)}
       >
         <CardMedia
           className={classes.media}

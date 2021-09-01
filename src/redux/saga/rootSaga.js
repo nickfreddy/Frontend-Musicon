@@ -1,4 +1,5 @@
 import { all } from "redux-saga/effects";
+import { getArtistAlbumWatcher } from "./sagaWatcher/getArtistAlbumWatcher";
 import { getNewReleaseSongWatcher } from "./sagaWatcher/newReleaseSongWatcher";
 import { 
   addSongToPlaylistWatcher, 
@@ -45,6 +46,7 @@ export default function* rootSaga(){
     getPlaylistWatcher(),
     getNewReleaseSongWatcher(),
     getRecomendedSongWatcher(),
-    getSongLyricWatcher()
+    getSongLyricWatcher(),
+    getArtistAlbumWatcher()
   ])
 }

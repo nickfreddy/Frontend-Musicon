@@ -12,7 +12,6 @@ import {
   Button,
 } from '@material-ui/core';
 import React from 'react';
-// import samplePhoto from '../../../assets/img/XMLID1383.svg';
 import editIcon from '../../../assets/img/editIcon.svg';
 import deleteIcon from '../../../assets/img/deleteIcon.svg';
 import { useHistory, useRouteMatch } from 'react-router';
@@ -92,7 +91,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCreatePlaylistModal, userPlaylist }) => {
+const CreatedPlaylistTable = ({ data, handleDelete, handleOpenCreatePlaylistModal, userPlaylist }) => {
   const classes = useStyles();
   const history = useHistory();
   const { url } = useRouteMatch()
@@ -106,11 +105,6 @@ const CreatedPlaylistTable = ({ data, handleSongPlay, handleDelete, handleOpenCr
             : <img className={`${classes.playlistIcon}`} width="40px" height="40px" src={URL.createObjectURL(photo)} alt="..." /> //if type of photo is a file that inputed from form so use it
           : <img className={`${classes.playlistIcon}`} width="40px" height="40px" src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
       }
-      {/* {icon ?
-        <img className={`${classes.playlistIcon}`} width="40px" src={sourceUrl+icon} alt="" />
-        :
-        <img className={`${classes.playlistIcon}`} width="40px" src={samplePhoto} alt="" />
-      } */}
       <Typography>{title}</Typography>
     </div>
   );
