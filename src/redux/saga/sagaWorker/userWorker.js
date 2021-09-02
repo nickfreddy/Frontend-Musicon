@@ -22,7 +22,7 @@ export function* signUpUserWorker(action) {
       action.callback();
     } else {
       //SIGN UP FAILED
-      console.log('ERROR ON USER REGISTRATION DETAILS:', response.data);
+      // console.log('ERROR ON USER REGISTRATION DETAILS:', response.data);
       yield put(unsetLoadingUserAction());
       yield put(openRegisterInfoAction());
     }
@@ -30,7 +30,7 @@ export function* signUpUserWorker(action) {
     if (err.response.status === 401) {
       yield put(openRegisterInfoAction("email or username has been registered"));
     } else {
-      console.log('ERROR ON signUpUserWorker SAGA WORKER DETAILS:', err.message);
+      // console.log('ERROR ON signUpUserWorker SAGA WORKER DETAILS:', err.message);
     }
     yield put(unsetLoadingUserAction());
   }
@@ -53,7 +53,7 @@ export function* signInUserWorker(action) {
       action.callback();
     } else {
       //SIGN UP FAILED
-      console.log('ERROR ON USER SIGN IN DETAILS:', response.data);
+      // console.log('ERROR ON USER SIGN IN DETAILS:', response.data);
       yield put(unsetLoadingUserAction());
       yield put(openInfoLoginModalAction());
     }
@@ -61,7 +61,7 @@ export function* signInUserWorker(action) {
     if (err) {
       yield put(openInfoLoginModalAction(err.response.data.errors[0]));
     } else {
-      console.log('ERROR ON signInUserWorker SAGA WORKER DETAILS:', err.message);
+      // console.log('ERROR ON signInUserWorker SAGA WORKER DETAILS:', err.message);
     }
 
     yield put(unsetLoadingUserAction())
@@ -81,12 +81,12 @@ export function* getLogedInUserWorker(action) {
       yield put(unsetLoadingUserAction());
       action.callback();
     } catch (err) {
-      console.log('ERROR GETTING DATA USER DETAIL:', err.response);
+      // console.log('ERROR GETTING DATA USER DETAIL:', err.response);
       yield put(unsetLoadingUserAction());
 
     }
   } else {
-    console.log('NO USER LOGGED IN BRO');
+    // console.log('NO USER LOGGED IN BRO');
     yield put(unsetLoadingUserAction());
   }
 }
@@ -108,11 +108,11 @@ export function* updateUserWorker(action) {
       yield action.callback();
       yield put(unsetLoadingUserAction())
     }else{
-      console.log("ERROR DATA ON RESPONSE.DATA NOT FOUND");
+      // console.log("ERROR DATA ON RESPONSE.DATA NOT FOUND");
       yield put(unsetLoadingUserAction())
     }
   } catch (err) {
-    console.log('ERROR ON UPDATE USER DATA TO SERVER DETAIL : ', err);
+    // console.log('ERROR ON UPDATE USER DATA TO SERVER DETAIL : ', err);
     yield put(unsetLoadingUserAction())
   }
 }

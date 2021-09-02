@@ -1,4 +1,5 @@
 import { combineReducers} from "redux";
+import albumDetailsReducer from "./reducers/albumDetailsReducer";
 import artistAlbumReducer from "./reducers/artistAlbumReducer";
 import currentPlayingReducer from "./reducers/currentPlayingReducer";
 import currentPlaylistRatingReducer from "./reducers/currentPlaylistRatingReducer";
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   newReleaseSong: newReleaseSongReducer,
   recomendedSong: recomendedSongReducer,
   songLyric : songLyricReducer,
-  artistAlbum: artistAlbumReducer
+  artistAlbum: artistAlbumReducer,
+  albumDetails: albumDetailsReducer
 })
 
 export default rootReducer;

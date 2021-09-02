@@ -34,14 +34,15 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     paddingTop: "80px",//"120px" //space to the top spare to header
     paddingBottom: "210px",
-    [theme.breakpoints.up('sm')]:{
+    [theme.breakpoints.up('sm')]: {
       paddingBottom: "160px"
     },
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       paddingBottom: "100px"
     },
   }
 }))
+
 
 
 const UserPage = () => {
@@ -50,25 +51,42 @@ const UserPage = () => {
   let match = useRouteMatch();
 
 
+  const routes = [
+    { exact: true, path: match.path, component: () => <HomePage /> },
+    { exact: true, path: `${match.path}/browse`, component: () => <BrowsePage /> },
+    { exact: false, path: `${match.path}/browse/artist/:artist_id`, component: () => <ArtistPage /> },
+    { exact: false, path: `${match.path}/browse/album/:album_id`, component: () => <ArtistAlbumDetail /> },
+    { exact: true, path: `${match.path}/playlist`, component: () => <PlaylistPage /> },
+    { exact: false, path: `${match.path}/playlist/:playlist_id`, component: () => <SongList /> },
+    { exact: true, path: `${match.path}/createdPlaylist`, component: () => <CreatedPlaylistPage /> },
+    { exact: false, path: `${match.path}/createdPlaylist/:playlist_id`, component: () => <SongList /> },
+    { exact: true, path: `${match.path}/profile`, component: () => <ProfilePage /> },
+    { exact: true, path: `${match.path}/account`, component: () => <AccountPage /> },
+    { exact: true, path: `${match.path}/likedSong`, component: () => <LikedSong /> },
+  ]
+
   return (
     <div className={classes.root}>
-      <Header/>
-      <CstDrawer/>
+      <Header />
+      <CstDrawer />
       <div className={classes.content}>
         <Switch>
-          <Route exact path={match.path} component={() => <HomePage />} />
-          <Route exact path={`${match.path}/browse`} component={() => <BrowsePage/>}/>
-          <Route path={`${match.path}/browse/artist/:artist_id`} component={() => <ArtistPage />}/>
-          <Route path={`${match.path}/browse/album/:album_id`} component={() => <ArtistAlbumDetail />}/>
+
+          {routes.map((route, index) => <Route key={index} {...route} />)}
+
+          {/* <Route exact path={match.path} component={() => <HomePage />} />
+          <Route exact path={`${match.path}/browse`} component={() => <BrowsePage />} />
+          <Route path={`${match.path}/browse/artist/:artist_id`} component={() => <ArtistPage />} />
+          <Route path={`${match.path}/browse/album/:album_id`} component={() => <ArtistAlbumDetail />} />
           <Route exact path={`${match.path}/playlist`} component={() => <PlaylistPage />} />
-          {/* <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} /> */}
           <Route path={`${match.path}/playlist/:playlist_id`} component={() => <SongList />} />
           <Route exact path={`${match.path}/createdPlaylist`} component={() => <CreatedPlaylistPage />} />
           <Route path={`${match.path}/createdPlaylist/:playlist_id`} component={() => <SongList />} />
           <Route exact path={`${match.path}/profile`} component={() => <ProfilePage />} />
-          <Route exact path={`${match.path}/account`} component={() => <AccountPage />}/>
-          <Route exact path={`${match.path}/likedSong`} component={() => <LikedSong />}/>
+          <Route exact path={`${match.path}/account`} component={() => <AccountPage />} />
+          <Route exact path={`${match.path}/likedSong`} component={() => <LikedSong />} /> */}
 
+          {/* <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} /> */}
         </Switch>
       </div>
       <Player />
