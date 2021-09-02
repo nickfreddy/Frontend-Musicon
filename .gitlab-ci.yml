@@ -24,7 +24,7 @@ build:
     paths:
       - node_modules/
   only:
-    - main
+    - fixing
 
 # testing:
 #   stage: testing
@@ -54,4 +54,4 @@ deploy:
   
   # untuk menunjuk spesifikasi branch mana yang akan di deploy di server
   only:
-    - main
+    - fixing
