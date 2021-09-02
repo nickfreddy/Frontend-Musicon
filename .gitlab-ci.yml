@@ -1,0 +1,57 @@
+# untuk mendefinisikan spesifikasi nodejs yang dipakai
+image: node:14.17.1
+
+# menuliskan perintah awal, sebelum docker image program di ambil
+before_script:
+  - apt-get update -qq && apt-get install
+
+cache:
+  paths:
+    - node_modules/
+
+# Define stage/ tahap tahao yang akan ditempuh ketika deploy aplikasi
+stages:
+  - build
+  #- testing
+  - deploy
+
+# langkah awal installasi dependencies/ library yang dibutuhkan
+build:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+  only:
+    - main
+
+# testing:
+#   stage: testing
+#   script:
+#    - npm install
+#    - CI=true npm run test #CI = continous integration
+
+deploy:
+  # untuk upload aplikasi produk ke server
+  stage: deploy
+
+  # mengambil contoh docker container yg dipakai -> berupa linux
+  image: ruby:latest
+
+  # ini bagian perintah yang dijalankan di Gitlab Runner
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=pmusicon --api-key=$HEROKU
+    - echo "Deployed to testing server"
+  
+  # untuk menambah url dari heroku dan jenis environment (test/ production)
+  environment:
+    name: test
+    url: https://pmusicon.herokuapp.com/
+  
+  # untuk menunjuk spesifikasi branch mana yang akan di deploy di server
+  only:
+    - main
