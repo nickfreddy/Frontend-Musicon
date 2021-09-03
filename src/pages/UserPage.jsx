@@ -15,6 +15,7 @@ import BrowsePage from './browsePage/BrowsePage';
 import ArtistPage from './artistPage/ArtistPage';
 import ArtistAlbumDetail from './artistPage/artistAlbumDetail/ArtistAlbumDetail';
 import LikedSong from './likedSong/LikedSong';
+import SocketIOClientComponent from '../components/SocketIOClientComponent';
 // import { AUTH_SPOTIFY_URL } from '../redux/Api/spotifyAPI';
 // import useAuthSpotify from '../components/customHook/useAuthSpotify';
 
@@ -89,6 +90,7 @@ const UserPage = () => {
           {/* <Route path={`${match.path}/playlist/:playlist_id`} component={() => <DetailPlaylist />} /> */}
         </Switch>
       </div>
+      <SocketIOClientComponent/>
       <Player />
     </div>
   )

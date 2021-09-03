@@ -6,6 +6,7 @@ import currentPlaylistRatingReducer from "./reducers/currentPlaylistRatingReduce
 import drawerReducer from "./reducers/drawerReducer";
 import modalReducer from "./reducers/modalReducer";
 import newReleaseSongReducer from "./reducers/newReleaseSongReducer";
+import notificationReducers from "./reducers/notificationReducers";
 import playlistDetailReducer from "./reducers/playlistDetailReducer";
 import playlistReducer from "./reducers/playlistReducer";
 import recomendedSongReducer from "./reducers/recomendedSongReducer";
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   recomendedSong: recomendedSongReducer,
   songLyric : songLyricReducer,
   artistAlbum: artistAlbumReducer,
-  albumDetails: albumDetailsReducer
+  albumDetails: albumDetailsReducer,
+  notification: notificationReducers
 })
 
 export default rootReducer;
