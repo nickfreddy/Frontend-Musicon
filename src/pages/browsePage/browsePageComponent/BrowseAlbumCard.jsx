@@ -14,35 +14,41 @@ const useStyles = makeStyles((theme) => ({
     margin: [[5, 5, 5, 5]],
     background: "#1F1D2B",
     borderRadius: "8px",
-    [theme.breakpoints.down("md")]: {
-      width: 220,
-      height: 260,
+
+    [theme.breakpoints.up("xs")]: {
+      width: '47%',
+      height: 210,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: '31.6%',
+      height: 265,
     },
     [theme.breakpoints.up("md")]: {
-      width: 200,
-      height: 240,
+      width: '31.6%',
+      height: 248,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: '19%',
+      height: 248,
     },
   },
   media: {
     margin: [[20, 20, 0, 20]],
     borderRadius: "8px",
-    [theme.breakpoints.down("md")]: {
-      width: 180,
+    [theme.breakpoints.up('xs')]: {
+      height: 128
+    },
+    [theme.breakpoints.up("sm")]: {
       height: 180,
     },
     [theme.breakpoints.up("md")]: {
-      width: 160,
       height: 160,
     },
   },
   actionarea: {
     borderRadius: "8px",
-    [theme.breakpoints.down("md")]: {
-      width: 220,
-    },
-    [theme.breakpoints.up("md")]: {
-      width: 200,
-    },
+    width: '100%',
+    height: '100%'
   },
   titletext: {
     margin: "auto",

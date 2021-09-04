@@ -18,10 +18,26 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   albumsCardSkeleton:{
-    width: 200,
-    height: 230,
     borderRadius: '8px',
-    margin: theme.spacing(0.8)
+    margin: theme.spacing(0.7),
+    // width: 200,
+    // height: 230,
+    [theme.breakpoints.up("xs")]: {
+      width: '47%',
+      height: 210,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: '31.6%',
+      height: 265,
+    },
+    [theme.breakpoints.up("md")]: {
+      width: '31.6%',
+      height: 248,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: '19%',
+      height: 248,
+    },
   }
 }));
 
@@ -97,7 +113,7 @@ const BrowseAlbums = ({ pattern }) => {
     };
   }, [pattern]);
 
-  const dummyData = [1, 2, 3, 4];
+  const dummyData = [1, 2, 3, 4,5];
   const renderBrowsedAlbums = (result) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.albumsCardSkeleton} />)
     if (result.data.length === 0) return (

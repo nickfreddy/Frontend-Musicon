@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     display: "flex",
     flexWrap: "wrap",
+    // gap: '1%',
     [theme.breakpoints.down("sm")]: {
       justifyContent: "center",
     },
@@ -31,9 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
   newReleaseSongSkeleton: {
     height: '120px',
-    width: '325px',
+    // width: '325px',
     borderRadius: '8px',
-    margin: theme.spacing(0.7)
+    margin: theme.spacing(0.7),
+    width: '100%',
+    [theme.breakpoints.up('sm')]:{
+      width: '48%',
+    },
+    [theme.breakpoints.up('lg')]:{
+      width: '32%',
+    }
   },
 
   newReleaseSongEmpty: {

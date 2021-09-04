@@ -13,35 +13,46 @@ const useStyles = makeStyles((theme) => ({
     margin: [[5, 5, 5, 5]],
     background: "#1F1D2B",
     borderRadius: "8px",
-    [theme.breakpoints.down("md")]: {
-      width: 220,
-      height: 260,
+    padding: '0 20px',
+    [theme.breakpoints.up("xs")]: {
+      width: '47%',
+      height: 210,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: '31.6%',
+      height: 265,
     },
     [theme.breakpoints.up("md")]: {
-      width: 200,
-      height: 240,
+      width: '31.6%',
+      height: 248,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: '19%',
+      height: 248,
     },
   },
+
+
   actionarea: {
     borderRadius: "8px",
-    [theme.breakpoints.down("md")]: {
-      width: 220,
-      height: 260,
-    },
-    [theme.breakpoints.up("md")]: {
-      width: 200,
-      height: 240,
-    },
+    width: '100%',
+    height: '100%'
   },
   artistimage: {
-    margin: 20,
-    [theme.breakpoints.down("md")]: {
+    margin: '20px auto 10px',
+    [theme.breakpoints.up('xs')]: {
+      height: 128,
+      width: 128
+    },
+    [theme.breakpoints.up("sm")]: {
       width: 180,
       height: 180,
+
     },
     [theme.breakpoints.up("md")]: {
       width: 160,
       height: 160,
+
     },
   },
   artistname: {

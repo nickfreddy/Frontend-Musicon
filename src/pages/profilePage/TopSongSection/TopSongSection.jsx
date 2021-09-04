@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
   tableContainer: {
     background: '#1F1D2B',
     borderRadius: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    paddingBottom: theme.spacing(0.5),
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'block'
