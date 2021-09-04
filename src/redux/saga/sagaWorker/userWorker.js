@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
-import { openInfoLoginModalAction, openRegisterInfoAction, setLoadingUserAction, setUserAction, unsetLoadingUserAction, updateLocalUserAction } from '../../actions/userAction'
-import { getUserById, signInUser, signUpUser, updateUserById } from '../../Api/userAPI';
+import { openInfoLoginModalAction, openRegisterInfoAction, setLoadingGoogleLoginAction, setLoadingUserAction, setUserAction, unsetLoadingGoogleLoginAction, unsetLoadingUserAction, updateLocalUserAction } from '../../actions/userAction'
+import { getUserById, postGoogleDataUser, signInUser, signUpUser, updateUserById } from '../../Api/userAPI';
 import FormData from 'form-data';
 
 export function* signUpUserWorker(action) {
@@ -99,20 +99,52 @@ export function* updateUserWorker(action) {
     const user_id = localStorage.getItem('user_id');
     const data = new FormData();
     data.append("fullname", fullname);
-    if(typeof photo !== "string"){
+    if (typeof photo !== "string") {
       data.append("photo", photo);
     }
     const response = yield updateUserById(user_id, data, token);
-    if(response.data.data){
-      yield put(updateLocalUserAction(fullname,photo));
+    if (response.data.data) {
+      yield put(updateLocalUserAction(fullname, photo));
       yield action.callback();
       yield put(unsetLoadingUserAction())
-    }else{
+    } else {
       // console.log("ERROR DATA ON RESPONSE.DATA NOT FOUND");
       yield put(unsetLoadingUserAction())
     }
   } catch (err) {
     // console.log('ERROR ON UPDATE USER DATA TO SERVER DETAIL : ', err);
     yield put(unsetLoadingUserAction())
+  }
+};
+
+export function* postGoogleDataUserWorker(action) {
+  try {
+    yield put(setLoadingGoogleLoginAction());
+
+    console.log('PAYLOAD DI postGoogleDataUserWorker', action.payload)
+    const { email, familyName, givenName, googleId, imageUrl, name } = action.payload;
+    const params = new URLSearchParams();
+    params.append('email', email);
+    params.append('familyName', familyName);
+    params.append('givenName', givenName);
+    params.append('googleId', googleId);
+    params.append('imageUrl', imageUrl);
+    params.append('name', name);
+    const response = yield postGoogleDataUser(params);
+    if (Boolean(response.data.token && response.data.loggedUser._id)) {
+      yield put(setUserAction(response.data.loggedUser));
+      yield put(unsetLoadingGoogleLoginAction());
+      localStorage.setItem('token', `Bearer ${response.data.token}`);
+      localStorage.setItem('user_id', response.data.loggedUser._id);
+      action.callback()
+    } else {
+      console.log('DATA STRUCTURE IN UNKNOWN IN GOOGLE LOGIN WORKER GOT:', response);
+      yield put(unsetLoadingGoogleLoginAction());
+    }
+
+  } catch (err) {
+    console.log('ERROR POSTING USER DATA LOGGED IN USING GOOGLE TO SERVER, DETAIL : ', err.response)
+    yield put(openInfoLoginModalAction(err.response.data.errors[0]));
+    yield put(unsetLoadingGoogleLoginAction());
   }
 }

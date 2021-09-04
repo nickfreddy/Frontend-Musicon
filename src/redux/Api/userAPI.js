@@ -22,3 +22,7 @@ export const updateUserById = (user_id, formData, token) => musiconAPI.put(`/use
     'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
   }
 })
+
+export const postGoogleDataUser = (urlEncodedData) => musiconAPI.post(`/auth/google/v2`,urlEncodedData,{
+  headers:{'content-type': 'application/x-www-form-urlencoded'}
+});

@@ -21,6 +21,7 @@ import { getUserTopArtistWatcher } from "./sagaWatcher/userTopArtistWatcher";
 import { getUserTopSongsWatcher } from "./sagaWatcher/userTopSongsWatcher";
 import { 
   getLogedInUserWatcher, 
+  postGoogleDataUserWatcher, 
   signInUserWatcher, 
   signUpUserWatcher, 
   updateUserWatcher
@@ -32,6 +33,9 @@ export default function* rootSaga(){
     signUpUserWatcher(),
     signInUserWatcher(),
     getLogedInUserWatcher(),
+    updateUserWatcher(),
+    postGoogleDataUserWatcher(),
+
     getUserPlaylistWatcher(),
     getPlaylistDetailWatcher(),
     postUserPlaylistWatcer(),
@@ -39,15 +43,20 @@ export default function* rootSaga(){
     addSongToPlaylistWatcher(),
     deleteSongFromPlaylistWatcher(),
     updatePlaylistDetailWatcher(),
-    updateUserWatcher(),
+
     getUserTopArtistWatcher(),
+
     getUserTopSongsWatcher(),
+
     getRatingCurrentPlaylistWatcher(),
     postRatingCurrentPlaylistWatcher(),
+
     getPlaylistWatcher(),
     getNewReleaseSongWatcher(),
     getRecomendedSongWatcher(),
+
     getSongLyricWatcher(),
+    
     getArtistAlbumWatcher(),
     getAlbumDetailsWatcher(),
   ])
