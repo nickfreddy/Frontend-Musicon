@@ -155,7 +155,7 @@ export function* postFacebookDataUserWorker(action){
     const {email, name, picture, userID} = action.payload; //picture is an object
     const pictureUrl = picture.data.url;
     const params = new URLSearchParams();
-    console.log('PHOTO TO POSTED,:', pictureUrl);
+    // console.log('PHOTO TO POSTED,:', pictureUrl);
     params.append('userID', userID);
     params.append('fullname', name);
     params.append('email', email);

@@ -189,14 +189,18 @@ export default function Header() {
       window.FB.logout();
     }
     history.push('/');
+    handleMenuClose();
+
   }
 
   const routeToProfilePage = () => {
     history.push(`${url}/profile`);
+    handleMenuClose();
   }
 
   const routeToAccountPage = () => {
     history.push(`${url}/account`)
+    handleMenuClose();
   }
 
   const handleSearchChange = (e) => {
