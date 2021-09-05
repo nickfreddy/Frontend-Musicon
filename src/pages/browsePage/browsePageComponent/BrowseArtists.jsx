@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "left",
     },
   },
-  artistCardSkeleton:{
+  artistCardSkeleton: {
     borderRadius: '8px',
-    margin: theme.spacing(0.7),
+    margin: 5,
     // width: 200,
     // height: 230,
     [theme.breakpoints.up("xs")]: {
@@ -116,7 +116,7 @@ const BrowseArtists = ({ pattern }) => {
 
 
 
-  const dummyData = [1, 2, 3, 4,5];
+  const dummyData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const renderBrowsedArtist = (result) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.artistCardSkeleton} />)
     if (result.data.length === 0) return (

@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "left",
     },
   },
-  albumsCardSkeleton:{
+  albumsCardSkeleton: {
     borderRadius: '8px',
-    margin: theme.spacing(0.7),
+    margin: 5,
     // width: 200,
     // height: 230,
     [theme.breakpoints.up("xs")]: {
@@ -113,7 +113,7 @@ const BrowseAlbums = ({ pattern }) => {
     };
   }, [pattern]);
 
-  const dummyData = [1, 2, 3, 4,5];
+  const dummyData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const renderBrowsedAlbums = (result) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.albumsCardSkeleton} />)
     if (result.data.length === 0) return (
