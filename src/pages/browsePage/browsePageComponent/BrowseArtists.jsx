@@ -130,7 +130,6 @@ const BrowseArtists = ({ pattern }) => {
         artistImage={data.photo}
         artistName={data.name}
         artistUrl={data.id}
-        className={classes.artistcard}
       />
     ))
   }

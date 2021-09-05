@@ -103,7 +103,7 @@ export default function PlaylistItems() {
       <PlaylistCard
         key={data._id}
         playlistImage={selectPhotoSource(data.playlistImage, sourceUrl)}
-        playlistMaker={data.author.username}
+        playlistMaker={data.author?.username || 'anonymous'}
         playlistTitle={data.playlistTitle}
         playlistId={data._id}
         ratingValue={data.playlistRating}

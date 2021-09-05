@@ -9,6 +9,7 @@ import {
   alpha,
 } from "@material-ui/core";
 import StarRateIcon from "@material-ui/icons/StarRate";
+import sampleImg from '../../assets/img/bluemusicon120.png'
 
 const useStyles = makeStyles((theme) => ({
   cardwrapper: {
@@ -137,8 +138,12 @@ const PlaylistCard = ({
         <div>
           <CardMedia
             className={classes.media}
-            image={playlistImage}
+            // image={playlistImage}
+            src={playlistImage} //new
             title={playlistTitle}
+            component="img" //new
+            onError={e => {e.target.src = sampleImg}} //new
+
           />
         </div>
       </Card>
