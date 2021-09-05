@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const FacebookLoginButton = () => {
+const FacebookLoginButton = ({handleClose}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -73,7 +73,7 @@ const FacebookLoginButton = () => {
     if (response.accessToken) {
       // setLogin(true);
       dispatch(setFacebookDataUserAction(response)); //save the original response from facebook
-      dispatch(postFacebookDataUserAction(response, () => history.push('/user')));
+      dispatch(postFacebookDataUserAction(response, () => {history.push('/user'); handleClose()}));
 
     } else {
       // setLogin(false);

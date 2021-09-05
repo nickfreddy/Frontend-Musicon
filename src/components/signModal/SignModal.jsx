@@ -74,8 +74,8 @@ const SignModal = () => {
         }
 
         <TitleDivider className={classes.divider}>OR</TitleDivider>
-        <GoogleLoginButton/>
-        <FacebookLoginButton/>
+        <GoogleLoginButton handleClose={handleClose}/>
+        <FacebookLoginButton handleClose={handleClose}/>
         {/* <RoundedButton className={classes.socialButton} startIcon={<img src={googleIcon} alt=""/>} fullWidth variant="transparent">Google</RoundedButton> */}
         {/* <RoundedButton className={classes.socialButton} startIcon={<img src={facebookIcon} alt=""/>} fullWidth variant="transparent">Facebook</RoundedButton> */}
       </Container>

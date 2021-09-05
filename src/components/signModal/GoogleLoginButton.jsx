@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const GoogleLoginButton = () => {
+const GoogleLoginButton = ({handleClose}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(state => state.user)
@@ -55,7 +55,7 @@ const GoogleLoginButton = () => {
     //SAVE USER DATA FROM GOOGLE TO REDUCER
     dispatch(setGoogleDataUserAction(res.profileObj))
     //POST DATA TO SERVER
-    dispatch(postGoogleDataUserAction(res.profileObj, () => history.push('/user')))
+    dispatch(postGoogleDataUserAction(res.profileObj, () => {history.push('/user'); handleClose()}))
 
   }
 

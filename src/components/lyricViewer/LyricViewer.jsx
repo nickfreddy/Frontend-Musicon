@@ -5,7 +5,17 @@ import { connect, useDispatch } from 'react-redux';
 import { closeLyricModalAction } from '../../redux/actions/modalAction';
 const useStyles = makeStyles((theme) => ({
   root: {
-
+    '& .modal-paper': {
+      [theme.breakpoints.up('sm')]: {
+        maxWidth: '80%'
+      },
+      [theme.breakpoints.up('md')]: {
+        maxWidth: '60%'
+      },
+      [theme.breakpoints.up('lg')]: {
+        maxWidth: '50%'
+      },
+    },
   },
   lyricContainer: {
     paddingTop: theme.spacing(2),
@@ -24,8 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
   lyricText: {
     marginTop: theme.spacing(2),
-    textAlign: 'center',
-    wordWrap: 'break-word'
+    wordWrap: 'break-word',
+    textAlign: 'left',
+    [theme.breakpoints.up('sm')]:{
+      textAlign: 'center',
+    }
   },
   lyricNotFound: {
     fontSize: '1.3em',
