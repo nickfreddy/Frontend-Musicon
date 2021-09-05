@@ -14,8 +14,8 @@ export const getUserById = (user_id, token) => musiconAPI.get(`/users/${user_id}
 })
 //===========================================
 
-export const updateUserById = (user_id, formData, token) => musiconAPI.put(`/users/updatedata/${user_id}`,formData, {
-  headers:{
+export const updateUserById = (user_id, formData, token) => musiconAPI.put(`/users/updatedata/${user_id}`, formData, {
+  headers: {
     "Authorization": token,
     "accept": "application/json",
     "Accept-Language": 'en-US,en;q=0.8',
@@ -23,6 +23,10 @@ export const updateUserById = (user_id, formData, token) => musiconAPI.put(`/use
   }
 })
 
-export const postGoogleDataUser = (urlEncodedData) => musiconAPI.post(`/auth/google/v2`,urlEncodedData,{
-  headers:{'content-type': 'application/x-www-form-urlencoded'}
+export const postGoogleDataUser = (urlEncodedData) => musiconAPI.post(`/auth/google/v2`, urlEncodedData, {
+  headers: { 'content-type': 'application/x-www-form-urlencoded' }
 });
+
+export const postFacebookDataUser = (urlEncodedData) => musiconAPI.post(`/auth/facebook/v2`, urlEncodedData, {
+  headers: { 'content-type': 'application/x-www-form-urlencoded' }
+})

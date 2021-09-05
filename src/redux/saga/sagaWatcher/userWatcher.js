@@ -1,6 +1,13 @@
 import { takeLatest } from 'redux-saga/effects';
 import * as type from '../../actions/actionTypes'
-import { getLogedInUserWorker, postGoogleDataUserWorker, signInUserWorker, signUpUserWorker, updateUserWorker } from '../sagaWorker/userWorker';
+import { 
+  getLogedInUserWorker, 
+  postFacebookDataUserWorker, 
+  postGoogleDataUserWorker, 
+  signInUserWorker, 
+  signUpUserWorker, 
+  updateUserWorker 
+} from '../sagaWorker/userWorker';
 
 export function* signUpUserWatcher() {
   yield takeLatest(type.REGISTER_USER, signUpUserWorker);
@@ -18,5 +25,9 @@ export function* updateUserWatcher(){
 
 export function* postGoogleDataUserWatcher(){
   yield takeLatest(type.POST_GOOGLE_DATA_USER, postGoogleDataUserWorker);
+}
+
+export function* postFacebookDataUserWatcher(){
+  yield takeLatest(type.POST_FACEBOOK_DATA_USER, postFacebookDataUserWorker);
 }
 

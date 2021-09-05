@@ -79,7 +79,7 @@ const userReducer = (state = initialState, action) => {
     };
     case type.SET_LOADING_GOOGLE_LOGIN: return {
       ...state,
-      googleLoding: true
+      googleLoading: true
     };
 
     case type.UNSET_LOADING_GOOGLE_LOGIN: return {
@@ -97,7 +97,6 @@ const userReducer = (state = initialState, action) => {
       ...state,
       facebookData: {}
     }
-
     case type.SET_LOADING_FACEBOOK_LOGIN: return {
       ...state,
       facebookLoading: true

@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
-import { openInfoLoginModalAction, openRegisterInfoAction, setLoadingGoogleLoginAction, setLoadingUserAction, setUserAction, unsetLoadingGoogleLoginAction, unsetLoadingUserAction, updateLocalUserAction } from '../../actions/userAction'
-import { getUserById, postGoogleDataUser, signInUser, signUpUser, updateUserById } from '../../Api/userAPI';
+import { openInfoLoginModalAction, openRegisterInfoAction, setLoadingFacebookLoginAction, setLoadingGoogleLoginAction, setLoadingUserAction, setUserAction, unsetLoadingFacebookLoginAction, unsetLoadingGoogleLoginAction, unsetLoadingUserAction, updateLocalUserAction } from '../../actions/userAction'
+import { getUserById, postFacebookDataUser, postGoogleDataUser, signInUser, signUpUser, updateUserById } from '../../Api/userAPI';
 import FormData from 'form-data';
 
 export function* signUpUserWorker(action) {
@@ -121,7 +121,7 @@ export function* postGoogleDataUserWorker(action) {
   try {
     yield put(setLoadingGoogleLoginAction());
 
-    console.log('PAYLOAD DI postGoogleDataUserWorker', action.payload)
+    // console.log('PAYLOAD DI postGoogleDataUserWorker', action.payload)
     const { email, familyName, givenName, googleId, imageUrl, name } = action.payload;
     const params = new URLSearchParams();
     params.append('email', email);
@@ -138,13 +138,44 @@ export function* postGoogleDataUserWorker(action) {
       localStorage.setItem('user_id', response.data.loggedUser._id);
       action.callback()
     } else {
-      console.log('DATA STRUCTURE IN UNKNOWN IN GOOGLE LOGIN WORKER GOT:', response);
+      console.log('DATA STRUCTURE IS UNKNOWN IN GOOGLE LOGIN WORKER GOT:', response);
       yield put(unsetLoadingGoogleLoginAction());
     }
 
   } catch (err) {
     console.log('ERROR POSTING USER DATA LOGGED IN USING GOOGLE TO SERVER, DETAIL : ', err.response)
-    yield put(openInfoLoginModalAction(err.response.data.errors[0]));
     yield put(unsetLoadingGoogleLoginAction());
+    yield put(openInfoLoginModalAction(err.response.data.errors[0]));
+  }
+};
+
+export function* postFacebookDataUserWorker(action){
+  try{
+    yield put(setLoadingFacebookLoginAction());
+    const {email, name, picture, userID} = action.payload; //picture is an object
+    const pictureUrl = picture.data.url;
+    const params = new URLSearchParams();
+    params.append('userID', userID);
+    params.append('fullname', name);
+    params.append('email', email);
+    params.append('photo', pictureUrl);
+
+    const response = yield postFacebookDataUser(params);
+
+    if(Boolean(response.data.token && response.data.loggedUser._id)){
+      yield put(setUserAction(response.data.loggedUser));
+      yield put(unsetLoadingFacebookLoginAction());
+      localStorage.setItem('token', `Bearer ${response.data.token}`);
+      localStorage.setItem('user_id', response.data.loggedUser._id);
+      action.callback()
+    }else{
+      console.log('DATA STRUCTURE IS UNKNOW IN postFacebookDataUserWorker, GOT:', response);
+      yield put(unsetLoadingFacebookLoginAction());
+    }
+  }catch(err){
+    console.log('ERROR ON POSTING FACEBOOK USER DATA TO SERVER, DETAIL: ', err.response);
+    yield put(unsetLoadingFacebookLoginAction())
+    yield put(openInfoLoginModalAction(err.response.data.errors[0]));
+    window.FB.logout();
   }
 }

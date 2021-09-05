@@ -5,7 +5,7 @@ import googleIcon from '../../assets/img/grommet-icons_google.svg'
 import { useGoogleLogin } from "react-google-login";
 import {
   useDispatch, 
-  useSelector
+  useSelector,
 } from 'react-redux';
 import { postGoogleDataUserAction, setGoogleDataUserAction } from '../../redux/actions/userAction';
 import { useHistory } from 'react-router';
@@ -81,3 +81,4 @@ const GoogleLoginButton = () => {
 }
 
 export default GoogleLoginButton
+

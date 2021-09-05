@@ -18,7 +18,7 @@ import FacebookLoginButton from "./FacebookLoginButton";
 const useStyles = makeStyles(theme => ({
   formContainer: {
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(5)
   },
   socialButton:{
     position: 'relative',

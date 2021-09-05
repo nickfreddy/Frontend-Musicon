@@ -18,7 +18,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { logOutUserAction } from "../redux/actions/userAction";
+import { logOutUserAction, unsetFacebookDataUserAction, unsetGoogleDataUserAction } from "../redux/actions/userAction";
 import { toggleDrawerOpenAction } from "../redux/actions/drawerAction";
 import { limitString } from "../tools/stringManipulation";
 import { sourceUrl } from "../redux/Api/setupAPI";
@@ -182,6 +182,8 @@ export default function Header() {
 
   const handleLogOutUser = () => {
     dispatch(logOutUserAction());
+    dispatch(unsetFacebookDataUserAction());
+    dispatch(unsetGoogleDataUserAction());
     signOut();
     if(window.FB){
       window.FB.logout();
