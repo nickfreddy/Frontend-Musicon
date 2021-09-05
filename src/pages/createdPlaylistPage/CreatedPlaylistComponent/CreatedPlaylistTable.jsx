@@ -19,6 +19,8 @@ import { sourceUrl } from '../../../redux/Api/setupAPI';
 import { formatDate } from '../../../tools/dateReformat';
 import { connect } from 'react-redux';
 import { Skeleton } from '@material-ui/lab';
+import { selectPhotoSource } from '../../../tools/checkPhotoSource';
+
 //useStyles==========================================
 const useStyles = makeStyles(theme => ({
   table: {
@@ -98,13 +100,7 @@ const CreatedPlaylistTable = ({ data, handleDelete, handleOpenCreatePlaylistModa
 
   const combineIconAndTitle = (photo, title) => (
     <div className={classes.playListTitleTable}>
-      {// This mitigate type of received photo to prevent broken photo display
-        photo !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg' ? //check if photo is not empty string
-          typeof photo === 'string' ?
-            <img className={`${classes.playlistIcon}`} width="40px" height="40px" src={sourceUrl + photo} alt="..." /> //if type of photo is string mostli its a url from server so use it
-            : <img className={`${classes.playlistIcon}`} width="40px" height="40px" src={URL.createObjectURL(photo)} alt="..." /> //if type of photo is a file that inputed from form so use it
-          : <img className={`${classes.playlistIcon}`} width="40px" height="40px" src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
-      }
+      <img className={`${classes.playlistIcon}`} width="40px" height="40px" src={selectPhotoSource(photo, sourceUrl)} alt="..." />
       <Typography>{title}</Typography>
     </div>
   );
