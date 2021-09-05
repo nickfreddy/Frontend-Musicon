@@ -44,7 +44,8 @@ const useStyles = makeStyles(theme => ({
     '& .btn-text': {
       color: 'white',
       fontSize: '14px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontFamily: 'DM Sans'
     },
     '& .btn-progress': {
       position: 'absolute',

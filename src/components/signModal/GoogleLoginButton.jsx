@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
       color: 'white',
       textTransform: 'none',
       fontSize: '14px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      // fontFamily: 'Arial'
     },
     '& .MuiButton-startIcon': {
       position: 'absolute',
