@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'block'
     },
-    paddingBottom: theme.spacing(2)
+    // paddingBottom: theme.spacing(2)
   },
   songTitleTable: {
     display: 'flex',

@@ -18,6 +18,12 @@ const initialState = {
   openLoginInfoModal: false,
   info: '',
   loading: false, 
+
+  googleData:{},
+  googleLoading: false,
+  facebookData:{},
+  facebookLoading: false
+
 }
 
 
@@ -62,6 +68,42 @@ const userReducer = (state = initialState, action) => {
     case type.UPDATE_LOCAL_USER: return {
       ...state,
       ...action.payload
+    };
+    case type.SET_GOOGLE_DATA_USER: return{
+      ...state,
+      googleData: action.payload
+    };
+    case type.UNSET_GOOGLE_DATA_USER: return {
+      ...state,
+      googleData: {}
+    };
+    case type.SET_LOADING_GOOGLE_LOGIN: return {
+      ...state,
+      googleLoading: true
+    };
+
+    case type.UNSET_LOADING_GOOGLE_LOGIN: return {
+      ...state,
+      googleLoading: false
+    }
+
+
+
+    case type.SET_FACEBOOK_DATA_USER: return {
+      ...state,
+      facebookData: action.payload
+    };
+    case type.UNSET_FACEBOOK_DATA_USER: return {
+      ...state,
+      facebookData: {}
+    }
+    case type.SET_LOADING_FACEBOOK_LOGIN: return {
+      ...state,
+      facebookLoading: true
+    }
+    case type.UNSET_LOADING_FACEBOOK_LOGIN: return {
+      ...state,
+      facebookLoading: false
     }
     default: return state
   }

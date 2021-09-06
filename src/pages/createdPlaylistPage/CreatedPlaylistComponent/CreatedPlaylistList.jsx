@@ -21,6 +21,7 @@ import { sourceUrl } from '../../../redux/Api/setupAPI';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Skeleton } from '@material-ui/lab';
+import { selectPhotoSource } from '../../../tools/checkPhotoSource';
 
 const useStyles = makeStyles(theme => ({
   playListContainer: {
@@ -83,13 +84,7 @@ const PlaylistItem = ({ className, number, id, image, title, totalSong, dateCrea
           <Typography>{number}</Typography>
         </ListItemIcon>
         <ListItemAvatar>
-          {// This mitigate type of received photo to prevent broken photo display
-            image !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg' ? //check if photo is not empty string
-              typeof image === 'string' ?
-                <img className={classes.imageIcon} src={sourceUrl + image} alt="..." /> //if type of photo is string mostli its a url from server so use it
-                : <img className={classes.imageIcon} src={URL.createObjectURL(image)} alt="..." /> //if type of photo is a file that inputed from form so use it
-              : <img className={classes.imageIcon} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
-          }
+          <img className={classes.imageIcon} src={selectPhotoSource(image, sourceUrl)} alt="..." />
         </ListItemAvatar>
         <ListItemText
           primary={title}
@@ -169,14 +164,14 @@ const CreatedPlaylistList = ({ userPlaylist, data, handleDelete }) => {
       </div>
     )
     return data.map((playlist, index) => (
-      <PlaylistItem 
-        key={playlist._id} 
-        number={index + 1} 
-        id={playlist._id} 
-        image={playlist.playlistImage} 
-        title={playlist.playlistTitle} 
-        totalSong={playlist.songs.length} 
-        dateCreated={playlist.createdAt} 
+      <PlaylistItem
+        key={playlist._id}
+        number={index + 1}
+        id={playlist._id}
+        image={playlist.playlistImage}
+        title={playlist.playlistTitle}
+        totalSong={playlist.songs.length}
+        dateCreated={playlist.createdAt}
         onDelete={() => handleDelete(playlist._id)} />
     ))
   }

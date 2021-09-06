@@ -18,20 +18,24 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "8px",
     height: 120,
     [theme.breakpoints.down("sm")]: {
-      width: "80vw",
+      // width: "80vw",
+      width: "100%",
+
     },
     [theme.breakpoints.up("sm")]: {
-      width: "44vw",
+      // width: "44vw",
+      width: "48%",
+
     },
-    [theme.breakpoints.up("md")]: {
-      width: "33vw",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   width: "33vw",
+    // },
     [theme.breakpoints.up("lg")]: {
-      width: "24vw",
+      width: "32%",
     },
-    [theme.breakpoints.up("xl")]: {
-      width: "15vw",
-    },
+    // [theme.breakpoints.up("xl")]: {
+    //   width: "15vw",
+    // },
   },
   media: {
     borderRadius: "8px",
@@ -44,21 +48,22 @@ const useStyles = makeStyles((theme) => ({
     height: 120,
     display: "flex",
     justifyContent: "flex-start",
-    [theme.breakpoints.down("sm")]: {
-      width: "80vw",
-    },
-    [theme.breakpoints.up("sm")]: {
-      width: "44vw",
-    },
-    [theme.breakpoints.up("md")]: {
-      width: "33vw",
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: "24vw",
-    },
-    [theme.breakpoints.up("xl")]: {
-      width: "15vw",
-    },
+    width: '100%'
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "80vw",
+    // },
+    // [theme.breakpoints.up("sm")]: {
+    //   width: "44vw",
+    // },
+    // [theme.breakpoints.up("md")]: {
+    //   width: "33vw",
+    // },
+    // [theme.breakpoints.up("lg")]: {
+    //   width: "24vw",
+    // },
+    // [theme.breakpoints.up("xl")]: {
+    //   width: "15vw",
+    // },
   },
   titletext: {
     padding: [[5, 0]],

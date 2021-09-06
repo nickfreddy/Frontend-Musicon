@@ -18,11 +18,11 @@ export function* getPlaylistWorker(action) {
       yield put(unsetLoadingPlaylistAction());
       action.callback();
     } else {
-      console.log('GET UNKNOWN DATA STRUCTURE RESPONSE IS :', response)
+      // console.log('GET UNKNOWN DATA STRUCTURE RESPONSE IS :', response)
       yield put(unsetLoadingPlaylistAction())
     }
   } catch (err) {
-    console.log('ERROR ON GET PLAYLIST WORKER DETAILS:', err)
+    // console.log('ERROR ON GET PLAYLIST WORKER DETAILS:', err)
     yield put(unsetLoadingPlaylistAction())
   }
 }

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Musicon",
+  "name": "Musicon The Best Web Player",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,7 +10,13 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "51x51"
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",

@@ -17,11 +17,27 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "left",
     },
   },
-  artistCardSkeleton:{
-    width: 200,
-    height: 230,
+  artistCardSkeleton: {
     borderRadius: '8px',
-    margin: theme.spacing(0.8)
+    margin: 5,
+    // width: 200,
+    // height: 230,
+    [theme.breakpoints.up("xs")]: {
+      width: '47%',
+      height: 210,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: '31.6%',
+      height: 265,
+    },
+    [theme.breakpoints.up("md")]: {
+      width: '31.6%',
+      height: 248,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: '19%',
+      height: 248,
+    },
   }
 }));
 
@@ -100,7 +116,7 @@ const BrowseArtists = ({ pattern }) => {
 
 
 
-  const dummyData = [1, 2, 3, 4];
+  const dummyData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const renderBrowsedArtist = (result) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.artistCardSkeleton} />)
     if (result.data.length === 0) return (
@@ -114,7 +130,6 @@ const BrowseArtists = ({ pattern }) => {
         artistImage={data.photo}
         artistName={data.name}
         artistUrl={data.id}
-        className={classes.artistcard}
       />
     ))
   }
