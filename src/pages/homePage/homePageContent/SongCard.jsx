@@ -13,25 +13,27 @@ import { setCurrentPlayingAction, setPlayCurrentPlayingAction } from "../../../r
 const useStyles = makeStyles((theme) => ({
   card: {
     margin: [[5, 5, 5, 5]],
+
     background: "#1F1D2B",
     borderRadius: "8px",
     height: 120,
     [theme.breakpoints.down("sm")]: {
-      width: "80vw",
-      margin: [[10, 10, 30, 10]],
+      // width: "80vw",
+      width: "100%",
+      // margin: [[10, 10, 10, 10]],
     },
     [theme.breakpoints.up("sm")]: {
-      width: "44vw",
+      width: "48%",
     },
-    [theme.breakpoints.up("md")]: {
-      width: "33vw",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   width: "47%",
+    // },
     [theme.breakpoints.up("lg")]: {
-      width: "24vw",
+      width: "32%",
     },
-    [theme.breakpoints.up("xl")]: {
-      width: "15vw",
-    },
+    // [theme.breakpoints.up("xl")]: {
+    //   width: "32%",
+    // },
   },
   media: {
     borderRadius: "8px",
@@ -44,21 +46,22 @@ const useStyles = makeStyles((theme) => ({
     height: 120,
     display: "flex",
     justifyContent: "flex-start",
-    [theme.breakpoints.down("sm")]: {
-      width: "80vw",
-    },
-    [theme.breakpoints.up("sm")]: {
-      width: "44vw",
-    },
-    [theme.breakpoints.up("md")]: {
-      width: "33vw",
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: "24vw",
-    },
-    [theme.breakpoints.up("xl")]: {
-      width: "15vw",
-    },
+    width: '100%',
+    // [theme.breakpoints.down("sm")]: {
+    //   width: "80vw",
+    // },
+    // [theme.breakpoints.up("sm")]: {
+    //   width: "44vw",
+    // },
+    // [theme.breakpoints.up("md")]: {
+    //   width: "33vw",
+    // },
+    // [theme.breakpoints.up("lg")]: {
+    //   width: "24vw",
+    // },
+    // [theme.breakpoints.up("xl")]: {
+    //   width: "15vw",
+    // },
   },
   titletext: {
     padding: [[5, 0]],

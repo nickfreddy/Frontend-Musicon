@@ -90,17 +90,6 @@ const App = ({ theme }) => {
           <Route exact path="/" component={() => (<LandingPage />)} /> {/**Loading page */}
           <Route path="/user" component={() => (<UserPage />)} />
           <Route path="/test" component={() => (<TestPage />)} />
-
-
-
-          {/**=========== USED TO GET SPOTIFY CODE ========== */}
-          {/* <Route path="/spotifyLogin" component={() => { //redirect to spotify auth URL and then back to localhost:300/user
-            window.location.href = AUTH_SPOTIFY_URL;
-            // window.location.href= "https://musicon.gabatch13.my.id/auth/spotify/login"
-            return null;
-          }} /> */}
-          {/**=============================================== */}
-
         </Switch>
       </ThemeProvider>
     </Router>

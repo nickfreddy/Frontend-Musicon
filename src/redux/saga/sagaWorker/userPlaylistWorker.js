@@ -31,7 +31,7 @@ export function* getUserPlaylistWorker(action) {
     }
 
   } catch (error) {
-    console.log('ERROR ON GETUSER PAYLIST WORKER details', error.response);
+    // console.log('ERROR ON GETUSER PAYLIST WORKER details', error.response);
     yield put(setFailedInfoUserPlaylistAction("Failed to load data from server"));
     yield put(unsetLoadingUserPlaylistAction());
   }
@@ -47,8 +47,10 @@ export function* postUserPlaylistWorker(action) {
     data.append("playlistImage", playlistImage);
   }
   data.append("description", description);
-  const response = yield postUserPlaylist(data, token);
-  console.log('POST NEW PLAYLIST TO USER SUCCES', response)
+  // const response = yield postUserPlaylist(data, token);
+  yield postUserPlaylist(data, token);
+
+  // console.log('POST NEW PLAYLIST TO USER SUCCES', response)
   yield put(unsetLoadingUserPlaylistAction());
   action.callback();
 };
@@ -68,7 +70,7 @@ export function* deleteUserPlaylistWorker(action) {
       yield put(setFailedInfoUserPlaylistAction("delete playlist Failed"))
     }
   } catch (err) {
-    console.log('ERROR DELETING PLAYLIST TO SERVER DETAILS: ', err);
+    // console.log('ERROR DELETING PLAYLIST TO SERVER DETAILS: ', err);
     yield put(setFailedInfoUserPlaylistAction("Failed to load data from server"));
     yield put(unsetLoadingUserPlaylistAction());
   }

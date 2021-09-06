@@ -19,10 +19,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   songSkeleton:{
-    width: 325,
+    // width: 325,
     height: 120,
     borderRadius: '8px',
-    margin: theme.spacing(0.8)
+    margin: theme.spacing(0.7),
+    width: '100%',
+    [theme.breakpoints.up('sm')]:{
+      width: '48%',
+    },
+    [theme.breakpoints.up('lg')]:{
+      width: '32%',
+    }
   }
 }));
 
@@ -100,7 +107,7 @@ const BrowseSongs = ({ pattern }) => {
 
 
 
-  const dummyData = [1, 2, 3];
+  const dummyData = [1, 2, 3,];
   const renderBrowsedSongs = (result) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.songSkeleton} />)
     if (result.data.length === 0) return (

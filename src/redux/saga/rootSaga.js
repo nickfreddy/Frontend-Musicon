@@ -1,4 +1,5 @@
 import { all } from "redux-saga/effects";
+import { getAlbumDetailsWatcher } from "./sagaWatcher/albumDetailsWatcher";
 import { getArtistAlbumWatcher } from "./sagaWatcher/getArtistAlbumWatcher";
 import { getNewReleaseSongWatcher } from "./sagaWatcher/newReleaseSongWatcher";
 import { 
@@ -20,6 +21,8 @@ import { getUserTopArtistWatcher } from "./sagaWatcher/userTopArtistWatcher";
 import { getUserTopSongsWatcher } from "./sagaWatcher/userTopSongsWatcher";
 import { 
   getLogedInUserWatcher, 
+  postFacebookDataUserWatcher, 
+  postGoogleDataUserWatcher, 
   signInUserWatcher, 
   signUpUserWatcher, 
   updateUserWatcher
@@ -31,6 +34,9 @@ export default function* rootSaga(){
     signUpUserWatcher(),
     signInUserWatcher(),
     getLogedInUserWatcher(),
+    updateUserWatcher(),
+    postGoogleDataUserWatcher(),
+    postFacebookDataUserWatcher(),
     getUserPlaylistWatcher(),
     getPlaylistDetailWatcher(),
     postUserPlaylistWatcer(),
@@ -38,15 +44,21 @@ export default function* rootSaga(){
     addSongToPlaylistWatcher(),
     deleteSongFromPlaylistWatcher(),
     updatePlaylistDetailWatcher(),
-    updateUserWatcher(),
+
     getUserTopArtistWatcher(),
+
     getUserTopSongsWatcher(),
+
     getRatingCurrentPlaylistWatcher(),
     postRatingCurrentPlaylistWatcher(),
+
     getPlaylistWatcher(),
     getNewReleaseSongWatcher(),
     getRecomendedSongWatcher(),
+
     getSongLyricWatcher(),
-    getArtistAlbumWatcher()
+    
+    getArtistAlbumWatcher(),
+    getAlbumDetailsWatcher(),
   ])
 }

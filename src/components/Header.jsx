@@ -18,10 +18,12 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { logOutUserAction } from "../redux/actions/userAction";
+import { logOutUserAction, unsetFacebookDataUserAction, unsetGoogleDataUserAction } from "../redux/actions/userAction";
 import { toggleDrawerOpenAction } from "../redux/actions/drawerAction";
 import { limitString } from "../tools/stringManipulation";
 import { sourceUrl } from "../redux/Api/setupAPI";
+import { useGoogleLogout } from "react-google-login";
+import { selectPhotoSource } from "../tools/checkPhotoSource";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -147,6 +149,19 @@ export default function Header() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user);
 
+  const onLogoutSuccess = res => {
+    console.log('GOOGLE USER LOGOUT SUCCESFULLY', res);
+  }
+
+  const onFailure = res => {
+    console.log('GOOGLE USER FAILED TO LOGOUT')
+  }
+
+  const { signOut} = useGoogleLogout({
+    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    onLogoutSuccess,
+    onFailure
+  })
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -167,15 +182,25 @@ export default function Header() {
 
   const handleLogOutUser = () => {
     dispatch(logOutUserAction());
+    dispatch(unsetFacebookDataUserAction());
+    dispatch(unsetGoogleDataUserAction());
+    signOut();
+    if(window.FB){
+      window.FB.logout();
+    }
     history.push('/');
+    handleMenuClose();
+
   }
 
   const routeToProfilePage = () => {
     history.push(`${url}/profile`);
+    handleMenuClose();
   }
 
   const routeToAccountPage = () => {
     history.push(`${url}/account`)
+    handleMenuClose();
   }
 
   const handleSearchChange = (e) => {
@@ -229,7 +254,7 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Avatar className={classes.avatar} src={sourceUrl+user.data.photo}/>
+        <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)}/>
         <div>
           <Typography variant="subtitle1" className={classes.bold}>
             {limitString(user.data.fullname, 20)}
@@ -289,7 +314,7 @@ export default function Header() {
             />
           </div>
           <div className={classes.sectionDesktop}>
-            <Avatar className={classes.avatar} src={sourceUrl+user.data.photo}/>
+            <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)}/>
             <div>
               <Typography variant="subtitle1" className={classes.bold}>
                 {limitString(user.data.fullname, 17)}
@@ -314,7 +339,7 @@ export default function Header() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <Avatar src={sourceUrl+user.data.photo}/>
+              <Avatar src={selectPhotoSource(user.data.photo, sourceUrl)}/>
             </IconButton>
           </div>
         </Toolbar>

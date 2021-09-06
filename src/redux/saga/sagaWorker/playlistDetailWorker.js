@@ -27,7 +27,7 @@ export function* getPlaylistDetailWorker(action) {
       yield put(unsetLoadingPlayistDetailAction());
     }
   } catch (err) {
-    console.log('ERROR FROM GET PLAUYLIST DETAIL WORKER DETAILS: ', err.response);
+    // console.log('ERROR FROM GET PLAUYLIST DETAIL WORKER DETAILS: ', err.response);
     yield put(unsetLoadingPlayistDetailAction())
   }
 }
@@ -46,12 +46,12 @@ export function* addSongToPlaylistWorker(action) {
       action.callback()
       //additional : add song id to userPlaylist
     } else {
-      console.log('SOMETHING WROKE WITH RESPONSE :', response);
+      // console.log('SOMETHING WROKE WITH RESPONSE :', response);
       yield put(unsetLoadingPlayistDetailAction())
     }
 
   } catch (err) {
-    console.log('ERROR AT ADD SONG TO PLAYLIST WORKER DETAIL:', err);
+    // console.log('ERROR AT ADD SONG TO PLAYLIST WORKER DETAIL:', err);
     yield put(unsetLoadingPlayistDetailAction())
   }
 }
@@ -67,11 +67,11 @@ export function* deleteSongFromPlaylistWorker(action) {
       yield put(unsetLoadingPlayistDetailAction());
       action.callback();
     } else {
-      console.log('SOMETHING WRONG WITH RESPONSE AT DELETE SONG FROM PLAYLIST:', response);
+      // console.log('SOMETHING WRONG WITH RESPONSE AT DELETE SONG FROM PLAYLIST:', response);
       yield put(unsetLoadingPlayistDetailAction());
     };
   } catch (err) {
-    console.log('ERROR AT DELETE SONG FROM PLAYLIST WORKER DETAIL:', err);
+    // console.log('ERROR AT DELETE SONG FROM PLAYLIST WORKER DETAIL:', err);
     yield put(unsetLoadingPlayistDetailAction())
   };
 }
@@ -98,11 +98,11 @@ export function* updatePlaylistDetailWorker(action){
       yield put(unsetLoadingPlayistDetailAction())
       action.callback();
     }else{
-      console.log('ERROR ON SETTING DATA TO REDUCER')
+      // console.log('ERROR ON SETTING DATA TO REDUCER')
       yield put(unsetLoadingPlayistDetailAction())
     }
   }catch(err){
-    console.log('ERROR ON UPDATE PLAYLIST DETAIL:', err);
+    // console.log('ERROR ON UPDATE PLAYLIST DETAIL:', err);
     yield put(unsetLoadingPlayistDetailAction())
   }
 }

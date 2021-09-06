@@ -226,7 +226,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
   useEffect(() => {
     dispatch(getRatingCurrentPlaylistAction(playlistId, (value) => handleReceivedRatingFromServer(value)))
   }, [dispatch, playlistId])
-  
+
   return (
     <div className={classes.root}>
       {/** LEFT SIDE */}
@@ -234,13 +234,6 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
         <Typography className={classes.playlistTitle} variant="h4">{`${nowLocation} / `}<span>{playlistTitle}</span></Typography>
         <div className={classes.description}>
           <img className={classes.playListPhoto} src={selectPhotoSource(photo, sourceUrl)} alt="..." />
-          {/* {// This mitigate type of received photo to prevent broken photo display
-            photo !== 'https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg' ? //check if photo is not empty string
-              typeof photo === 'string' ?
-                <img className={classes.playListPhoto} src={sourceUrl + photo} alt="..." /> //if type of photo is string mostli its a url from server so use it
-                : <img className={classes.playListPhoto} src={URL.createObjectURL(photo)} alt="..." /> //if type of photo is a file that inputed from form so use it
-              : <img className={classes.playListPhoto} src="https://i1.sndcdn.com/artworks-000560586507-q7vve7-t500x500.jpg" alt="..." /> // if no photo provided so use local default photo
-          } */}
           <div className={classes.descriptionContent}>
             <Typography>{description}</Typography>
             <div className={classes.moreDetails}>
@@ -309,7 +302,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
       </Menu>
       <CreatePlaylistModal
         photo={photo}
-        title={playlistTitle}
+        title={`Edit ${playlistTitle}`}
         description={description}
         actionUpdate={true}
         playlistId={playlistId}
