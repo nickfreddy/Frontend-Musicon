@@ -19,6 +19,7 @@ import { secondsDuration } from '../../../../tools/timeConverter';
 import { connect } from 'react-redux';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import LoveButton from '../../../../components/commons/LoveButton';
 
 const useStyles = makeStyles(theme => ({
   playListContainer: {
@@ -68,6 +69,13 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
       textAlign: 'center'
     }
+  },
+  loveButton: {
+    // '&.MuiIconButton-root': {
+    padding: 0,
+    margin: '0 auto',
+    height: '20px'
+    // }
   }
 }))
 
@@ -100,21 +108,21 @@ const SongListListItem = ({
     <div>
       <ListItem className={`${classes.listItem} ${className}`} onClick={() => handleSongPlay(song)}>
         <ListItemIcon className={classes.listIcon}>
-            {/* {number} */}
-            {song._id === currentPlaying.songDetail._id ?
-              <div className={classes.playArrowIcon}>
-                {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+          {/* {number} */}
+          {song._id === currentPlaying.songDetail._id ?
+            <div className={classes.playArrowIcon}>
+              {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+            </div>
+            :
+            <div className={classes.songNumber}>
+              <div className="playNumberIcon">
+                <PlayArrowIcon />
               </div>
-              :
-              <div className={classes.songNumber}>
-                <div className="playNumberIcon">
-                  <PlayArrowIcon />
-                </div>
-                <Typography className="numberIcon" align="center">
-                  {number}
-                </Typography>
-              </div>
-            }
+              <Typography className="numberIcon" align="center">
+                {number}
+              </Typography>
+            </div>
+          }
         </ListItemIcon>
         <ListItemAvatar>
           {Boolean(image) ?
@@ -142,16 +150,18 @@ const SongListListItem = ({
             </React.Fragment>
           }
         />
-        {isOwner &&
-          <ListItemSecondaryAction>
+        <ListItemSecondaryAction>
+          {isOwner ?
             <IconButton
               edge="end"
               onClick={handleMenuOpen}
             >
               <MoreVertIcon />
             </IconButton>
-          </ListItemSecondaryAction>
-        }
+            :
+            <LoveButton songId={song._id} isLiked={song.isLiked} />
+          }
+        </ListItemSecondaryAction>
       </ListItem>
       <Menu
         id={`song-menu${id}`}
@@ -169,11 +179,17 @@ const SongListListItem = ({
           horizontal: 'center',
         }}
       >
+        <MenuItem>
+          <ListItemIcon className={classes.menuIcon}>
+            <LoveButton className={classes.loveButton} songId={song._id} isLiked={song.isLiked} />
+          </ListItemIcon>
+          {/* <ListItemText primary="Like" /> */}
+        </MenuItem>
         <MenuItem onClick={onDelete}>
           <ListItemIcon className={classes.menuIcon}>
             <img src={deleteIcon} alt="..." />
           </ListItemIcon>
-          <ListItemText primary="Delete" />
+          {/* <ListItemText primary="Delete" /> */}
         </MenuItem>
       </Menu>
     </div>

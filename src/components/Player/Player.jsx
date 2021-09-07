@@ -160,6 +160,7 @@ const Player = ({ currentPlaying, playlistDetail }) => {
           muted={muted}
           setMuted={setMuted}
           songId ={currentPlaying.songDetail._id}
+          isLiked = {currentPlaying.songDetail.isLiked}
         />
 
 

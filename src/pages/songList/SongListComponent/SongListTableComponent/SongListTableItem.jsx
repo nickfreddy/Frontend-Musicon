@@ -13,6 +13,7 @@ import { secondsDuration } from '../../../../tools/timeConverter';
 import { connect } from 'react-redux';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import LoveButton from '../../../../components/commons/LoveButton';
 
 //useStyles==========================================
 const useStyles = makeStyles(theme => ({
@@ -43,10 +44,10 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       background: alpha('#2D304D', 0.9),
       cursor: 'pointer',
-      '& .playNumberIcon':{
+      '& .playNumberIcon': {
         display: 'block',
       },
-      '& .numberIcon':{
+      '& .numberIcon': {
         display: 'none'
       }
     },
@@ -76,11 +77,17 @@ const useStyles = makeStyles(theme => ({
   playArrowIcon: {
     textAlign: 'center'
   },
-  songNumber:{
-    '& .playNumberIcon':{
+  songNumber: {
+    '& .playNumberIcon': {
       display: 'none',
       textAlign: 'center'
     }
+  },
+  actionButton: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '65px',
   }
 }))
 //==================================================
@@ -131,13 +138,14 @@ const SongListTableItem = ({ currentPlaying, isOwner, song, handleDelete, handle
           {secondsDuration(song.songDuration)}
         </Typography>
       </TableCell>
-      {isOwner &&
-        <TableCell padding="none" align="center">
+      <TableCell className={classes.actionButton} padding="none" align="center">
+        <LoveButton songId={song._id} isLiked={song.isLiked} />
+        {isOwner &&
           <IconButton onClick={() => handleDelete(song._id)}>
             <img src={deleteIcon} alt="..." />
           </IconButton>
-        </TableCell>
-      }
+        }
+      </TableCell>
     </TableRow>
   )
 }

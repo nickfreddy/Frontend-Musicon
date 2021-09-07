@@ -47,3 +47,14 @@ export const updateLocalPlaylistDetailAction = ( playlistTitle, playlistImage, d
     description
   }
 }) //used to update local playlist detail
+
+
+export const setLikeSongInPlaylistDetailAction = (songId) => ({
+  type: type.SET_LIKE_SONG_IN_PLAYLIST_DETAIL,
+  payload: songId
+});
+
+export const unsetLikeSongInPlaylistDetailAction = (songId) => ({
+  type: type.UNSET_LIKE_SONG_IN_PLAYLIST_DETAIL,
+  payload: songId
+})

@@ -45,6 +45,22 @@ const currentPlayingReducer = (state = initialState, action)=>{
     case type.DISABLE_REPEAT_PLAYING: return {
       ...state,
       isRepeatOn: false
+    };
+    case type.SET_LIKE_CURRENT_PLAYING: return {
+      ...state,
+      //change like status
+      songDetail: {
+        ...state.songDetail,
+        isLiked: true
+      }
+    };
+    case type.UNSET_LIKE_CURRENT_PLAYING: return {
+      ...state,
+      //change like status
+      songDetail: {
+        ...state.songDetail,
+        isLiked: false
+      }
     }
     case type.RESET_CURRENT_PLAYING: return initialState;
     default: return state

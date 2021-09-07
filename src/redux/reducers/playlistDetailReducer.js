@@ -8,7 +8,13 @@ const initialState = {
     //     "songTitle": "Theme For The People",
     //     "songDuration": "116",
     //     "songImage": "https://i.scdn.co/image/ab67616d0000b2731a37c926465567557e294c51",
+    //     "audio": "https://i.scdn.co/image/ab67616d0000b273c04e45a5961ed74625c7c03a",
     //     "_id": "611fb596f343941863d7458f",
+    //     "albumId": {
+    //       "albumTitle": "Sunset di Tanah Anarki",
+    //       "id": "611fb589f343941863d74333",
+    //       "_id": "611fb589f343941863d74333"
+    //      }
     //     "artistId": {
     //       "_id": "611fb589f343941863d74326",
     //       "name": "Logic",
@@ -75,7 +81,34 @@ const playlistDetailReducer = (state = initialState, action) => {
         ...action.payload // it contain {playlistTitle, playlistImage, playlistRating, description}
       }
     }
-  
+    
+    case type.SET_LIKE_SONG_IN_PLAYLIST_DETAIL: return {
+      ...state,
+      data:{
+        ...state.data,
+        songs: state.data.songs.map(song => {
+          if(song._id !== action.payload) return song; //song is object inside songs
+          return {
+            ...song,
+            isLiked: true
+          }
+        })
+      }
+    };
+
+    case type.UNSET_LIKE_SONG_IN_PLAYLIST_DETAIL: return {
+      ...state,
+      data:{
+        ...state.data,
+        songs: state.data.songs.map(song => {
+          if(song._id !== action.payload) return song; //song is object inside songs
+          return {
+            ...song,
+            isLiked: false
+          }
+        })
+      }
+    };
     case type.RESET_PLAYLIST_DETAIL: return initialState
     default: return state
   }
