@@ -67,7 +67,8 @@ const useStyles = makeStyles(theme => ({
   songNumber: {
     '& .playNumberIcon': {
       display: 'none',
-      textAlign: 'center'
+      textAlign: 'center',
+      marginLeft: '-0.6em'
     }
   },
   loveButton: {

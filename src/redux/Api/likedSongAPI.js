@@ -26,3 +26,14 @@ export const setLikeSongStatus = (songId, urlEncodedData, token) => musiconAPI.p
   }
 } )
 
+/**
+ * GET User Liked song from the server by user Id
+ * @param {string} userId 
+ * @param {string} token 
+ * @returns 
+ */
+export const getUserLikedSongs = (userId, token) => musiconAPI.get(`/users/${userId}/likedsongs`, {
+  headers:{
+    "Authorization": token
+  }
+})

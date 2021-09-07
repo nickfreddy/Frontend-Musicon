@@ -109,6 +109,12 @@ const playlistDetailReducer = (state = initialState, action) => {
         })
       }
     };
+    case type.SET_USER_LIKED_SONGS: return {
+      ...state,
+      data:{
+        songs: action.payload
+      }
+    }
     case type.RESET_PLAYLIST_DETAIL: return initialState
     default: return state
   }
