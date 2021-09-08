@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import LoveButton from '../../../../components/commons/LoveButton';
+import usePlayerAction from '../../../../functions/usePlayerAction';
 
 const useStyles = makeStyles(theme => ({
   playListContainer: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles(theme => ({
     background: '#1F1D2B',
     borderRadius: theme.spacing(1),
     marginBottom: theme.spacing(1),
+    '& .numberIcon': {
+      marginLeft: theme.spacing(0.3)
+    },
     '&:hover': {
       background: alpha('#2D304D', 0.9),
       cursor: 'pointer',
@@ -39,7 +43,7 @@ const useStyles = makeStyles(theme => ({
         display: 'block',
       },
       '& .numberIcon': {
-        display: 'none'
+        display: 'none',
       }
     },
   },
@@ -51,11 +55,11 @@ const useStyles = makeStyles(theme => ({
     display: 'inline'
   },
 
-  menuItem:{
+  menuItem: {
     justifyContent: 'center'
   },
   listIcon: {
-    minWidth: theme.spacing(3)
+    minWidth: theme.spacing(4)
   },
   menuIcon: {
     minWidth: theme.spacing(0),
@@ -66,13 +70,13 @@ const useStyles = makeStyles(theme => ({
     marginRight: '1em'
   },
   playArrowIcon: {
-    marginLeft: '-0.6em'
+    marginLeft: '-1.2em'
   },
   songNumber: {
     '& .playNumberIcon': {
       display: 'none',
-      textAlign: 'center',
-      marginLeft: '-0.6em'
+      // textAlign: 'center',
+      marginLeft: '-0.7em'
     }
   },
   loveButton: {
@@ -101,7 +105,7 @@ const SongListListItem = ({
 }) => {
 
   const classes = useStyles();
-
+  const player = usePlayerAction();
   const [anchorEl, setAnchorEl] = useState(null);
   const handleMenuClose = (e) => {
     setAnchorEl(null)
@@ -116,13 +120,21 @@ const SongListListItem = ({
           {/* {number} */}
           {song._id === currentPlaying.songDetail._id ?
             <div className={classes.playArrowIcon}>
-              {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+              {currentPlaying.isPlaying ?
+                <IconButton onClick={player.handlePauseAction}>
+                  <PauseIcon />
+                </IconButton>
+                :
+                <IconButton>
+                  <PlayArrowIcon />
+                </IconButton>
+              }
             </div>
             :
             <div className={classes.songNumber}>
-              <div className="playNumberIcon">
+              <IconButton className="playNumberIcon">
                 <PlayArrowIcon />
-              </div>
+              </IconButton>
               <Typography className="numberIcon" align="center">
                 {number}
               </Typography>

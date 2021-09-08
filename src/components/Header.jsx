@@ -32,8 +32,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(2),
     display: "flex",
+    [theme.breakpoints.up("sm")]: {
+      marginRight: theme.spacing(1),
+    },
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -59,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     },
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      marginRight: theme.spacing(4),
+      marginRight: theme.spacing(2),
       width: "100%",
     },
   },
@@ -102,8 +105,12 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
-    '& .MuiIconButton-root':{
-      paddingRight: theme.spacing(0)
+    '& .MuiIconButton-root': {
+      padding: theme.spacing(0),
+      marginLeft: theme.spacing(1.5),
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(1),
+      },
     },
     [theme.breakpoints.up("md")]: {
       display: "none",
@@ -120,8 +127,8 @@ const useStyles = makeStyles((theme) => ({
   dividerSpacing: {
     margin: theme.spacing(1),
   },
-  blueTringale:{
-    width:'0',
+  blueTringale: {
+    width: '0',
     height: '0',
     borderTop: '50px solid #4399FD',
     borderRight: '50px solid transparent',
@@ -131,10 +138,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: '-8px',
     left: '-32px',
     display: 'none',
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       display: 'block'
     }
-    
+
   }
 }));
 
@@ -143,7 +150,7 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
-  const {url} = useRouteMatch()
+  const { url } = useRouteMatch()
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const dispatch = useDispatch()
@@ -157,7 +164,7 @@ export default function Header() {
     console.log('GOOGLE USER FAILED TO LOGOUT')
   }
 
-  const { signOut} = useGoogleLogout({
+  const { signOut } = useGoogleLogout({
     clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
     onLogoutSuccess,
     onFailure
@@ -185,7 +192,7 @@ export default function Header() {
     dispatch(unsetFacebookDataUserAction());
     dispatch(unsetGoogleDataUserAction());
     signOut();
-    if(window.FB){
+    if (window.FB) {
       window.FB.logout();
     }
     history.push('/');
@@ -207,7 +214,7 @@ export default function Header() {
     // console.log(e.target.value);
     history.push(`${url}/browse?pattern=${e.target.value}`)
   }
-  
+
   const handleToggleDrawer = () => {
     dispatch(toggleDrawerOpenAction());
   }
@@ -254,7 +261,7 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)}/>
+        <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)} />
         <div>
           <Typography variant="subtitle1" className={classes.bold}>
             {limitString(user.data.fullname, 20)}
@@ -314,7 +321,7 @@ export default function Header() {
             />
           </div>
           <div className={classes.sectionDesktop}>
-            <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)}/>
+            <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)} />
             <div>
               <Typography variant="subtitle1" className={classes.bold}>
                 {limitString(user.data.fullname, 17)}
@@ -339,7 +346,7 @@ export default function Header() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <Avatar src={selectPhotoSource(user.data.photo, sourceUrl)}/>
+              <Avatar src={selectPhotoSource(user.data.photo, sourceUrl)} />
             </IconButton>
           </div>
         </Toolbar>

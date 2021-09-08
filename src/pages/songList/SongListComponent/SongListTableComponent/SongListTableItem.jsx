@@ -15,6 +15,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import LoveButton from '../../../../components/commons/LoveButton';
 
+import usePlayerAction from '../../../../functions/usePlayerAction';
+
 //useStyles==========================================
 const useStyles = makeStyles(theme => ({
   table: {
@@ -95,6 +97,8 @@ const useStyles = makeStyles(theme => ({
 const SongListTableItem = ({ currentPlaying, isOwner, song, handleDelete, handleSongPlay, index }) => {
   const classes = useStyles();
 
+  const player = usePlayerAction();
+
   const combineIconAndTitle = (icon, title) => (
     <div className={classes.songTitleTable}>
       {icon ?
@@ -109,15 +113,25 @@ const SongListTableItem = ({ currentPlaying, isOwner, song, handleDelete, handle
 
   return (
     <TableRow className={classes.tableRowContent}>
-      <TableCell padding="none" onClick={() => handleSongPlay(song)}> {/** Play song */}
+      <TableCell padding="none" > {/** Play song */}
         {song._id === currentPlaying.songDetail._id ?
           <div className={classes.playArrowIcon}>
-            {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+            {currentPlaying.isPlaying ?
+              <IconButton onClick={player.handlePauseAction}>
+                <PauseIcon />
+              </IconButton>
+              :
+              <IconButton onClick={() => handleSongPlay(song)}>
+                <PlayArrowIcon />
+              </IconButton>
+            }
           </div>
           :
-          <div className={classes.songNumber}>
+          <div className={classes.songNumber} >
             <div className="playNumberIcon">
-              <PlayArrowIcon />
+              <IconButton onClick={() => handleSongPlay(song)}>
+                <PlayArrowIcon />
+              </IconButton>
             </div>
             <Typography className="numberIcon" align="center">
               {Number(index) + 1}
