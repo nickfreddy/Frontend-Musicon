@@ -144,7 +144,7 @@ const SongListTableItem = ({ currentPlaying, isOwner, song, handleDelete, handle
       </TableCell>
       <TableCell padding="none" onClick={() => handleSongPlay(song)}>
         <Typography align="center">
-          {song.artistId.name}
+          {song.artistId?.name || "anonymous"}
         </Typography>
       </TableCell >
       <TableCell padding="none" onClick={() => handleSongPlay(song)}>

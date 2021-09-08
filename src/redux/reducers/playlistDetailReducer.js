@@ -114,6 +114,12 @@ const playlistDetailReducer = (state = initialState, action) => {
       data:{
         songs: action.payload
       }
+    };
+    case type.SET_SONG_ONLY_TO_PLAYLIST_DETAIL: return {
+      ...state,
+      data: {
+        songs: action.payload
+      }
     }
     case type.RESET_PLAYLIST_DETAIL: return initialState
     default: return state

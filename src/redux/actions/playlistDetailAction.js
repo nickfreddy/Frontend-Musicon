@@ -58,3 +58,13 @@ export const unsetLikeSongInPlaylistDetailAction = (songId) => ({
   type: type.UNSET_LIKE_SONG_IN_PLAYLIST_DETAIL,
   payload: songId
 })
+
+/**
+ * 
+ * @param {array} songs 
+ * @returns 
+ */
+export const setSongOnlyToPlaylistDetailAction = (songs) => ({
+  type: type.SET_SONG_ONLY_TO_PLAYLIST_DETAIL,
+  payload: songs
+})

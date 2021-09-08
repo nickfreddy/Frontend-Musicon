@@ -1,6 +1,9 @@
 import React from "react";
 // import { useHistory, useRouteMatch } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import playIcon from '../../../assets/img/playSongIcon.svg';
+import pauseIcon from '../../../assets/img/pauseIcon.svg';
+
 import {
   Card,
   CardActionArea,
@@ -8,8 +11,10 @@ import {
   CardContent,
   Typography,
   makeStyles,
+  IconButton,
 } from "@material-ui/core";
 import { setCurrentPlayingAction, setPlayCurrentPlayingAction } from "../../../redux/actions/currentPlayingAction";
+import usePlayerAction from "../../../functions/usePlayerAction";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -48,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
     height: 120,
     display: "flex",
     justifyContent: "flex-start",
-    width: '100%'
+    width: '100%',
+    position: 'relative',
     // [theme.breakpoints.down("sm")]: {
     //   width: "80vw",
     // },
@@ -80,17 +86,52 @@ const useStyles = makeStyles((theme) => ({
       width: "60%",
     },
   },
+  playIcon: {
+    position: 'absolute',
+    bottom: '0px',
+    right: '0px'
+  }
 }));
 
-const BrowseSongCard = ({songDetails, songImage, songTitle, albumTitle, songUrl }) => {
+const BrowseSongCard = ({ songDetails, songImage, songTitle, albumTitle, songUrl }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const playerAction = usePlayerAction();
+  const currentPlaying = useSelector(state => state.currentPlaying)
   // const history = useHistory();
   // const { url } = useRouteMatch();
 
   const handleSongPlay = (songData) => {
-    dispatch(setCurrentPlayingAction(songData));
-    dispatch(setPlayCurrentPlayingAction());
+    if (currentPlaying.songDetail?._id === songDetails._id) {
+      if (currentPlaying.isPlaying) return null
+      dispatch(setCurrentPlayingAction(songData));
+      dispatch(setPlayCurrentPlayingAction());
+    } else {
+      dispatch(setCurrentPlayingAction(songData));
+      dispatch(setPlayCurrentPlayingAction());
+    }
+  }
+
+  const renderPlayButton = () => {
+    if (currentPlaying.songDetail?._id === songDetails._id) {
+      if (currentPlaying.isPlaying) return (
+        <IconButton onClick={playerAction.handlePauseAction} className={classes.playIcon}>
+          <img src={pauseIcon} alt="..." />
+        </IconButton>
+      );
+      return (
+        <IconButton className={classes.playIcon}>
+          <img src={playIcon} alt="..." />
+        </IconButton>
+      )
+
+    } else {
+      return (
+        <IconButton className={classes.playIcon}>
+          <img src={playIcon} alt="..." />
+        </IconButton>
+      )
+    }
   }
   return (
     <Card className={classes.card}>
@@ -116,6 +157,8 @@ const BrowseSongCard = ({songDetails, songImage, songTitle, albumTitle, songUrl 
             {albumTitle}
           </Typography>
         </CardContent>
+        {renderPlayButton()}
+
       </CardActionArea>
     </Card>
   );

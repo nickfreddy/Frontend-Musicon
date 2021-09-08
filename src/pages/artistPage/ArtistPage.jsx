@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getArtistAlbumAction, resetArtistAlbumAction } from "../../redux/actions/artistAlbumAction";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { makeStyles, Container, Typography, Divider } from "@material-ui/core";
 import BrowseAlbumCard from "../browsePage/browsePageComponent/BrowseAlbumCard";
 import { Skeleton } from "@material-ui/lab";
@@ -26,6 +26,31 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: '200px',
         borderRadius: '8px'
+      },
+      '& .artist-name-skeleton': {
+        width: '300px',
+        margin: theme.spacing(0, 'auto', 1),
+        // margin: theme.spacing(0, 0, 1),
+        height: '50px',
+        borderRadius: '8px',
+        [theme.breakpoints.up('md')]: {
+          width: '400px',
+          height: '65px',
+          margin: theme.spacing(0, 'auto', 3),
+        }
+      },
+      '& .artist-songs-skeleton':{
+        width: '100%',
+        // margin: theme.spacing(0, 'auto', 1),
+        // margin: theme.spacing(0, 0, 1),
+        height: '20px',
+        marginTop: theme.spacing(0.6),
+        borderRadius: '8px',
+        [theme.breakpoints.up('md')]: {
+          // width: '400px',
+          // height: '65px',
+          // margin: theme.spacing(0, 'auto', 3),
+        }
       },
       '& .artist-img': {
         width: '200px',
@@ -71,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
   linedText: {
     display: 'flex',
     // padding: theme.spacing(0, 3),
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       padding: theme.spacing(0, 3),
     },
     alignItems: 'center',
@@ -121,7 +146,7 @@ const ArtistPage = () => {
   const { artist_id } = useParams();
   const artistAlbum = useSelector((state) => state.artistAlbum);
   const classes = useStyles();
-  const history = useHistory();
+
 
   useEffect(() => {
     dispatch(getArtistAlbumAction(artist_id));
@@ -145,7 +170,7 @@ const ArtistPage = () => {
         albumImage={album.albumImage}
         albumTitle={album.albumTitle}
         albumUrl={album._id}
-        onClick={() => history.push(`/user/browse/album/${album._id}`)}
+        // onClick={() => history.push('/')}
       />
     ))
   }
@@ -172,11 +197,21 @@ const ArtistPage = () => {
           }
         </div>
         <div className="artist-info">
-          <Typography align="center" variant="h2" > {artistAlbum.data.name} </Typography>
+          {artistAlbum.loading ?
+            <Skeleton variant="rect" className={"artist-name-skeleton"} />
+            :
+            <Typography align="center" variant="h2" > {artistAlbum.data.name} </Typography>
+          }
           <div className={classes.linedText}>
-            <span className="line"></span>
-            <Typography align="right" variant="h5"> {artistAlbum.data.albums?.length} Album </Typography>
-            <span className="line"></span>
+            {artistAlbum.loading ?
+              <Skeleton variant="rect" className="artist-songs-skeleton"/>
+              :
+              <>
+                <span className="line"></span>
+                <Typography align="right" variant="h5"> {artistAlbum.data.albums?.length} Album </Typography>
+                <span className="line"></span>
+              </>
+            }
           </div>
         </div>
       </div>
