@@ -48,10 +48,18 @@ const ArtistAlbumDetail = () => {
     },
     header: {
       display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       marginBottom: theme.spacing(2),
       padding: theme.spacing(5, 2),
       background: alpha("#1F1D2B", 0.8),
       borderRadius: '8px',
+      [theme.breakpoints.up('md')]: {
+
+      },
+      [theme.breakpoints.up('md')]: {
+        flexDirection: 'row'
+      },
       '& > .header-img': {
         // width: "12%",
 
@@ -63,17 +71,37 @@ const ArtistAlbumDetail = () => {
         }
       },
       '& > .header-description': {
-
+        '& > .album-title': {
+          textAlign: 'center',
+          [theme.breakpoints.up('md')]: {
+            textAlign: 'left'
+          }
+        },
         '& > .header-sub-description': {
-          display: 'flex',
-          alignItems: 'center'
+          textAlign: 'center',
+          [theme.breakpoints.up('sm')]: {
+            display: 'flex',
+            alignItems: 'center',
+          }
+        },
+        '& .song-total':{
+          textAlign: 'center',
+          [theme.breakpoints.up('sm')]:{
+          },
+          [theme.breakpoints.up('md')]:{
+            textAlign: 'left'
+          }
         }
       }
 
     },
-    divider: {
-      marginBottom: theme.spacing(2)
+    dotSpacer:{
+      display: 'none',
+      [theme.breakpoints.up('sm')]:{
+        display: 'block'
+      }
     }
+
   }))
   const classes = useStyles();
 
@@ -95,15 +123,15 @@ const ArtistAlbumDetail = () => {
             <img src={selectPhotoSource(albumImage, sourceUrl)} alt="..." />
           </div>
           <div className="header-description">
-            <Typography variant="h4">{albumTitle}</Typography>
+            <Typography className="album-title" variant="h4">{albumTitle}</Typography>
             <div className="header-sub-description">
-              <Typography variant="h6">{`By ${artistId.name}`}</Typography>
-              <DotSpacer />
+              <Typography variant="h6">{`By ${artistId?.name || 'anonymous'}`}</Typography>
+              <DotSpacer className={classes.dotSpacer} />
               <Typography variant="h6">{`on ${formatDate(releaseDate)}`}</Typography>
-              <DotSpacer />
+              <DotSpacer className={classes.dotSpacer} />
               <Typography variant="h6">{`About ${secondsToHMS(albumDuration)}`}</Typography>
             </div>
-            <Typography>{`${songs.length} Songs`}</Typography>
+            <Typography className="song-total">{`${songs.length} Songs`}</Typography>
           </div>
         </div>
       </div>

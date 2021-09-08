@@ -11,10 +11,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const DotSpacer = () => {
+const DotSpacer = ({className}) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${className}`}>
     </div>
   )
 }

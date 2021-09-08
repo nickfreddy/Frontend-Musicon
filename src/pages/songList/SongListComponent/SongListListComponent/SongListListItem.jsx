@@ -85,6 +85,9 @@ const useStyles = makeStyles(theme => ({
     margin: '0 auto',
     height: '25px',
     // }
+  },
+  loveButtonNotOwner:{
+    padding: theme.spacing(1)
   }
 }))
 
@@ -176,7 +179,7 @@ const SongListListItem = ({
               <MoreVertIcon />
             </IconButton>
             :
-            <LoveButton songId={song._id} isLiked={song.isLiked} />
+            <LoveButton className={classes.loveButtonNotOwner} songId={song._id} isLiked={song.isLiked} />
           }
         </ListItemSecondaryAction>
       </ListItem>

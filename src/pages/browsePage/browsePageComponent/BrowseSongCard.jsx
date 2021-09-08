@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
     background: "#1F1D2B",
     borderRadius: "8px",
     height: 120,
+    position: 'relative',
+
     [theme.breakpoints.down("sm")]: {
       // width: "80vw",
       width: "100%",
@@ -54,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "flex-start",
     width: '100%',
-    position: 'relative',
     // [theme.breakpoints.down("sm")]: {
     //   width: "80vw",
     // },
@@ -120,14 +121,14 @@ const BrowseSongCard = ({ songDetails, songImage, songTitle, albumTitle, songUrl
         </IconButton>
       );
       return (
-        <IconButton className={classes.playIcon}>
+        <IconButton onClick={() => handleSongPlay(songDetails)} className={classes.playIcon}>
           <img src={playIcon} alt="..." />
         </IconButton>
       )
 
     } else {
       return (
-        <IconButton className={classes.playIcon}>
+        <IconButton onClick={() => handleSongPlay(songDetails)} className={classes.playIcon}>
           <img src={playIcon} alt="..." />
         </IconButton>
       )
@@ -157,9 +158,8 @@ const BrowseSongCard = ({ songDetails, songImage, songTitle, albumTitle, songUrl
             {albumTitle}
           </Typography>
         </CardContent>
-        {renderPlayButton()}
-
       </CardActionArea>
+      {renderPlayButton()}
     </Card>
   );
 };
