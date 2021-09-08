@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(2),
       '& .MuiTypography-root:first-child':{
         fontSize: '3em',
-        textShadow: '0 0 20px #0065DA'
+        textShadow: '0 0 20px #4399FD'
       }
     }
   },

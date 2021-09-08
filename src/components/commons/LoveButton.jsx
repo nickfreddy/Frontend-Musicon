@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { CircularProgress, IconButton, makeStyles } from '@material-ui/core'
-import loveAction from '../../assets/img/loveIcon.svg'
-import chekedLoveAction from '../../assets/img/loveChecked.svg';
-import disabledLoveIcon from '../../assets/img/disabledLoveAction.svg'
+import loveAction from '../../assets/img/loveIcon2.svg'
+import chekedLoveAction from '../../assets/img/loveIcon2filled.svg';
+import disabledLoveIcon from '../../assets/img/loveIcon2disabled.svg'
 import {
   connect,
   useDispatch,
@@ -15,6 +15,9 @@ import { setLikeCurrentPlayingAction, unsetLikeCurrentPlaylingAction } from '../
 const useStyles = makeStyles(theme => ({
   root:{
     // display: 'block'
+    '& img':{
+      width: '20px'
+    }
   }
 }))
 

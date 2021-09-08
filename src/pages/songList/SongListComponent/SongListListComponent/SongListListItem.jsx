@@ -50,11 +50,15 @@ const useStyles = makeStyles(theme => ({
   inline: {
     display: 'inline'
   },
+
+  menuItem:{
+    justifyContent: 'center'
+  },
   listIcon: {
     minWidth: theme.spacing(3)
   },
   menuIcon: {
-    minWidth: theme.spacing(4)
+    minWidth: theme.spacing(0),
   },
   songImageDisplay: {
     width: '60px',
@@ -73,9 +77,9 @@ const useStyles = makeStyles(theme => ({
   },
   loveButton: {
     // '&.MuiIconButton-root': {
-    padding: 0,
+    padding: '0',
     margin: '0 auto',
-    height: '20px'
+    height: '25px',
     // }
   }
 }))
@@ -180,13 +184,13 @@ const SongListListItem = ({
           horizontal: 'center',
         }}
       >
-        <MenuItem>
+        <MenuItem className={classes.menuItem}>
           <ListItemIcon className={classes.menuIcon}>
             <LoveButton className={classes.loveButton} songId={song._id} isLiked={song.isLiked} />
           </ListItemIcon>
           {/* <ListItemText primary="Like" /> */}
         </MenuItem>
-        <MenuItem onClick={onDelete}>
+        <MenuItem className={classes.menuItem} onClick={onDelete}>
           <ListItemIcon className={classes.menuIcon}>
             <img src={deleteIcon} alt="..." />
           </ListItemIcon>
