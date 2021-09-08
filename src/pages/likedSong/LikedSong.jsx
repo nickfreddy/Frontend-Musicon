@@ -9,10 +9,10 @@ import usePlayerAction from '../../functions/usePlayerAction';
 
 
 const useStyles = makeStyles(theme => ({
-  root:{
-    '& .liked-header':{
+  root: {
+    '& .liked-header': {
       marginBottom: theme.spacing(2),
-      '& .MuiTypography-root:first-child':{
+      '& .MuiTypography-root:first-child': {
         fontSize: '3em',
         textShadow: '0 0 20px #4399FD'
       }
@@ -37,22 +37,27 @@ const LikedSong = () => {
 
   useEffect(() => {
     dispatch(getUserLikedSongsAction(user_id))
-  }, [dispatch, user_id, playlistDetailData]);
+  }, [
+    dispatch,
+    user_id,
+    playlistDetailData
+  ]);
 
 
   if (!playlistDetailData.songs) return (
     <div className={classes.pleaseWait}>
       <CircularProgress />
-    </div>)
+    </div>
+  )
   return (
     <Container className={classes.root}>
       <div className="liked-header">
         <Typography align="center">Your Liked Songs</Typography>
-        <LinedText text={`${playlistDetail.data.songs?.length || 0} songs`} lineLeft={true} lineRight={true}/>
+        <LinedText text={`${playlistDetail.data.songs?.length || 0} songs`} lineLeft={true} lineRight={true} />
       </div>
       <div>
-      <SongListTable isOwner={false} data={playlistDetailData.songs} handleDelete={() => {}} handleSongPlay={playerAction.handleSongPlay} handleAddNewSong={()=>{}} />
-      <SongListList isOwner={false} data={playlistDetailData.songs} handleDelete={() => {}} handleSongPlay={playerAction.handleSongPlay} />
+        <SongListTable isOwner={false} data={playlistDetailData.songs} handleDelete={() => { }} handleSongPlay={playerAction.handleSongPlay} handleAddNewSong={() => { }} />
+        <SongListList isOwner={false} data={playlistDetailData.songs} handleDelete={() => { }} handleSongPlay={playerAction.handleSongPlay} />
       </div>
     </Container>
   )

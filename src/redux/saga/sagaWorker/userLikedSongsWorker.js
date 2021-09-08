@@ -13,8 +13,8 @@ export function* getUserLikedSongsWorker(action){
     yield put(setLoadingPlaylistDetailAction())
     const token = localStorage.getItem('token');
     const response = yield getUserLikedSongs(action.payload,token);
-    if(response.data){
-      yield put(setUserLikedSongsAction(response.data.songs));
+    if(response.data.data){
+      yield put(setUserLikedSongsAction(response.data.data));
       yield put(unsetLoadingPlayistDetailAction())
       action.callback();
     }else{
