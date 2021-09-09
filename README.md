@@ -2,11 +2,11 @@
 # DEMO INSTRUCTION
 
 1. [x] Landing page (button functionality) 
-2. [x] login normal
-3. [x] register normal, -> after register check email
-4. [x] login with google
-5. [x] login with facebook
-6. [ ] --NEED FIXING CREATE PLAYLIST MODAL--   homepage (play new release song and recomended song), -> then create new playlist then open owned playlist and play song from it
+2. [x] register normal, -> after register check email
+3. [x] login with google
+4. [x] login with facebook
+5. [x] login normal
+6. [ ] homepage (play new release song and recomended song), -> then create new playlist then open owned playlist and play song from it
 8. [ ] Browse Functionality (search bar)
 9. [ ] Browse Page (play song from browse page)
 10. [ ] Browse Page (open artist Detail From Browse Page, -> then open album details form artist page)
