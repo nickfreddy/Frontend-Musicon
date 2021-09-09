@@ -5,7 +5,9 @@ import rootSaga from "./saga/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancer = compose;
+
 // const composeEnhancer = compose;
 
 

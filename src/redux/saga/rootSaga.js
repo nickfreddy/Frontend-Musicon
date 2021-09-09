@@ -1,4 +1,6 @@
 import { all } from "redux-saga/effects";
+import { getAlbumDetailsWatcher } from "./sagaWatcher/albumDetailsWatcher";
+import { getArtistAlbumWatcher } from "./sagaWatcher/getArtistAlbumWatcher";
 import { getNewReleaseSongWatcher } from "./sagaWatcher/newReleaseSongWatcher";
 import { 
   addSongToPlaylistWatcher, 
@@ -10,6 +12,7 @@ import { getPlaylistWatcher } from "./sagaWatcher/playlistWatcher";
 import { getRatingCurrentPlaylistWatcher, postRatingCurrentPlaylistWatcher } from "./sagaWatcher/ratingCurrentPlaylistWatcher";
 import { getRecomendedSongWatcher } from "./sagaWatcher/recomendedSongWatcher";
 import { getSongLyricWatcher } from "./sagaWatcher/songLyricWatcher";
+import { getUserLikedSongsWatcher } from "./sagaWatcher/userLikedSongWatcher";
 import { 
   deleteUserPlaylistWatcher, 
   getUserPlaylistWatcher, 
@@ -19,6 +22,8 @@ import { getUserTopArtistWatcher } from "./sagaWatcher/userTopArtistWatcher";
 import { getUserTopSongsWatcher } from "./sagaWatcher/userTopSongsWatcher";
 import { 
   getLogedInUserWatcher, 
+  postFacebookDataUserWatcher, 
+  postGoogleDataUserWatcher, 
   signInUserWatcher, 
   signUpUserWatcher, 
   updateUserWatcher
@@ -30,6 +35,9 @@ export default function* rootSaga(){
     signUpUserWatcher(),
     signInUserWatcher(),
     getLogedInUserWatcher(),
+    updateUserWatcher(),
+    postGoogleDataUserWatcher(),
+    postFacebookDataUserWatcher(),
     getUserPlaylistWatcher(),
     getPlaylistDetailWatcher(),
     postUserPlaylistWatcer(),
@@ -37,14 +45,23 @@ export default function* rootSaga(){
     addSongToPlaylistWatcher(),
     deleteSongFromPlaylistWatcher(),
     updatePlaylistDetailWatcher(),
-    updateUserWatcher(),
+
     getUserTopArtistWatcher(),
+
     getUserTopSongsWatcher(),
+
     getRatingCurrentPlaylistWatcher(),
     postRatingCurrentPlaylistWatcher(),
+
     getPlaylistWatcher(),
     getNewReleaseSongWatcher(),
     getRecomendedSongWatcher(),
-    getSongLyricWatcher()
+
+    getSongLyricWatcher(),
+    
+    getArtistAlbumWatcher(),
+    getAlbumDetailsWatcher(),
+
+    getUserLikedSongsWatcher()
   ])
 }

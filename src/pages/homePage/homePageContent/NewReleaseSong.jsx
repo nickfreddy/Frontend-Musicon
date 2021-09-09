@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { makeStyles, Box, Typography } from "@material-ui/core";
-import SongCard from "./SongCard";
+// import SongCard from "./SongCard";
 import Collapse from "@material-ui/core/Collapse";
 import { Skeleton } from "@material-ui/lab";
+import BrowseSongCard from "../../browsePage/browsePageComponent/BrowseSongCard";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     display: "flex",
     flexWrap: "wrap",
+    // gap: '1%',
     [theme.breakpoints.down("sm")]: {
       justifyContent: "center",
     },
@@ -31,9 +34,16 @@ const useStyles = makeStyles((theme) => ({
   },
   newReleaseSongSkeleton: {
     height: '120px',
-    width: '325px',
+    // width: '325px',
     borderRadius: '8px',
-    margin: theme.spacing(0.7)
+    margin: theme.spacing(0.7),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '48%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '32%',
+    }
   },
 
   newReleaseSongEmpty: {
@@ -45,18 +55,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewReleaseSong = ({ newReleaseSong }) => {
-  // console.log("NEW RELEASE SONG CONTAIN: ", newReleaseSong);
-
-  // const renderNewReleaseSong = newReleaseSong.data.map((song) => (
-  //   <SongCard
-  //     songDetail={song}
-  //     key={song._id}
-  //     songImage={song.songImage}
-  //     songTitle={song.songTitle}
-  //     albumTitle={song.albumId.albumTitle}
-  //     songUrl={song.id}
-  //   />
-  // ));
 
   const renderNewReleaseSong = (newReleaseSongReducer) => {
     if (newReleaseSongReducer.loading) return (
@@ -72,13 +70,20 @@ const NewReleaseSong = ({ newReleaseSong }) => {
       </div>
     )
     return newReleaseSongReducer.data.map((song) => (
-      <SongCard
-        songDetail={song}
+      // <SongCard
+      //   songDetail={song}
+      //   key={song._id}
+      //   songImage={song.songImage}
+      //   songTitle={song.songTitle}
+      //   albumTitle={song.albumId.albumTitle}
+      //   songUrl={song.id}
+      // />
+      <BrowseSongCard
+        songDetails={song}
         key={song._id}
         songImage={song.songImage}
         songTitle={song.songTitle}
         albumTitle={song.albumId.albumTitle}
-        songUrl={song.id}
       />
     ));
   }

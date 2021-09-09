@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
-  buttonContainer:{
+  buttonContainer: {
     display: 'flex',
 
   },
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
     marginLeft: 'auto'
   },
-  
+
 }))
 
 const validationSchema = yup.object({
@@ -51,7 +51,7 @@ const validationSchema = yup.object({
 })
 
 
-const ChangePasswordForm = () => {
+const ChangePasswordForm = ({ disabled }) => {
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -151,6 +151,7 @@ const ChangePasswordForm = () => {
       </InfoBar>
 
       <TextField
+        disabled={disabled}
         type={showCurrentPassword ? "text" : "password"}
         fullWidth
         className={classes.textInput}
@@ -174,6 +175,7 @@ const ChangePasswordForm = () => {
         }}
       />
       <TextField
+        disabled={disabled}
         type={showNewPassword ? "text" : "password"}
         fullWidth
         className={classes.textInput}
@@ -198,6 +200,7 @@ const ChangePasswordForm = () => {
       />
 
       <TextField
+        disabled={disabled}
         type={showConfirmPassword ? "text" : "password"}
         fullWidth
         className={classes.textInput}
@@ -221,7 +224,13 @@ const ChangePasswordForm = () => {
         }}
       />
       <div className={classes.buttonContainer}>
-        <RoundedButton startIcon={loading && <CircularProgress size={20} />} type="submit" className={classes.submitButton} variant="primary">Save Changes</RoundedButton>
+        <RoundedButton
+          disabled={disabled}
+          startIcon={loading && <CircularProgress size={20} />}
+          type="submit"
+          className={classes.submitButton}
+          variant="primary"
+        >Save Changes</RoundedButton>
       </div>
 
     </form>

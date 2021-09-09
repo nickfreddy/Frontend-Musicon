@@ -9,18 +9,22 @@ import { makeStyles } from '@material-ui/core';
 import plusIcon from '../../assets/img/carbon_add.svg'
 import ConfirmationDialog from '../../components/ConfirmationDialog/ConfirmationDialog';
 import AddSongSearcBar from './SongListComponent/AddSongSearcBar';
-import { 
-  useDispatch, 
+import {
+  useDispatch,
   // useSelector 
 } from 'react-redux';
-import { getPlaylistDetailAction, resetPlaylistDetailAction } from '../../redux/actions/playlistDetailAction';
+import {
+  getPlaylistDetailAction,
+  // resetPlaylistDetailAction,
+  resetPlaylistDetailExceptSongsAction
+} from '../../redux/actions/playlistDetailAction';
 import { deleteUserPlaylistAction } from '../../redux/actions/userPlaylistAction';
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { deleteSongFromPlaylistAction } from '../../redux/actions/playlistDetailAction';
-import { 
-  setCurrentPlayingAction, 
-  setPlayCurrentPlayingAction, 
+import {
+  setCurrentPlayingAction,
+  setPlayCurrentPlayingAction,
   // unsetPlayCurrentPlayingAction 
 } from '../../redux/actions/currentPlayingAction';
 
@@ -125,9 +129,8 @@ const SongList = ({ userPlaylist, currentPlaying, playlistDetail }) => {
 
 
   const handleSongPlay = (songData) => {
-    console.log(`SONG BE PLAYED IS`, songData);
     dispatch(setCurrentPlayingAction(songData));
-    if(! currentPlaying.isPlaying){
+    if (!currentPlaying.isPlaying) {
       dispatch(setPlayCurrentPlayingAction());
     }
   }
@@ -142,10 +145,10 @@ const SongList = ({ userPlaylist, currentPlaying, playlistDetail }) => {
   useEffect(() => {
     if (!playlistDetail.data.author) return; //check if data is fullfiled, if not skip this effect
     if (playlistDetail.data.author?._id === user_id) {
-      console.log('I AM THE OWNER OF THIS PLAYLIST');
+      // console.log('I AM THE OWNER OF THIS PLAYLIST');
       setIsOwner(true)
     } else {
-      console.log('I AM NOT THE OWNER OF THIS PLAYLIST')
+      // console.log('I AM NOT THE OWNER OF THIS PLAYLIST')
       setIsOwner(false)
     }
   }, [playlistDetail.data.author, playlistDetail.data.author?._id, user_id])
@@ -153,7 +156,7 @@ const SongList = ({ userPlaylist, currentPlaying, playlistDetail }) => {
   //CLEANUP
   useEffect(() => {
     return () => {
-      dispatch(resetPlaylistDetailAction());
+      dispatch(resetPlaylistDetailExceptSongsAction());
     }
   }, [dispatch])
 
@@ -164,16 +167,16 @@ const SongList = ({ userPlaylist, currentPlaying, playlistDetail }) => {
   return (
     <Container>
       <PlaylistHeader
-        nowLocation = {nowLocation === "playlist" ? "Playlist" : "Created Playlist"}
+        nowLocation={nowLocation === "playlist" ? "Playlist" : "Created Playlist"}
         playlistId={playlist_id}
         playlistTitle={playlistDetailData.playlistTitle}
         author={playlistDetailData.author}
         description={playlistDetailData.description}
         // duration={playlistDetailData.playlistDuration}
-        duration={playlistDetailData.songs.reduce((acc, cur) => { 
+        duration={playlistDetailData.songs.reduce((acc, cur) => {
           // console.log('INI DARI REDUCER', cur.songDuration);
           return (acc + cur.songDuration)
-        },0)}
+        }, 0)}
 
         photo={playlistDetailData.playlistImage}
         totalSongs={playlistDetailData.songs.length}

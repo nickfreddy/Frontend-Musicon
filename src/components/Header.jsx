@@ -18,10 +18,13 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { logOutUserAction } from "../redux/actions/userAction";
+import { logOutUserAction, unsetFacebookDataUserAction, unsetGoogleDataUserAction } from "../redux/actions/userAction";
 import { toggleDrawerOpenAction } from "../redux/actions/drawerAction";
-import { limitString } from "../tools/stringManipulation";
+// import { limitString } from "../tools/stringManipulation";
 import { sourceUrl } from "../redux/Api/setupAPI";
+import { useGoogleLogout } from "react-google-login";
+import { selectPhotoSource } from "../tools/checkPhotoSource";
+import useLocalStorage from "../functions/useLocalStorage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +33,11 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    // marginRight: theme.spacing(2),
     display: "flex",
+    [theme.breakpoints.up("sm")]: {
+      marginRight: theme.spacing(1),
+    },
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
@@ -57,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     },
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      marginRight: theme.spacing(4),
+      marginRight: theme.spacing(2),
       width: "100%",
     },
   },
@@ -100,8 +106,12 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionMobile: {
     display: "flex",
-    '& .MuiIconButton-root':{
-      paddingRight: theme.spacing(0)
+    '& .MuiIconButton-root': {
+      padding: theme.spacing(0),
+      marginLeft: theme.spacing(1.5),
+      [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(1),
+      },
     },
     [theme.breakpoints.up("md")]: {
       display: "none",
@@ -118,8 +128,8 @@ const useStyles = makeStyles((theme) => ({
   dividerSpacing: {
     margin: theme.spacing(1),
   },
-  blueTringale:{
-    width:'0',
+  blueTringale: {
+    width: '0',
     height: '0',
     borderTop: '50px solid #4399FD',
     borderRight: '50px solid transparent',
@@ -129,11 +139,17 @@ const useStyles = makeStyles((theme) => ({
     bottom: '-8px',
     left: '-32px',
     display: 'none',
-    [theme.breakpoints.up('md')]:{
+    [theme.breakpoints.up('md')]: {
       display: 'block'
     }
-    
-  }
+
+  },
+  limitString:{
+    whiteSpace: "nowrap",
+    overflow: 'hidden',
+    width: 140,
+    textOverflow: 'ellipsis'
+  },
 }));
 
 export default function Header() {
@@ -141,12 +157,25 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
-  const {url} = useRouteMatch()
+  const { url } = useRouteMatch()
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const dispatch = useDispatch()
   const user = useSelector(state => state.user);
+  const appLocalStorage = useLocalStorage();
+  const onLogoutSuccess = res => {
+    // console.log('GOOGLE USER LOGOUT SUCCESFULLY', res);
+  }
 
+  const onFailure = res => {
+    // console.log('GOOGLE USER FAILED TO LOGOUT')
+  }
+
+  const { signOut } = useGoogleLogout({
+    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    onLogoutSuccess,
+    onFailure
+  })
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -167,22 +196,33 @@ export default function Header() {
 
   const handleLogOutUser = () => {
     dispatch(logOutUserAction());
+    dispatch(unsetFacebookDataUserAction());
+    dispatch(unsetGoogleDataUserAction());
+    appLocalStorage.removeLoginMethod();
+    signOut();
+    if (window.FB) {
+      window.FB.logout();
+    }
     history.push('/');
+    handleMenuClose();
+
   }
 
   const routeToProfilePage = () => {
     history.push(`${url}/profile`);
+    handleMenuClose();
   }
 
   const routeToAccountPage = () => {
     history.push(`${url}/account`)
+    handleMenuClose();
   }
 
   const handleSearchChange = (e) => {
     // console.log(e.target.value);
     history.push(`${url}/browse?pattern=${e.target.value}`)
   }
-  
+
   const handleToggleDrawer = () => {
     dispatch(toggleDrawerOpenAction());
   }
@@ -229,13 +269,19 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Avatar className={classes.avatar} src={sourceUrl+user.data.photo}/>
+        <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)} />
         <div>
-          <Typography variant="subtitle1" className={classes.bold}>
+          {/* <Typography variant="subtitle1" className={classes.bold}>
             {limitString(user.data.fullname, 20)}
+          </Typography> */}
+          <Typography variant="subtitle1" className={`${classes.bold} ${classes.limitString}`}>
+            {user.data.fullname}
           </Typography>
-          <Typography variant="body2" className={classes.spacing}>
+          {/* <Typography variant="body2" className={classes.spacing}>
             {limitString(user.data.email, 21)}
+          </Typography> */}
+          <Typography variant="body2" className={`${classes.spacing} ${classes.limitString}`}>
+            {user.data.email}
           </Typography>
         </div>
       </MenuItem>
@@ -289,12 +335,17 @@ export default function Header() {
             />
           </div>
           <div className={classes.sectionDesktop}>
-            <Avatar className={classes.avatar} src={sourceUrl+user.data.photo}/>
+            <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)} />
             <div>
-              <Typography variant="subtitle1" className={classes.bold}>
+              {/* <Typography variant="subtitle1" className={classes.bold}>
                 {limitString(user.data.fullname, 17)}
+              </Typography> */}
+              <Typography variant="subtitle1" className={`${classes.bold} ${classes.limitString}`}>
+                {user.data.fullname}
               </Typography>
-              <Typography variant="body2">{limitString(user.data.email, 21)}</Typography>
+              {/* <Typography variant="body2">{limitString(user.data.email, 21)}</Typography> */}
+              <Typography variant="body2" className={classes.limitString}>{user.data.email}</Typography>
+
             </div>
             <div className={classes.dropdownIcon}>
               <ArrowDropDownIcon
@@ -314,7 +365,7 @@ export default function Header() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <Avatar src={sourceUrl+user.data.photo}/>
+              <Avatar src={selectPhotoSource(user.data.photo, sourceUrl)} />
             </IconButton>
           </div>
         </Toolbar>

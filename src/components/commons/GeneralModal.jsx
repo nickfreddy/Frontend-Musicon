@@ -10,21 +10,34 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     // display: 'flex',
     // justifyContent: 'center',
-    overflowY: 'scroll'
-  },
-  paper: {
-    backgroundColor: "#252836",
-    boxShadow: theme.shadows[5],
-    borderRadius: theme.spacing(1),
-    margin: theme.spacing(4, 'auto'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: theme.spacing(60)
+    overflowY: 'scroll',
+    '& .modal-paper': {
+      backgroundColor: "#252836",
+      boxShadow: theme.shadows[5],
+      borderRadius: theme.spacing(1),
+      margin: theme.spacing(4, 'auto'),
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
+        maxWidth: theme.spacing(60)
+      },
+      [theme.breakpoints.up('md')]: {
+        maxWidth: theme.spacing(80)
+      }
     },
-    [theme.breakpoints.up('md')]: {
-      maxWidth: theme.spacing(80)
-    }
   },
+  // paper: {
+  //   backgroundColor: "#252836",
+  //   boxShadow: theme.shadows[5],
+  //   borderRadius: theme.spacing(1),
+  //   margin: theme.spacing(4, 'auto'),
+  //   width: '100%',
+  //   [theme.breakpoints.up('sm')]: {
+  //     maxWidth: theme.spacing(60)
+  //   },
+  //   [theme.breakpoints.up('md')]: {
+  //     maxWidth: theme.spacing(80)
+  //   }
+  // },
   header: {
     background: "#1F1D2B",
     display: 'flex',
@@ -40,12 +53,12 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function GeneralModal({ isOpen, handleClose, title, children }) {
+export default function GeneralModal({ isOpen, handleClose, title, children, className }) {
   const classes = useStyles();
   return (
     <div>
       <Modal
-        className={classes.modal}
+        className={`${classes.modal} ${className}`}
         open={isOpen}
         onClose={handleClose}
         closeAfterTransition
@@ -55,7 +68,8 @@ export default function GeneralModal({ isOpen, handleClose, title, children }) {
         }}
       >
         <Fade in={isOpen}>
-          <div className={classes.paper}>
+          {/* <div className={classes.paper}> */}
+          <div className="modal-paper">
             <div className={classes.header}>
               <Typography variant="h5">{title}</Typography>
               <IconButton onClick={handleClose}>

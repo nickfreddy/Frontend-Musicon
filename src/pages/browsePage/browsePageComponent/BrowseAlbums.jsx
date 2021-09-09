@@ -17,11 +17,27 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "left",
     },
   },
-  albumsCardSkeleton:{
-    width: 200,
-    height: 230,
+  albumsCardSkeleton: {
     borderRadius: '8px',
-    margin: theme.spacing(0.8)
+    margin: 5,
+    // width: 200,
+    // height: 230,
+    [theme.breakpoints.up("xs")]: {
+      width: '47%',
+      height: 210,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: '31.6%',
+      height: 265,
+    },
+    [theme.breakpoints.up("md")]: {
+      width: '31.6%',
+      height: 248,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: '19%',
+      height: 248,
+    },
   }
 }));
 
@@ -64,7 +80,7 @@ const BrowseAlbums = ({ pattern }) => {
         }));
         setLoading(false);
       } else {
-        console.log("ERROR SETTING DATA TO STATE");
+        // console.log("ERROR SETTING DATA TO STATE");
         setResult({
           data: [],
           error: false,
@@ -73,10 +89,10 @@ const BrowseAlbums = ({ pattern }) => {
         setLoading(false);
       }
     } catch (err) {
-      console.log(
-        "ERROR GET SONG BY TITLE ON BROWSE SONG, DETAILS: ",
-        err.response
-      );
+      // console.log(
+      //   "ERROR GET SONG BY TITLE ON BROWSE SONG, DETAILS: ",
+      //   err.response
+      // );
       setResult((state) => ({
         ...state,
         data: [],
@@ -88,7 +104,7 @@ const BrowseAlbums = ({ pattern }) => {
   };
   useEffect(() => {
     const fetchData = setTimeout(
-      () => getSongByTitle(pattern), // sebenarnya dia getsong by tagName
+      () => getSongByTitle(pattern),
       50
     );
     return () => {
@@ -96,16 +112,13 @@ const BrowseAlbums = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
-  // console.log(result, loading);
-  // console.log("album", result.data);
 
-
-  const dummyData = [1, 2, 3, 4];
+  const dummyData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const renderBrowsedAlbums = (result) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.albumsCardSkeleton} />)
     if (result.data.length === 0) return (
       <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
-        Oops!... Can't find the song...
+        Oops!... Can't find the Album...
       </Typography>
     )
     return result.data.map((data) => (
@@ -121,21 +134,6 @@ const BrowseAlbums = ({ pattern }) => {
 
   return (
     <div className={classes.root}>
-      {/* {result.data.length !== 0 ? (
-        result.data.map((data) => (
-          <BrowseAlbumCard
-            key={data._id}
-            albumImage={data.albumImage}
-            albumTitle={data.albumTitle}
-            albumUrl={data.id}
-            className={classes.albumcard}
-          />
-        ))
-      ) : (
-        <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
-          Oops!... Can't find the album...
-        </Typography>
-      )} */}
       {renderBrowsedAlbums(result)}
     </div>
   );

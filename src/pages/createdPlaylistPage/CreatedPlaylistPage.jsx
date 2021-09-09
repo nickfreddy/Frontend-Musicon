@@ -77,14 +77,10 @@ const CreatedPlaylistPage = ({ userPlaylist }) => {
     }))
   }
   const actionTrueDeleteConfirmation = (_id) => {
-    // alert(`This id ${_id} playList will be deleted`)
     dispatch(deleteUserPlaylistAction(_id, handleCloseDeleteConfirmation));
   }
   //========================================================
 
-  const handleSongPlay = (_id) => {
-    console.log(`This playList with id ${_id} will be played`)
-  }
 
   const handleOpenCreatePlaylistModal = () => {
     dispatch(openCreatePlaylistModalAction())
@@ -98,15 +94,23 @@ const CreatedPlaylistPage = ({ userPlaylist }) => {
   return (
     <Container>
       <Typography className={classes.sectionTitle} variant="h4">Created Playlist</Typography>
-      {/* <Button variant="contained" color="primary" onClick={() => history.push(`${url}/123`)}>Goto Song List</Button> */}
       <div className={classes.buttonContainer}>
         <Button onClick={handleOpenCreatePlaylistModal} startIcon={<img src={addIcon} alt="..." />} variant="contained" color="primary">Create Playlist</Button>
       </div>
 
-      <CreatedPlaylistTable data={userPlaylist.data} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
-      <CreatedPlaylistList data={userPlaylist.data} handleSongPlay={handleSongPlay} handleDelete={handleDelete} handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal} />
+      <CreatedPlaylistTable
+        data={userPlaylist.data}
+        handleDelete={handleDelete}
+        handleOpenCreatePlaylistModal={handleOpenCreatePlaylistModal}
+      />
+
+      <CreatedPlaylistList
+        data={userPlaylist.data}
+        handleDelete={handleDelete}
+      />
 
       <CreatePlaylistModal />
+
       <ConfirmationDialog
         open={deleteConfirmation.open}
         title="Delete Playlist"
@@ -118,17 +122,6 @@ const CreatedPlaylistPage = ({ userPlaylist }) => {
         buttonVariant="danger"
         loading={userPlaylist.loading}
       />
-
-      {/* <ConnectedConfirmationDialog
-        open={deleteConfirmation.open}
-        title="DeletePlaylist"
-        mainText="Are you sure want to delete this Playlist ?"
-        secondaryText="Note: After deletion, the action cannot be undoned"
-        actionTrue={() => actionTrueDeleteConfirmation(deleteConfirmation.idToDelete)}
-        handleClose={handleCloseDeleteConfirmation}
-        buttonOk="Delete"
-        buttonVariant="danger"
-      /> */}
     </Container>
   )
 }

@@ -7,15 +7,18 @@ import { Container, Typography, makeStyles } from "@material-ui/core";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import TitleDivider from "../commons/TitleDivider";
-import { RoundedButton } from "../commons/CstButton";
-import googleIcon from '../../assets/img/grommet-icons_google.svg'
-import facebookIcon from '../../assets/img/logos_facebook.svg'
+// import { RoundedButton } from "../commons/CstButton";
+// import googleIcon from '../../assets/img/grommet-icons_google.svg'
+// import facebookIcon from '../../assets/img/logos_facebook.svg'
 import { closeInfoLoginModalAction, closeRegisterInfoAction } from "../../redux/actions/userAction";
+import GoogleLoginButton from "./GoogleLoginButton";
+import FacebookLoginButton from "./FacebookLoginButton";
+
 
 const useStyles = makeStyles(theme => ({
   formContainer: {
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(5)
   },
   socialButton:{
     position: 'relative',
@@ -71,8 +74,10 @@ const SignModal = () => {
         }
 
         <TitleDivider className={classes.divider}>OR</TitleDivider>
-        <RoundedButton className={classes.socialButton} startIcon={<img src={googleIcon} alt=""/>} fullWidth variant="transparent">Google</RoundedButton>
-        <RoundedButton className={classes.socialButton} startIcon={<img src={facebookIcon} alt=""/>} fullWidth variant="transparent">Facebook</RoundedButton>
+        <GoogleLoginButton handleClose={handleClose}/>
+        <FacebookLoginButton handleClose={handleClose}/>
+        {/* <RoundedButton className={classes.socialButton} startIcon={<img src={googleIcon} alt=""/>} fullWidth variant="transparent">Google</RoundedButton> */}
+        {/* <RoundedButton className={classes.socialButton} startIcon={<img src={facebookIcon} alt=""/>} fullWidth variant="transparent">Facebook</RoundedButton> */}
       </Container>
     </CstModal>
   )

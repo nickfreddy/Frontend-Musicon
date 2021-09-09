@@ -1,4 +1,4 @@
-import { musiconAPI } from "./setupAPI";
+import { musiconAPI, musiconAPIV2 } from "./setupAPI";
 
 export const getPlaylistDetail = (playlistId, token) => musiconAPI.get(`/playlists/${playlistId}`, {
   headers:{
@@ -19,6 +19,18 @@ export const deleteSongFromPlaylist = (playlist_id, song_id, token) => musiconAP
 })
 
 export const updatePlaylistDetail = (playlist_id, formData, token) => musiconAPI.put(`/playlists/update/${playlist_id}`, formData, {
+  headers: {
+    "Authorization": token,
+    "accept": "application/json",
+    "Accept-Language": 'en-US,en;q=0.8',
+    'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+  }
+}) // UPDATE PLAYLIST DETAIL
+
+
+//EXPERIMENT =================
+
+export const updatePlaylistDetailV2 = (playlist_id, formData, token) => musiconAPIV2.put(`/playlists/update/${playlist_id}`, formData, {
   headers: {
     "Authorization": token,
     "accept": "application/json",
