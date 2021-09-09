@@ -302,7 +302,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
       </Menu>
       <CreatePlaylistModal
         photo={photo}
-        title={`Edit ${playlistTitle}`}
+        title={playlistTitle}
         description={description}
         actionUpdate={true}
         playlistId={playlistId}
