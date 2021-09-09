@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory, useRouteMatch } from "react-router";
+import { useHistory } from "react-router";
 import {
   Card,
   CardActionArea,
@@ -63,12 +63,13 @@ const useStyles = makeStyles((theme) => ({
 const BrowseAlbumCard = ({ albumImage, albumTitle, albumUrl }) => {
   const classes = useStyles();
   const history = useHistory();
-  const { url } = useRouteMatch();
   return (
     <Card className={classes.card}>
       <CardActionArea
         className={classes.actionarea}
-        onClick={() => history.push(`${url}/album/${albumUrl}`)}
+        // onClick={() => history.push(`${url}/album/${albumUrl}`)}
+        onClick={() => history.push(`/user/browse/album/${albumUrl}`)}
+
       >
         <CardMedia
           className={classes.media}

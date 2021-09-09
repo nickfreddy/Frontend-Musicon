@@ -21,7 +21,9 @@ const SocketIOClientComponent = () => {
   }
 
   useEffect(() => {
-    const socket = socketIOClient(sourceUrl);
+    const socket = socketIOClient(sourceUrl,{
+      transports: ["websocket", "polling"] // use WebSocket first, if available
+    });
     socket.on('newRating', data => {
       // dispatch(setNotificationAction(data));
       // console.log('DATA DARI PUSH', data);

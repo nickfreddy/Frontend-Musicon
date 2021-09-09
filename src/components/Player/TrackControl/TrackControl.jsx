@@ -57,7 +57,7 @@ const TrackControl = ({ currentPlaying, playlistDetail, currentTime, duration, h
   const classes = useStyles();
   const playlistSong = playlistDetail.data.songs; //its an array of songs in recenly viewed playlist
   const handleInputChange = (e, newValue) => {
-    console.log(newValue)
+    // console.log(newValue)
     handleCurrentTimeChange(parseFloat(newValue));
 
   }
@@ -124,7 +124,7 @@ const TrackControl = ({ currentPlaying, playlistDetail, currentTime, duration, h
 
   const handleNextSongPlay = () => {
     const currentSongIndex = getCurrentSongIndex();
-    console.log('INDEX SONG YANG SEKARANG ADALAH', currentSongIndex);
+    // console.log('INDEX SONG YANG SEKARANG ADALAH', currentSongIndex);
     if (currentSongIndex === playlistSong.length - 1) {
       dispatch(setCurrentPlayingAction(playlistSong[0]))
     } else {
@@ -134,7 +134,7 @@ const TrackControl = ({ currentPlaying, playlistDetail, currentTime, duration, h
 
   const handlePrevSongPlay = () => {
     const currentSongIndex = getCurrentSongIndex();
-    console.log('INDEX SONG YANG SEKARANG ADALAH', currentSongIndex);
+    // console.log('INDEX SONG YANG SEKARANG ADALAH', currentSongIndex);
     if (currentSongIndex === 0) {
       dispatch(setCurrentPlayingAction(playlistSong[playlistSong.length - 1]))
     } else {

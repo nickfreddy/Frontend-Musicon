@@ -11,7 +11,8 @@ import {
   addSongToPlaylist,
   deleteSongFromPlaylist,
   getPlaylistDetail,
-  updatePlaylistDetail
+  updatePlaylistDetail,
+  // updatePlaylistDetailV2
 } from '../../Api/playlistDetailAPI';
 
 export function* getPlaylistDetailWorker(action) {
@@ -92,7 +93,10 @@ export function* updatePlaylistDetailWorker(action){
     }
     data.append("description", description);
     const token = localStorage.getItem('token');
+
     const response = yield updatePlaylistDetail(playlistId, data, token);
+    // const response = yield updatePlaylistDetailV2(playlistId, data, token);
+
     if(response.data.message){
       yield put(updateLocalPlaylistDetailAction(playlistTitle, playlistImage, description));
       yield put(unsetLoadingPlayistDetailAction())

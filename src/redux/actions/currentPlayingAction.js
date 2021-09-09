@@ -10,3 +10,6 @@ export const enableShufflePlayingAction = () => ({type: type.ENABLE_SHUFFLE_PLAY
 export const disableShufflePlayingAction = () => ({type: type.DISABLE_SHUFFLE_PLAYING});
 export const enableRepeatPlayingAction = () => ({type: type.ENABLE_REPEAT_PLAYING});
 export const disableRepeatPlayingAction = () => ({type: type.DISABLE_REPEAT_PLAYING});
+
+export const setLikeCurrentPlayingAction = () => ({type: type.SET_LIKE_CURRENT_PLAYING});
+export const unsetLikeCurrentPlaylingAction = () => ({type: type.UNSET_LIKE_CURRENT_PLAYING});

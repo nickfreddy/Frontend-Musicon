@@ -237,7 +237,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
           <div className={classes.descriptionContent}>
             <Typography>{description}</Typography>
             <div className={classes.moreDetails}>
-              <Typography>{`By ${author.username}`}</Typography>
+              <Typography>{`By ${author?.username || "Anonymous"}`}</Typography>
               <div className={classes.separatorDot}></div>
               <Typography>{`${totalSongs} songs`}</Typography>
               <div className={classes.separatorDot}></div>
@@ -302,7 +302,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
       </Menu>
       <CreatePlaylistModal
         photo={photo}
-        title={`Edit ${playlistTitle}`}
+        title={playlistTitle}
         description={description}
         actionUpdate={true}
         playlistId={playlistId}

@@ -19,11 +19,11 @@ export function* getUserTopSongsWorker(action){
       yield put(setUserTopSongsAction(response.data.songs));
       yield put(unsetLoadingUserTopSongsAction());
     }else{
-      console.log("UNKNOWN DATA STRUCTURE FOUND AT GET USER TOP SONG WORKER");
+      // console.log("UNKNOWN DATA STRUCTURE FOUND AT GET USER TOP SONG WORKER");
       yield put(unsetLoadingUserTopSongsAction());
     }
   }catch(err){
-    console.log('ERROR ON GETTING USER TOP SONGS FROM SERVER DETAIL: ', err);
+    // console.log('ERROR ON GETTING USER TOP SONGS FROM SERVER DETAIL: ', err);
     yield put(unsetLoadingUserTopSongsAction())
   }
 }

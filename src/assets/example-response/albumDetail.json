@@ -1,0 +1,26 @@
+{
+  "songTitle": "Welcome to the Wonderful World of (feat. Sia, Diplo, and Labrinth)",
+  "releaseDate": "2019-04-12",
+  "songDuration": 116,
+  "songImage": "https://i.scdn.co/image/ab67616d0000b2733f159ae07dd556323f39f47b",
+  "audio": "https://musicon-songs.s3.ap-southeast-1.amazonaws.com/and+Labrinth)+-+Welcome+to+the+Wonderful+World+of+(feat.+Sia.mp3",
+  "deleted": false,
+  "_id": "611fb592f343941863d744c3",
+  "albumId": {
+    "albumTitle": "LABRINTH, SIA & DIPLO PRESENT... LSD",
+    "_id": "611fb58bf343941863d74351",
+    "id": "611fb58bf343941863d74351"
+  },
+  "artistId": {
+    "_id": "611fb588f343941863d74320",
+    "name": "Sia",
+    "photo": "https://i.scdn.co/image/ab6761610000e5ebe8637c96a7aa2917eae3c54d",
+    "id": "611fb588f343941863d74320"
+  },
+  "tags": "Welcome to the Wonderful World of (feat. Sia, Diplo, and Labrinth), LABRINTH, SIA & DIPLO PRESENT... LSD, Sia",
+  "createdAt": "2021-08-20T14:00:50.907Z",
+  "updatedAt": "2021-09-03T12:40:13.222Z",
+  "__v": 0,
+  "isLiked": false,
+  "id": "611fb592f343941863d744c3"
+}

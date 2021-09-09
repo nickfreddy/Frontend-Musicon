@@ -13,11 +13,11 @@ export function* getNewReleaseSongWorker (action) { //action.payload isinya valu
       yield put(unsetLoadingNewReleaseSongAction()); // end loading
       yield action.callback();
     }else{
-      console.log('RECEIVED DATA STRUCTURE IS UNKNOWN DETAIL:', response);
+      // console.log('RECEIVED DATA STRUCTURE IS UNKNOWN DETAIL:', response);
       yield put(unsetLoadingNewReleaseSongAction());
     }
   }catch(err){
-    console.log('ERROR ON GET NEW RELEASE SONG WORKER DETAILS:', err.response);
+    // console.log('ERROR ON GET NEW RELEASE SONG WORKER DETAILS:', err.response);
     yield put(unsetLoadingNewReleaseSongAction());
   }
 }

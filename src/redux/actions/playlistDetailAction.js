@@ -4,7 +4,10 @@ export const getPlaylistDetailAction = (playlistId, callback=()=>{}) => ({ type:
 export const setPlaylistDetailAction = (data) => ({ type: type.SET_PLAYLIST_DETAIL, payload: data });
 export const setLoadingPlaylistDetailAction = () => ({ type: type.SET_LOADING_PLAYLIST_DETAIL });
 export const unsetLoadingPlayistDetailAction = () => ({ type: type.UNSET_LOADING_PLAYLIST_DETAIL });
+
+
 export const resetPlaylistDetailAction = () => ({ type: type.RESET_PLAYLIST_DETAIL });
+export const resetPlaylistDetailExceptSongsAction = () => ({type: type.RESET_PLAYLIST_DETAIL_EXCEPT_SONGS});
 
 //ADD SONG TO PLAYLIST ACTION================================
 export const addSongToPlaylistAction = (songDetail, playlistId, callback = () => {}) => ({
@@ -47,3 +50,24 @@ export const updateLocalPlaylistDetailAction = ( playlistTitle, playlistImage, d
     description
   }
 }) //used to update local playlist detail
+
+
+export const setLikeSongInPlaylistDetailAction = (songId) => ({
+  type: type.SET_LIKE_SONG_IN_PLAYLIST_DETAIL,
+  payload: songId
+});
+
+export const unsetLikeSongInPlaylistDetailAction = (songId) => ({
+  type: type.UNSET_LIKE_SONG_IN_PLAYLIST_DETAIL,
+  payload: songId
+})
+
+/**
+ * 
+ * @param {array} songs 
+ * @returns 
+ */
+export const setSongOnlyToPlaylistDetailAction = (songs) => ({
+  type: type.SET_SONG_ONLY_TO_PLAYLIST_DETAIL,
+  payload: songs
+})

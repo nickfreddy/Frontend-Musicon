@@ -10,12 +10,12 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "center",
-    },
-    [theme.breakpoints.up("sm")]: {
-      justifyContent: "left",
-    },
+    justifyContent: "left",
+    // [theme.breakpoints.down("sm")]: {
+    //   justifyContent: "center",
+    // },
+    // [theme.breakpoints.up("sm")]: {
+    // },
   },
   artistCardSkeleton: {
     borderRadius: '8px',
