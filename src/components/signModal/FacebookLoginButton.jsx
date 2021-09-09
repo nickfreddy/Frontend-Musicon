@@ -14,6 +14,7 @@ import {
 } from '../../redux/actions/userAction';
 
 import { useHistory } from 'react-router-dom';
+import useLocalStorage from '../../functions/useLocalStorage';
 
 const useStyles = makeStyles(theme => ({
   facebookLoginButton: {
@@ -62,6 +63,7 @@ const FacebookLoginButton = ({handleClose}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  const appLocalStorage = useLocalStorage();
   const user = useSelector(state => state.user)
   // const [login, setLogin] = useState(false);
   // const [data, setData] = useState({});
@@ -74,7 +76,11 @@ const FacebookLoginButton = ({handleClose}) => {
     if (response.accessToken) {
       // setLogin(true);
       dispatch(setFacebookDataUserAction(response)); //save the original response from facebook
-      dispatch(postFacebookDataUserAction(response, () => {history.push('/user'); handleClose()}));
+      dispatch(postFacebookDataUserAction(response, () => {
+        appLocalStorage.setLoginMethodFacebook();
+        history.push('/user'); 
+        handleClose();
+      }));
 
     } else {
       // setLogin(false);

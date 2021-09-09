@@ -13,11 +13,11 @@ export function* getUserTopArtistWorker(action){
       yield put(setUserTopArtistAction(response.data.artists));
       yield put(unsetLoadingUserTopArtistAction());
     }else{
-      console.log("UNKNOWN DATA STRUCTURE GET FROM SERVER");
+      // console.log("UNKNOWN DATA STRUCTURE GET FROM SERVER");
       yield put(unsetLoadingUserTopArtistAction());
     }
   }catch(err){
-    console.log('ERROR ON GETTING USER TOP ARTIS ON SAGA WORKER DETAILS: ', err);
+    // console.log('ERROR ON GETTING USER TOP ARTIS ON SAGA WORKER DETAILS: ', err);
     yield put(unsetLoadingUserTopArtistAction());
   }
 }

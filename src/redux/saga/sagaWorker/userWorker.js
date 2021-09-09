@@ -138,12 +138,12 @@ export function* postGoogleDataUserWorker(action) {
       localStorage.setItem('user_id', response.data.loggedUser._id);
       action.callback()
     } else {
-      console.log('DATA STRUCTURE IS UNKNOWN IN GOOGLE LOGIN WORKER GOT:', response);
+      // console.log('DATA STRUCTURE IS UNKNOWN IN GOOGLE LOGIN WORKER GOT:', response);
       yield put(unsetLoadingGoogleLoginAction());
     }
 
   } catch (err) {
-    console.log('ERROR POSTING USER DATA LOGGED IN USING GOOGLE TO SERVER, DETAIL : ', err.response)
+    // console.log('ERROR POSTING USER DATA LOGGED IN USING GOOGLE TO SERVER, DETAIL : ', err.response)
     yield put(unsetLoadingGoogleLoginAction());
     yield put(openInfoLoginModalAction(err.response.data.errors[0]));
   }
@@ -170,11 +170,11 @@ export function* postFacebookDataUserWorker(action){
       localStorage.setItem('user_id', response.data.loggedUser._id);
       action.callback()
     }else{
-      console.log('DATA STRUCTURE IS UNKNOW IN postFacebookDataUserWorker, GOT:', response);
+      // console.log('DATA STRUCTURE IS UNKNOW IN postFacebookDataUserWorker, GOT:', response);
       yield put(unsetLoadingFacebookLoginAction());
     }
   }catch(err){
-    console.log('ERROR ON POSTING FACEBOOK USER DATA TO SERVER, DETAIL: ', err.response);
+    // console.log('ERROR ON POSTING FACEBOOK USER DATA TO SERVER, DETAIL: ', err.response);
     yield put(unsetLoadingFacebookLoginAction())
     yield put(openInfoLoginModalAction(err.response.data.errors[0]));
     window.FB.logout();

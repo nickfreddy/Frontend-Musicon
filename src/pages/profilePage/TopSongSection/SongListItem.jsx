@@ -8,19 +8,24 @@ import {
   Typography,
   Menu,
   MenuItem,
-  alpha
+  alpha,
+  IconButton
 } from '@material-ui/core'
 import defaultSongIcon from '../../../assets/img/XMLID1383.svg'
 import deleteIcon from '../../../assets/img/deleteIcon.svg';
 import { connect } from 'react-redux';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import usePlayerAction from '../../../functions/usePlayerAction';
 
 const useStyles = makeStyles(theme => ({
   listItem: {
     background: '#1F1D2B',
     borderRadius: theme.spacing(1),
     marginBottom: theme.spacing(1),
+    '& .numberIcon': {
+      marginLeft: theme.spacing(0.3)
+    },
     '&:hover': {
       background: alpha('#2D304D', 0.9),
       cursor: 'pointer',
@@ -36,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     display: 'inline'
   },
   listIcon: {
-    minWidth: theme.spacing(3)
+    minWidth: theme.spacing(4)
   },
   menuIcon: {
     minWidth: theme.spacing(4)
@@ -47,12 +52,14 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.spacing(1)
   },
   playArrowIcon: {
-    marginLeft: '-0.6em'
+    marginLeft: '-1.2em'
   },
   songNumber: {
     '& .playNumberIcon': {
       display: 'none',
-      textAlign: 'center'
+      // textAlign: 'center'
+      marginLeft: '-0.7em'
+
     }
   }
 }))
@@ -69,26 +76,40 @@ const SongListItem = ({
   onDelete
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const playerAction = usePlayerAction()
   const classes = useStyles();
 
   const handleMenuClose = (e) => {
     setAnchorEl(null)
   }
+
+  const handelPlaySong = () => {
+    if(id !== currentPlaying.songDetail._id){
+        onPlay()
+    }
+  }
   return (
     <div>
-      <ListItem className={`${classes.listItem} ${className}`} onClick={onPlay}>
+      <ListItem className={`${classes.listItem} ${className}`} onClick={handelPlaySong}>
         <ListItemIcon className={classes.listIcon}>
           {/* <Typography>{number}</Typography> */}
           {id === currentPlaying.songDetail._id ?
             <div className={classes.playArrowIcon}>
-              {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+              {currentPlaying.isPlaying ?
+                <IconButton onClick={playerAction.handlePauseAction}>
+                  <PauseIcon />
+                </IconButton>
+                :
+                <IconButton onClick={onPlay}>
+                  <PlayArrowIcon />
+                </IconButton>
+              }
             </div>
             :
             <div className={classes.songNumber}>
-              <div className="playNumberIcon">
+              <IconButton className="playNumberIcon">
                 <PlayArrowIcon />
-              </div>
+              </IconButton>
               <Typography className="numberIcon" align="center">
                 {number}
               </Typography>

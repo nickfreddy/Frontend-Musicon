@@ -12,6 +12,7 @@ import { getPlaylistWatcher } from "./sagaWatcher/playlistWatcher";
 import { getRatingCurrentPlaylistWatcher, postRatingCurrentPlaylistWatcher } from "./sagaWatcher/ratingCurrentPlaylistWatcher";
 import { getRecomendedSongWatcher } from "./sagaWatcher/recomendedSongWatcher";
 import { getSongLyricWatcher } from "./sagaWatcher/songLyricWatcher";
+import { getUserLikedSongsWatcher } from "./sagaWatcher/userLikedSongWatcher";
 import { 
   deleteUserPlaylistWatcher, 
   getUserPlaylistWatcher, 
@@ -60,5 +61,7 @@ export default function* rootSaga(){
     
     getArtistAlbumWatcher(),
     getAlbumDetailsWatcher(),
+
+    getUserLikedSongsWatcher()
   ])
 }

@@ -12,12 +12,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexWrap: "wrap",
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "space-evenly",
-    },
-    [theme.breakpoints.up("md")]: {
-      justifyContent: "left",
-    },
+    justifyContent: "left",
+
+    // [theme.breakpoints.down("sm")]: {
+    //   justifyContent: "space-evenly",
+    // },
+    // [theme.breakpoints.up("md")]: {
+    //   justifyContent: "left",
+    // },
   },
   playlistSkeleton: {
     margin: [[8, 8, 30, 8]],

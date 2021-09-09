@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { makeStyles, Box, Typography } from "@material-ui/core";
-import SongCard from "./SongCard";
+// import SongCard from "./SongCard"; //with no player button
 import Collapse from "@material-ui/core/Collapse";
 import { Skeleton } from "@material-ui/lab";
+import BrowseSongCard from "../../browsePage/browsePageComponent/BrowseSongCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,10 +36,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     margin: theme.spacing(0.7),
     width: '100%',
-    [theme.breakpoints.up('sm')]:{
+    [theme.breakpoints.up('sm')]: {
       width: '48%',
     },
-    [theme.breakpoints.up('lg')]:{
+    [theme.breakpoints.up('lg')]: {
       width: '32%',
     }
   },
@@ -61,18 +62,6 @@ const RecomendedSong = ({ recomendedSong }) => {
     setOpen((prev) => !prev);
   };
 
-  // const renderRecomendedSong = recomendedSong.data.map((song) => (
-  //   <SongCard
-  //     songDetail={song}
-  //     key={song._id}
-  //     songImage={song.songImage}
-  //     songTitle={song.songTitle}
-  //     albumTitle={song.albumId.albumTitle}
-  //     songUrl={song.id}
-  //   />
-  // ));
-
-
 
 
   const renderRecomendedSong = (recomendedSongReducer) => {
@@ -89,14 +78,26 @@ const RecomendedSong = ({ recomendedSong }) => {
       </div>
     )
     return recomendedSongReducer.data.map((song) => (
-      <SongCard
-        songDetail={song}
+
+      // with player button
+      <BrowseSongCard
+        songDetails={song}
         key={song._id}
         songImage={song.songImage}
         songTitle={song.songTitle}
         albumTitle={song.albumId.albumTitle}
-        songUrl={song.id}
       />
+
+      // with no player button
+      // <SongCard
+      //   songDetail={song}
+      //   key={song._id}
+      //   songImage={song.songImage}
+      //   songTitle={song.songTitle}
+      //   albumTitle={song.albumId.albumTitle}
+      //   songUrl={song.id}
+      // />
+
     ));
   }
 

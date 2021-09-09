@@ -70,7 +70,7 @@ const TopArtistSection = () => {
       </div>
     );
     return userTopArtist.data.map(artist => (
-      <ArtistCard key={artist._id} className={classes.artistCard} artistImage={artist.photo} artistName={artist.name} />
+      <ArtistCard key={artist._id} artist={artist} className={classes.artistCard} artistImage={artist.photo} artistName={artist.name} />
     ))
   }
 

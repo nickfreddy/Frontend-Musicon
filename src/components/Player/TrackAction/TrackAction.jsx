@@ -2,10 +2,10 @@ import { IconButton, Slider, makeStyles, withStyles } from '@material-ui/core'
 import React from 'react'
 import volumeIcon from '../../../assets/img/volume1.svg';
 import volumeMuteIcon from '../../../assets/img/volume1mute.svg'
-import loveAction from '../../../assets/img/loveIcon.svg'
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { useDispatch, connect } from 'react-redux';
 import { openLyricModalAction } from '../../../redux/actions/modalAction';
+import LoveButton from '../../commons/LoveButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,7 +51,7 @@ const VolumeSlider = withStyles({
   },
 })(Slider);
 
-const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric, songId }) => {
+const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric, songId, isLiked }) => {
   const dispatch = useDispatch()
 
   const handleOpenLyricModal = () => {
@@ -62,7 +62,7 @@ const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric, songId }) 
     setMuted(state => !state);
   }
 
-
+  // console.log('IS LIKED FROM TRACK ACTION', isLiked);
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -74,9 +74,10 @@ const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric, songId }) 
         step={0.01}
         onChange={(e, newVal) => setVolume(newVal)}
       />
-      <IconButton onClick={() => {console.log(songId)}}>
+      <LoveButton songId={songId} isLiked={isLiked}/>
+      {/* <IconButton onClick={() => {console.log(songId)}}>
         <img src={loveAction} alt="..." />
-      </IconButton>
+      </IconButton> */}
       <IconButton disabled={songLyric.data === "" ? true : false} onClick={handleOpenLyricModal} >
         <LibraryBooksIcon />
       </IconButton>

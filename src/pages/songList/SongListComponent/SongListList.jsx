@@ -146,7 +146,7 @@ const SongListList = ({ isOwner, data, handleSongPlay, handleDelete }) => {
         id={song._id} 
         image={song.songImage} 
         title={song.songTitle} 
-        artist={song.artistId.name} 
+        artist={song.artistId?.name || "anonymous"} 
         duration={song.songDuration} 
         handleSongPlay={handleSongPlay} 
         onDelete={() => handleDelete(song._id)} />

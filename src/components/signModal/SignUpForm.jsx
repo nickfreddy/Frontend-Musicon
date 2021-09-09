@@ -8,6 +8,7 @@ import InfoBar from '../commons/InfoBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUpUserAction } from '../../redux/actions/userAction';
 import { useHistory } from 'react-router-dom';
+import useLocalStorage from '../../functions/useLocalStorage';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -60,6 +61,7 @@ const SignUpForm = ({handleClose}) => {
   const { openRegisterInfoModal, loading, info } = useSelector(state => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const appLocalStorage = useLocalStorage();
 
 
   //FORMIK SETUP
@@ -76,7 +78,11 @@ const SignUpForm = ({handleClose}) => {
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       const {fullName, userName, email, password} = values;
-      dispatch(signUpUserAction(userName,fullName, email, password, () => {history.push('/user'); handleClose()}));
+      dispatch(signUpUserAction(userName,fullName, email, password, () => {
+        appLocalStorage.setLoginMethodNormal();
+        history.push('/user'); 
+        handleClose();
+      }));
       // dispatch(signUpUserAction(userName,fullName, email, password, () => history.push('/'))); //route to landing page
 
     }

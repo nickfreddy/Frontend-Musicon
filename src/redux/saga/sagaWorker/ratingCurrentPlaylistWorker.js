@@ -15,11 +15,11 @@ export function* getRatingCurrentPlaylistWorker(action){
       yield put(unsetLoadingRatingCurrentPlaylistAction());
       action.callback(response.data.rating); // its used
     } else {
-      console.log('RECEIVED RESPONSE IS UNKNOWN FROM GET RATING CURRENT PLAYLIST WORKER', response);
+      // console.log('RECEIVED RESPONSE IS UNKNOWN FROM GET RATING CURRENT PLAYLIST WORKER', response);
       yield put(unsetLoadingRatingCurrentPlaylistAction());
     }
   }catch(err){
-    console.log('ERR ON GET RATING CURRENT PLAYLIST DETAILS:', err);
+    // console.log('ERR ON GET RATING CURRENT PLAYLIST DETAILS:', err);
     yield put(unsetLoadingRatingCurrentPlaylistAction())
   }
 }
@@ -37,11 +37,11 @@ export function* postRatingCurrentPlaylistWorker(action){
       yield put(unsetLoadingRatingCurrentPlaylistAction());
       action.callback();
     }else{
-      console.log('UNKNOWN RESPONSE RECEIVED', response);
+      // console.log('UNKNOWN RESPONSE RECEIVED', response);
       yield put(unsetLoadingRatingCurrentPlaylistAction());
     }
   }catch(err){
-    console.log('ERR ON SET RATING CURRENT PLAYLIST DETAILS: ', err);
+    // console.log('ERR ON SET RATING CURRENT PLAYLIST DETAILS: ', err);
     yield put(unsetLoadingRatingCurrentPlaylistAction())
   }
 }

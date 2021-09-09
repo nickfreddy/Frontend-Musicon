@@ -17,11 +17,11 @@ export function* getRecomendedSongWorker(action) {
       yield put(unsetLoadingRecomendedSongAction());
       yield action.callback();
     } else {
-      console.log('ERROR DATA STRUCTURE IS UNKNOWN DETAILS :', response);
+      // console.log('ERROR DATA STRUCTURE IS UNKNOWN DETAILS :', response);
       yield put(unsetLoadingRecomendedSongAction());
     }
   } catch (err) {
-    console.log('ERROR GETTING DATA RECOMENDED SONG ON SAGA WORKER DETAILS: ', err.response)
+    // console.log('ERROR GETTING DATA RECOMENDED SONG ON SAGA WORKER DETAILS: ', err.response)
     yield put(unsetLoadingRecomendedSongAction())
   }
 }

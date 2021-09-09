@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Warning } from '@material-ui/icons';
 import { useHistory } from 'react-router';
 import { signInUserAction } from '../../redux/actions/userAction';
+import useLocalStorage from '../../functions/useLocalStorage';
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -46,6 +47,7 @@ const SignInForm = ({handleClose}) => {
   const history = useHistory();
   const dispatch = useDispatch()
   const {openLoginInfoModal, loading, info} = useSelector(state => state.user);
+  const appLocalStorage = useLocalStorage();
   //FORMIK SETUP
   const formik = useFormik({
     initialValues: {
@@ -56,7 +58,10 @@ const SignInForm = ({handleClose}) => {
     onSubmit: (values) => {
       // alert(JSON.stringify(values, null, 2));
       const {userNameOrEmail, password} = values;
-      dispatch(signInUserAction(userNameOrEmail, password, () => {history.push('/user'); handleClose()}));
+      dispatch(signInUserAction(userNameOrEmail, password, () => {
+        appLocalStorage.setLoginMethodNormal();
+        history.push('/user'); 
+        handleClose()}));
       // dispatch(signInUserAction(userNameOrEmail, password, () => history.push('/'))); //route to landing page
 
     }

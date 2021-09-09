@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const SongListTable = ({isOwner, data, handleDelete, handleSongPlay, handleAddNewSong }) => {
+const SongListTable = ({ isOwner, data, handleDelete, handleSongPlay, handleAddNewSong }) => {
   const classes = useStyles();
 
   // const combineIconAndTitle = (icon, title) => (
@@ -101,14 +101,20 @@ const SongListTable = ({isOwner, data, handleDelete, handleSongPlay, handleAddNe
     if (data.length === 0) return (
       <TableRow className={classes.tableRowContentEmpty}>
         <TableCell colSpan={5}>
-          <Typography variant="h6" align="center">Let's find song for your playlist,</Typography>
-          <Typography variant="h6" align="center">Please click <span className={classes.spanLink} onClick={handleAddNewSong}>Add Song</span> to add new song,</Typography>
+          {isOwner ?
+            <>
+              <Typography variant="h6" align="center">Let's find song for your playlist,</Typography>
+              <Typography variant="h6" align="center">Please click <span className={classes.spanLink} onClick={handleAddNewSong}>Add Song</span> to add new song,</Typography>
+            </>
+            :
+            <Typography variant="h6" align="center">This playlist has no any song</Typography>
+          }
         </TableCell>
       </TableRow>
     )
 
     return data.map((song, index) => (
-      <SongListTableItem isOwner={isOwner} handleDelete={handleDelete} handleSongPlay={handleSongPlay} song={song} key={index} index={index}/>
+      <SongListTableItem isOwner={isOwner} handleDelete={handleDelete} handleSongPlay={handleSongPlay} song={song} key={index} index={index} />
       // <TableRow key={index} className={classes.tableRowContent}>
       //   <TableCell padding="none" onClick={() => handleSongPlay(song._id)}>
       //     <Typography align="center">
@@ -146,9 +152,7 @@ const SongListTable = ({isOwner, data, handleDelete, handleSongPlay, handleAddNe
             <TableCell align="left">TITLE</TableCell>
             <TableCell align="center">ARTIST</TableCell>
             <TableCell align="center">DURATION</TableCell>
-            {isOwner &&
             <TableCell align="center">ACTION</TableCell>
-            }
           </TableRow>
         </TableHead>
         <TableBody>

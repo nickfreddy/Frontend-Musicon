@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
   songLyric : songLyricReducer,
   artistAlbum: artistAlbumReducer,
   albumDetails: albumDetailsReducer,
-  notification: notificationReducers
+  notification: notificationReducers,
 })
 
 export default rootReducer;

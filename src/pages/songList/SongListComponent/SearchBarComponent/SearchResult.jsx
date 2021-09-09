@@ -84,7 +84,7 @@ const SearchResult = ({ searchPattern }) => {
         }));
         setLoading(false);
       } else {
-        console.log('ERROR SETTING DATA TO STATE')
+        // console.log('ERROR SETTING DATA TO STATE')
         setSearchResult({
           data: [],
           error: false,
@@ -93,7 +93,7 @@ const SearchResult = ({ searchPattern }) => {
         setLoading(false)
       }
     } catch (err) {
-      console.log('ERROR ON GETTING SEARCH SONG RESULT, DETAILS', err.response);
+      // console.log('ERROR ON GETTING SEARCH SONG RESULT, DETAILS', err.response);
       setSearchResult(state => ({
         ...state,
         data: [],
