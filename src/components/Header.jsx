@@ -20,7 +20,7 @@ import { useHistory, useRouteMatch } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUserAction, unsetFacebookDataUserAction, unsetGoogleDataUserAction } from "../redux/actions/userAction";
 import { toggleDrawerOpenAction } from "../redux/actions/drawerAction";
-import { limitString } from "../tools/stringManipulation";
+// import { limitString } from "../tools/stringManipulation";
 import { sourceUrl } from "../redux/Api/setupAPI";
 import { useGoogleLogout } from "react-google-login";
 import { selectPhotoSource } from "../tools/checkPhotoSource";
@@ -142,7 +142,13 @@ const useStyles = makeStyles((theme) => ({
       display: 'block'
     }
 
-  }
+  },
+  limitString:{
+    whiteSpace: "nowrap",
+    overflow: 'hidden',
+    width: 140,
+    textOverflow: 'ellipsis'
+  },
 }));
 
 export default function Header() {
@@ -263,11 +269,17 @@ export default function Header() {
       <MenuItem onClick={handleMenuClose}>
         <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)} />
         <div>
-          <Typography variant="subtitle1" className={classes.bold}>
+          {/* <Typography variant="subtitle1" className={classes.bold}>
             {limitString(user.data.fullname, 20)}
+          </Typography> */}
+          <Typography variant="subtitle1" className={`${classes.bold} ${classes.limitString}`}>
+            {user.data.fullname}
           </Typography>
-          <Typography variant="body2" className={classes.spacing}>
+          {/* <Typography variant="body2" className={classes.spacing}>
             {limitString(user.data.email, 21)}
+          </Typography> */}
+          <Typography variant="body2" className={`${classes.spacing} ${classes.limitString}`}>
+            {user.data.email}
           </Typography>
         </div>
       </MenuItem>
@@ -323,10 +335,15 @@ export default function Header() {
           <div className={classes.sectionDesktop}>
             <Avatar className={classes.avatar} src={selectPhotoSource(user.data.photo, sourceUrl)} />
             <div>
-              <Typography variant="subtitle1" className={classes.bold}>
+              {/* <Typography variant="subtitle1" className={classes.bold}>
                 {limitString(user.data.fullname, 17)}
+              </Typography> */}
+              <Typography variant="subtitle1" className={`${classes.bold} ${classes.limitString}`}>
+                {user.data.fullname}
               </Typography>
-              <Typography variant="body2">{limitString(user.data.email, 21)}</Typography>
+              {/* <Typography variant="body2">{limitString(user.data.email, 21)}</Typography> */}
+              <Typography variant="body2" className={classes.limitString}>{user.data.email}</Typography>
+
             </div>
             <div className={classes.dropdownIcon}>
               <ArrowDropDownIcon
