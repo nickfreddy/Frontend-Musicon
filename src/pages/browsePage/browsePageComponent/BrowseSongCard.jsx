@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const BrowseSongCard = ({ songDetails, songImage, songTitle, albumTitle, songUrl }) => {
+const BrowseSongCard = ({ songDetails, songImage, songTitle, albumTitle }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const playerAction = usePlayerAction();
