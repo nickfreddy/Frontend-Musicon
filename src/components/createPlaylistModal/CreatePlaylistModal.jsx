@@ -20,7 +20,7 @@ const CreatePlaylistModal = ({photo = "", title ="", description= "", actionUpda
     dispatch(closeCreatePlaylistModalAction());
   }
   return (
-    <GeneralModal isOpen={openCreatePlaylistModal} handleClose={handleClose} title="Create Playlist">
+    <GeneralModal isOpen={openCreatePlaylistModal} handleClose={handleClose} title={actionUpdate ? "Update Playlist": "Create Playlist"}>
       <Container className={classes.modalContent} >
         <CreatePlaylistForm createPlaylistModalAction={createPlaylistModalAction} photo={photo} title={title} description={description} actionUpdate={actionUpdate} playlistId={playlistId}/>
       </Container>

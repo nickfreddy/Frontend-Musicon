@@ -11,6 +11,7 @@ import {
   alpha,
   List,
   ListItem,
+  IconButton,
 } from '@material-ui/core'
 // import { Delete } from '@material-ui/icons';
 import React, { useEffect } from 'react';
@@ -25,6 +26,7 @@ import { secondsDuration } from '../../../tools/timeConverter';
 import { setCurrentPlayingAction, setPlayCurrentPlayingAction } from '../../../redux/actions/currentPlayingAction';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
+import usePlayerAction from '../../../functions/usePlayerAction';
 
 
 const dummyData = [
@@ -78,7 +80,7 @@ const useStyles = makeStyles(theme => ({
   tableContainer: {
     background: '#1F1D2B',
     borderRadius: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    paddingBottom: theme.spacing(0.5),
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'block'
@@ -110,16 +112,17 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       background: alpha('#2D304D', 0.9),
       cursor: 'pointer',
-      '& .playNumberIcon':{
+      '& .playNumberIcon': {
         display: 'block',
       },
-      '& .numberIcon':{
+      '& .numberIcon': {
         display: 'none'
       }
     },
     '& .MuiTableCell-root': {
       border: 'none',
       padding: theme.spacing(0.5, 0),
+      height: 60,
       '&:first-child': {
         borderRadius: '8px 0 0 8px',
       },
@@ -141,14 +144,14 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  emptyTableList:{
+  emptyTableList: {
     borderRadius: theme.spacing(1),
   },
   playArrowIcon: {
     textAlign: 'center'
   },
-  songNumber:{
-    '& .playNumberIcon':{
+  songNumber: {
+    '& .playNumberIcon': {
       display: 'none',
       textAlign: 'center'
     }
@@ -156,10 +159,11 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const TopSongSection = ({currentPlaying}) => {
+const TopSongSection = ({ currentPlaying }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const userTopSongs = useSelector(state => state.userTopSongs);
+  const playerAction = usePlayerAction();
 
   const combineIconAndTitle = (icon, title) => (
     <div className={classes.songTitleTable}>
@@ -173,11 +177,10 @@ const TopSongSection = ({currentPlaying}) => {
   );
 
   const handleDelete = (_id) => {
-    alert(`This id ${_id} song will be deleted`)
+    // alert(`This id ${_id} song will be deleted`)
   }
 
   const handleSongPlay = (song) => {
-    console.log(`This song with id ${song._id} will be played`);
     dispatch(setCurrentPlayingAction(song));
     dispatch(setPlayCurrentPlayingAction());
   }
@@ -203,24 +206,31 @@ const TopSongSection = ({currentPlaying}) => {
 
     return userTopSongs.data.map((song, index) => (
       <TableRow key={index} className={classes.tableRowContent}>
-        <TableCell padding="none" onClick={() => handleSongPlay(song)}>
-          {/* <Typography align="center">
-            {index + 1}
-          </Typography> */}
+        <TableCell padding="none" >
           {song._id === currentPlaying.songDetail._id ?
-          <div className={classes.playArrowIcon}>
-            {currentPlaying.isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
-          </div>
-          :
-          <div className={classes.songNumber}>
-            <div className="playNumberIcon">
-              <PlayArrowIcon />
+            <div className={classes.playArrowIcon}>
+              {currentPlaying.isPlaying ?
+                <IconButton onClick={playerAction.handlePauseAction}>
+                  <PauseIcon />
+                </IconButton>
+                :
+                <IconButton onClick={() => handleSongPlay(song)}>
+                  <PlayArrowIcon />
+                </IconButton>
+              }
             </div>
-            <Typography className="numberIcon" align="center">
-              {Number(index) + 1}
-            </Typography>
-          </div>
-        }
+            :
+            <div className={classes.songNumber}>
+              <div className="playNumberIcon">
+                <IconButton onClick={() => handleSongPlay(song)}>
+                  <PlayArrowIcon />
+                </IconButton>
+              </div>
+              <Typography className="numberIcon" align="center">
+                {Number(index) + 1}
+              </Typography>
+            </div>
+          }
         </TableCell>
         <TableCell padding="none" style={{ width: 400 }} onClick={() => handleSongPlay(song)}>
           {combineIconAndTitle(song.songImage, song.songTitle)}
@@ -232,14 +242,9 @@ const TopSongSection = ({currentPlaying}) => {
         </TableCell >
         <TableCell padding="none" onClick={() => handleSongPlay(song)}>
           <Typography align="center">
-            {secondsDuration(song.songDuration)|| 'under maintenance'}
+            {secondsDuration(song.songDuration) || 'under maintenance'}
           </Typography>
         </TableCell>
-        {/* <TableCell padding="none" align="center">
-        <IconButton onClick={() => handleDelete(song._id)}>
-          <img src={deleteIcon} alt="..." />
-        </IconButton>
-      </TableCell> */}
       </TableRow>
     ))
   }
@@ -261,7 +266,7 @@ const TopSongSection = ({currentPlaying}) => {
     )
     return (
       userTopSongs.data.map((song, index) => (
-        <SongListItem key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId?.name || 'under maintenance'} duration={secondsDuration(song.songDuration)  || 'under maintenance'} onPlay={() => handleSongPlay(song)} onDelete={() => handleDelete(song._id)} />
+        <SongListItem key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId?.name || 'under maintenance'} duration={secondsDuration(song.songDuration) || 'under maintenance'} onPlay={() => handleSongPlay(song)} onDelete={() => handleDelete(song._id)} />
       ))
     )
 

@@ -11,12 +11,12 @@ export function* getSongLyricWorker(action) {
       yield put(setSongLyricAction(response.data.lyrics));
       yield put(unsetLoadingSongLyricAction());
     } else {
-      console.log('UNKNOWN DATA STRUCTURE RECEIVED ON GET SONG LYRIC WORKER', response);
+      // console.log('UNKNOWN DATA STRUCTURE RECEIVED ON GET SONG LYRIC WORKER', response);
       yield put(setSongLyricAction(""));
       yield put(unsetLoadingSongLyricAction());
     }
   } catch (err) {
-    console.log('ERROR ON GETTING SONG LYRIC ON SONG LYRIC SAGA WORKER', err)
+    // console.log('ERROR ON GETTING SONG LYRIC ON SONG LYRIC SAGA WORKER', err)
     yield put(setSongLyricAction(""));
     yield put(unsetLoadingSongLyricAction())
   }

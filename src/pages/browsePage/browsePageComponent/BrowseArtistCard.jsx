@@ -1,11 +1,12 @@
 import React from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import {
-  Avatar,
+  // Avatar,
   Card,
   CardActionArea,
   Typography,
   makeStyles,
+  // CardMedia,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -13,39 +14,52 @@ const useStyles = makeStyles((theme) => ({
     margin: [[5, 5, 5, 5]],
     background: "#1F1D2B",
     borderRadius: "8px",
-    [theme.breakpoints.down("md")]: {
-      width: 220,
-      height: 260,
+    // padding: '0 20px',
+    [theme.breakpoints.up("xs")]: {
+      width: '47%',
+      // height: 210,
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: '31.6%',
+      // height: 265,
     },
     [theme.breakpoints.up("md")]: {
-      width: 200,
-      height: 240,
+      width: '31.6%',
+      // height: 248,
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: '19%',
+      // height: 248,
     },
   },
+
+
   actionarea: {
-    borderRadius: "8px",
-    [theme.breakpoints.down("md")]: {
-      width: 220,
-      height: 260,
-    },
-    [theme.breakpoints.up("md")]: {
-      width: 200,
-      height: 240,
-    },
+    // borderRadius: "8px",
+    // width: '100%',
+    padding: '20px',
+    height: '100%',
   },
   artistimage: {
-    margin: 20,
-    [theme.breakpoints.down("md")]: {
-      width: 180,
-      height: 180,
-    },
-    [theme.breakpoints.up("md")]: {
-      width: 160,
-      height: 160,
-    },
+    margin: '0px auto',
+    borderRadius: '50%',
+    width: '100%',
+    // [theme.breakpoints.up('xs')]: {
+    //   // height: 128,
+    //   width: 128
+    // },
+    // [theme.breakpoints.up("sm")]: {
+    //   width: 180,
+    //   // height: 180,
+    // },
+    // [theme.breakpoints.up("md")]: {
+    //   width: 160,
+    //   // height: 160,
+    // },
   },
   artistname: {
-    marginBottom: 10,
+    // marginBottom: 10,
+    // width: '100%',
     textAlign: "center",
     fontWeight: "bold",
     whiteSpace: "nowrap",
@@ -67,13 +81,14 @@ const BrowseArtistCard = ({
     <Card className={`${classes.card} ${className}`}>
       <CardActionArea
         className={classes.actionarea}
-        onClick={() => history.push(`${url}/${artistUrl}`)}
+        onClick={() => history.push(`${url}/artist/${artistUrl}`)}
       >
-        <Avatar
+        <img
           className={classes.artistimage}
           alt={artistName}
           src={artistImage}
         />
+
         <Typography variant="h6" className={classes.artistname}>
           {artistName}
         </Typography>

@@ -111,7 +111,7 @@ const NavBar = ({ handleOpenAuthModal }) => {
         <div className={classes.navLinks}>
           <RoundedButton href="#home" variant="link">Home</RoundedButton>
           <RoundedButton href="#about" variant="link">About</RoundedButton>
-          <RoundedButton onClick={handleOpenAuthModal} variant="gold">Login</RoundedButton>
+          <RoundedButton onClick={handleOpenAuthModal} style={{fontWeight: 'bold'}} variant="gold">Login</RoundedButton>
         </div>
         <IconButton
           ref={menuButtonEl}

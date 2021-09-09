@@ -19,10 +19,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   songSkeleton:{
-    width: 325,
+    // width: 325,
     height: 120,
     borderRadius: '8px',
-    margin: theme.spacing(0.8)
+    margin: theme.spacing(0.7),
+    width: '100%',
+    [theme.breakpoints.up('sm')]:{
+      width: '48%',
+    },
+    [theme.breakpoints.up('lg')]:{
+      width: '32%',
+    }
   }
 }));
 
@@ -65,7 +72,7 @@ const BrowseSongs = ({ pattern }) => {
         }));
         setLoading(false);
       } else {
-        console.log("ERROR SETTING DATA TO STATE");
+        // console.log("ERROR SETTING DATA TO STATE");
         setResult({
           data: [],
           error: false,
@@ -74,10 +81,10 @@ const BrowseSongs = ({ pattern }) => {
         setLoading(false);
       }
     } catch (err) {
-      console.log(
-        "ERROR GET SONG BY TITLE ON BROWSE SONG, DETAILS: ",
-        err.response
-      );
+      // console.log(
+      //   "ERROR GET SONG BY TITLE ON BROWSE SONG, DETAILS: ",
+      //   err.response
+      // );
       setResult((state) => ({
         ...state,
         data: [],
@@ -89,7 +96,7 @@ const BrowseSongs = ({ pattern }) => {
   };
   useEffect(() => {
     const fetchData = setTimeout(
-      () => getSongByTitle(pattern), // sebenarnya dia getsong by tagName
+      () => getSongByTitle(pattern),
       50
     );
     return () => {
@@ -97,11 +104,10 @@ const BrowseSongs = ({ pattern }) => {
       resetAllState();
     };
   }, [pattern]);
-  // console.log(result, loading);
-  // console.log("song", result.data);
 
 
-  const dummyData = [1, 2, 3];
+
+  const dummyData = [1, 2, 3,];
   const renderBrowsedSongs = (result) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.songSkeleton} />)
     if (result.data.length === 0) return (
@@ -124,22 +130,6 @@ const BrowseSongs = ({ pattern }) => {
 
   return (
     <div className={classes.root}>
-      {/* {result.data.length !== 0 ? (
-        result.data.map((data) => (
-          <BrowseSongCard
-            key={data._id}
-            songImage={data.songImage}
-            songTitle={data.songTitle}
-            albumTitle={data.albumId.albumTitle}
-            songUrl={data.id}
-            className={classes.songcard}
-          />
-        ))
-      ) : (
-        <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
-          Oops!... Can't find the song...
-        </Typography>
-      )} */}
      {renderBrowsedSongs(result)}
     </div>
   );

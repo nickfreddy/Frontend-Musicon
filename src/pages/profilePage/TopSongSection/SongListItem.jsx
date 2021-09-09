@@ -1,58 +1,120 @@
 import React, { useState } from 'react'
 import {
-  // IconButton,
   ListItem,
   ListItemAvatar,
   ListItemIcon,
-  // ListItemSecondaryAction,
   ListItemText,
   makeStyles,
   Typography,
   Menu,
-  MenuItem
+  MenuItem,
+  alpha,
+  IconButton
 } from '@material-ui/core'
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import defaultSongIcon from '../../../assets/img/XMLID1383.svg'
-// import { Delete } from '@material-ui/icons';
 import deleteIcon from '../../../assets/img/deleteIcon.svg';
+import { connect } from 'react-redux';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+import usePlayerAction from '../../../functions/usePlayerAction';
 
 const useStyles = makeStyles(theme => ({
   listItem: {
     background: '#1F1D2B',
     borderRadius: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
+    '& .numberIcon': {
+      marginLeft: theme.spacing(0.3)
+    },
+    '&:hover': {
+      background: alpha('#2D304D', 0.9),
+      cursor: 'pointer',
+      '& .playNumberIcon': {
+        display: 'block',
+      },
+      '& .numberIcon': {
+        display: 'none'
+      }
+    },
   },
   inline: {
     display: 'inline'
   },
   listIcon: {
-    minWidth: theme.spacing(3)
-  },
-  menuIcon:{
     minWidth: theme.spacing(4)
   },
-  songImage:{
+  menuIcon: {
+    minWidth: theme.spacing(4)
+  },
+  songImage: {
     width: '50px',
     height: '50px',
     borderRadius: theme.spacing(1)
+  },
+  playArrowIcon: {
+    marginLeft: '-1.2em'
+  },
+  songNumber: {
+    '& .playNumberIcon': {
+      display: 'none',
+      // textAlign: 'center'
+      marginLeft: '-0.7em'
+
+    }
   }
 }))
-const SongListItem = ({ className, number, id, image, title, artist, duration, onPlay, onDelete }) => {
+const SongListItem = ({
+  currentPlaying,
+  className,
+  number,
+  id,
+  image,
+  title,
+  artist,
+  duration,
+  onPlay,
+  onDelete
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const playerAction = usePlayerAction()
   const classes = useStyles();
 
   const handleMenuClose = (e) => {
     setAnchorEl(null)
   }
-  // const handleMenuOpen = (e) => {
-  //   setAnchorEl(e.currentTarget)
-  // }
+
+  const handelPlaySong = () => {
+    if(id !== currentPlaying.songDetail._id){
+        onPlay()
+    }
+  }
   return (
     <div>
-      <ListItem className={`${classes.listItem} ${className}`} onClick={onPlay}>
+      <ListItem className={`${classes.listItem} ${className}`} onClick={handelPlaySong}>
         <ListItemIcon className={classes.listIcon}>
-          <Typography>{number}</Typography>
+          {/* <Typography>{number}</Typography> */}
+          {id === currentPlaying.songDetail._id ?
+            <div className={classes.playArrowIcon}>
+              {currentPlaying.isPlaying ?
+                <IconButton onClick={playerAction.handlePauseAction}>
+                  <PauseIcon />
+                </IconButton>
+                :
+                <IconButton onClick={onPlay}>
+                  <PlayArrowIcon />
+                </IconButton>
+              }
+            </div>
+            :
+            <div className={classes.songNumber}>
+              <IconButton className="playNumberIcon">
+                <PlayArrowIcon />
+              </IconButton>
+              <Typography className="numberIcon" align="center">
+                {number}
+              </Typography>
+            </div>
+          }
         </ListItemIcon>
         <ListItemAvatar>
           {Boolean(image) ?
@@ -76,14 +138,6 @@ const SongListItem = ({ className, number, id, image, title, artist, duration, o
             </React.Fragment>
           }
         />
-        {/* <ListItemSecondaryAction>
-          <IconButton
-            edge="end"
-            onClick={handleMenuOpen}
-          >
-            <MoreVertIcon />
-          </IconButton>
-        </ListItemSecondaryAction> */}
       </ListItem>
       <Menu
         id={`song-menu${id}`}
@@ -103,13 +157,16 @@ const SongListItem = ({ className, number, id, image, title, artist, duration, o
       >
         <MenuItem onClick={onDelete}>
           <ListItemIcon className={classes.menuIcon}>
-            <img src={deleteIcon} alt="..."/>
+            <img src={deleteIcon} alt="..." />
           </ListItemIcon>
-          <ListItemText primary="Delete"/>
+          <ListItemText primary="Delete" />
         </MenuItem>
       </Menu>
     </div>
   )
 }
 
-export default SongListItem
+const mapStateToProps = (state) => ({
+  currentPlaying: state.currentPlaying
+});
+export default connect(mapStateToProps)(SongListItem)
