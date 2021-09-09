@@ -24,7 +24,13 @@ const useStyles = makeStyles(theme => ({
       gridColumn: 'span 1',
       justifyContent: "flex-start"
     }
-  }
+  },
+  ellipsis:{
+    whiteSpace: 'nowrap',
+    width: '240px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
 }))
 
 const TrackInfo = ({ currentPlaying }) => {
@@ -35,8 +41,8 @@ const TrackInfo = ({ currentPlaying }) => {
         <img src={selectPhotoSource(currentPlaying.songDetail.songImage)} alt="" />
       }
       <div>
-        <Typography variant="h5">{currentPlaying.songDetail.songTitle || 'No song selected'}</Typography>
-        <Typography variant="caption">{`${currentPlaying.songDetail.artistId?.name || 'artist'} - ${currentPlaying.songDetail.albumId?.albumTitle || 'album'}`}</Typography>
+        <Typography className={classes.ellipsis} variant="h5">{currentPlaying.songDetail.songTitle || 'No song selected'}</Typography>
+        <Typography className={classes.ellipsis} variant="caption">{`${currentPlaying.songDetail.artistId?.name || 'artist'} - ${currentPlaying.songDetail.albumId?.albumTitle || 'album'}`}</Typography>
       </div>
     </div>
   )
