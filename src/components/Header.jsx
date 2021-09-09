@@ -24,6 +24,7 @@ import { toggleDrawerOpenAction } from "../redux/actions/drawerAction";
 import { sourceUrl } from "../redux/Api/setupAPI";
 import { useGoogleLogout } from "react-google-login";
 import { selectPhotoSource } from "../tools/checkPhotoSource";
+import useLocalStorage from "../functions/useLocalStorage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,13 +162,13 @@ export default function Header() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const dispatch = useDispatch()
   const user = useSelector(state => state.user);
-
+  const appLocalStorage = useLocalStorage();
   const onLogoutSuccess = res => {
-    console.log('GOOGLE USER LOGOUT SUCCESFULLY', res);
+    // console.log('GOOGLE USER LOGOUT SUCCESFULLY', res);
   }
 
   const onFailure = res => {
-    console.log('GOOGLE USER FAILED TO LOGOUT')
+    // console.log('GOOGLE USER FAILED TO LOGOUT')
   }
 
   const { signOut } = useGoogleLogout({
@@ -197,6 +198,7 @@ export default function Header() {
     dispatch(logOutUserAction());
     dispatch(unsetFacebookDataUserAction());
     dispatch(unsetGoogleDataUserAction());
+    appLocalStorage.removeLoginMethod();
     signOut();
     if (window.FB) {
       window.FB.logout();

@@ -121,7 +121,14 @@ const playlistDetailReducer = (state = initialState, action) => {
         songs: action.payload
       }
     }
-    case type.RESET_PLAYLIST_DETAIL: return initialState
+    case type.RESET_PLAYLIST_DETAIL: return initialState; // RESET PLAYLIST DETAIL ORIGINAL SET TO 0
+    case type.RESET_PLAYLIST_DETAIL_EXCEPT_SONGS: return { //RESET ALL EXCEPT  SONGS => to maintain song still able to iterate
+      ...state,
+      data: {
+        songs: state.data.songs
+      }
+    };
+
     default: return state
   }
 }

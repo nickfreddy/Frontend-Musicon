@@ -18,11 +18,11 @@ export function* getUserLikedSongsWorker(action){
       yield put(unsetLoadingPlayistDetailAction())
       action.callback();
     }else{
-      console.log('GOT UNKNOWN DATA STRUCTURE, DETAILS:', response);
+      // console.log('GOT UNKNOWN DATA STRUCTURE, DETAILS:', response);
       yield put(unsetLoadingPlayistDetailAction());
     }
   }catch(err){
-    console.log('ERROR ON GETTING USER LIKED SONG ON GET USERLIKDED SONG WORKER  :', err);
+    // console.log('ERROR ON GETTING USER LIKED SONG ON GET USERLIKDED SONG WORKER  :', err);
     yield put(unsetLoadingPlayistDetailAction())
   }
 }

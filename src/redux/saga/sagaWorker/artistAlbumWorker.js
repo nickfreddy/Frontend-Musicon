@@ -11,12 +11,12 @@ export function* getArtistAlbumWorker(action){
       yield put(setArtistAlbumAction(response.data.data));
       yield put (unsetLoadingArtistAlbumAction());
     }else{
-      console.log('ERROR SETTING DATA TO REDUCER IN GET ARTIST ALBUM WORKER DETAILS : ', response );
+      // console.log('ERROR SETTING DATA TO REDUCER IN GET ARTIST ALBUM WORKER DETAILS : ', response );
       yield put(unsetLoadingArtistAlbumAction());
     }
 
   }catch(err){
-    console.log('ERROR ON GETTING ARTIST ALBUM WORKER', err);
+    // console.log('ERROR ON GETTING ARTIST ALBUM WORKER', err);
     yield put(unsetLoadingArtistAlbumAction())
   }
 }

@@ -119,7 +119,7 @@ const TopSongSection = () => {
   }
 
   const handleSongPlay =(_id) => {
-    console.log(`This song with id ${_id} will be played`)
+    // console.log(`This song with id ${_id} will be played`)
   }
   const renderTableContent = (rowsPerPage > 0 ? dummyData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage): dummyData).map((song, index) => (
     <TableRow style={{ height: 81}} key={index} className={classes.tableRowContent}>

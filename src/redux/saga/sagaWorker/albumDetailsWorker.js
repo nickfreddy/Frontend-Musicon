@@ -16,7 +16,7 @@ export function* getAlbumDetailsWorker (action){
       yield put(unsetLoadingAlbumDetailsAction());
     }
   }catch(err){
-    console.log('ERR ON GET ALBUM DETAILS AT ALBUM DETAILS WORKER, DETAILS: ', err)
+    // console.log('ERR ON GET ALBUM DETAILS AT ALBUM DETAILS WORKER, DETAILS: ', err)
     yield put(unsetLoadingAlbumDetailsAction())
   }
 }

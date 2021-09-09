@@ -4,11 +4,12 @@ import { RoundedButton } from "../commons/CstButton";
 import googleIcon from '../../assets/img/grommet-icons_google.svg'
 import { useGoogleLogin } from "react-google-login";
 import {
-  useDispatch, 
+  useDispatch,
   useSelector,
 } from 'react-redux';
 import { postGoogleDataUserAction, setGoogleDataUserAction } from '../../redux/actions/userAction';
 import { useHistory } from 'react-router';
+import useLocalStorage from '../../functions/useLocalStorage';
 
 const useStyles = makeStyles(theme => ({
   socialButton: {
@@ -43,11 +44,12 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const GoogleLoginButton = ({handleClose}) => {
+const GoogleLoginButton = ({ handleClose }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(state => state.user)
   const classes = useStyles();
+  const appLocalStorage = useLocalStorage();
 
   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
@@ -56,7 +58,11 @@ const GoogleLoginButton = ({handleClose}) => {
     //SAVE USER DATA FROM GOOGLE TO REDUCER
     dispatch(setGoogleDataUserAction(res.profileObj))
     //POST DATA TO SERVER
-    dispatch(postGoogleDataUserAction(res.profileObj, () => {history.push('/user'); handleClose()}))
+    dispatch(postGoogleDataUserAction(res.profileObj, () => {
+      appLocalStorage.setLoginMethodGoogle();
+      history.push('/user');
+      handleClose()
+    }))
 
   }
 

@@ -40,9 +40,9 @@ const LoveButton = ({ currentPlaying, songId, isLiked, className }) => {
       setLoading(true);
       const params = new URLSearchParams();
       params.append('like', !isLiked);
-      console.log('LIKE SENT', params);
+      // console.log('LIKE SENT', params);
       const response = await setLikeSongStatus(songId, params, token);
-      console.log('UPDATE RESULT', response);
+      // console.log('UPDATE RESULT', response);
       if (response.data) {
 
         //toggle state on reducer (playlist detail and curent playing reducer)
@@ -60,11 +60,11 @@ const LoveButton = ({ currentPlaying, songId, isLiked, className }) => {
 
         setLoading(false)
       } else {
-        console.log('RESPONSE DATA NOT FOUND, DETAIL', response);
+        // console.log('RESPONSE DATA NOT FOUND, DETAIL', response);
         setLoading(false);
       }
     } catch (err) {
-      console.log('ERROR ON SENDING LIKE UPDATE TO SERVER:', err);
+      // console.log('ERROR ON SENDING LIKE UPDATE TO SERVER:', err);
       setLoading(false)
     }
 

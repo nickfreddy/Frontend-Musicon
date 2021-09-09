@@ -4,7 +4,10 @@ export const getPlaylistDetailAction = (playlistId, callback=()=>{}) => ({ type:
 export const setPlaylistDetailAction = (data) => ({ type: type.SET_PLAYLIST_DETAIL, payload: data });
 export const setLoadingPlaylistDetailAction = () => ({ type: type.SET_LOADING_PLAYLIST_DETAIL });
 export const unsetLoadingPlayistDetailAction = () => ({ type: type.UNSET_LOADING_PLAYLIST_DETAIL });
+
+
 export const resetPlaylistDetailAction = () => ({ type: type.RESET_PLAYLIST_DETAIL });
+export const resetPlaylistDetailExceptSongsAction = () => ({type: type.RESET_PLAYLIST_DETAIL_EXCEPT_SONGS});
 
 //ADD SONG TO PLAYLIST ACTION================================
 export const addSongToPlaylistAction = (songDetail, playlistId, callback = () => {}) => ({

@@ -111,7 +111,7 @@ const ArtistAlbumDetail = () => {
     dispatch(getAlbumDetailsAction(album_id))
   }, [album_id, dispatch])
 
-  if (!playlistDetailData.songs || albumDetails.loading) return (
+  if (!playlistDetailData.songs || albumDetails.loading || !albumDetails.data._id) return (
     <div className={classes.pleaseWait}>
       <CircularProgress />
     </div>)

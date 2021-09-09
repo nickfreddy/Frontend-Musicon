@@ -126,7 +126,7 @@ const Player = ({ currentPlaying, playlistDetail }) => {
               }
             } else {
               const newSongIndex = getRandomNumberExcept(0, songList.length, currentSongIndex);
-              console.log('LAGU BARU', newSongIndex)
+              // console.log('LAGU BARU', newSongIndex)
               dispatch(setCurrentPlayingAction(songList[newSongIndex]));
               dispatch(setPlayCurrentPlayingAction());
             }
