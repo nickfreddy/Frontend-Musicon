@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
           margin: theme.spacing(0, 'auto', 3),
         }
       },
-      '& .artist-songs-skeleton':{
+      '& .artist-songs-skeleton': {
         width: '100%',
         // margin: theme.spacing(0, 'auto', 1),
         // margin: theme.spacing(0, 0, 1),
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
           objectFit: 'cover',
           objectPosition: 'top',
           borderRadius: '8px',
-          boxShadow: `4px 6px 8px #0065DA`
+          // boxShadow: `4px 6px 8px #0065DA`
 
         }
       },
@@ -170,7 +170,7 @@ const ArtistPage = () => {
         albumImage={album.albumImage}
         albumTitle={album.albumTitle}
         albumUrl={album._id}
-        // onClick={() => history.push('/')}
+      // onClick={() => history.push('/')}
       />
     ))
   }
@@ -204,11 +204,17 @@ const ArtistPage = () => {
           }
           <div className={classes.linedText}>
             {artistAlbum.loading ?
-              <Skeleton variant="rect" className="artist-songs-skeleton"/>
+              <Skeleton variant="rect" className="artist-songs-skeleton" />
               :
               <>
                 <span className="line"></span>
-                <Typography align="right" variant="h5"> {artistAlbum.data.albums?.length} Album </Typography>
+                <Typography align="right" variant="h5">
+                  {artistAlbum.data.albums?.length > 1 ?
+                    `${artistAlbum.data.albums?.length} Albums`
+                    :
+                    `${artistAlbum.data.albums?.length} Album`
+                  }
+                </Typography>
                 <span className="line"></span>
               </>
             }

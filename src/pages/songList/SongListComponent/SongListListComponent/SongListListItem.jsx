@@ -15,7 +15,7 @@ import {
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import defaultSongIcon from '../../../../assets/img/XMLID1383.svg'
 import deleteIcon from '../../../../assets/img/deleteIcon.svg'
-import { secondsDuration } from '../../../../tools/timeConverter';
+import { secondsDurationWithZero } from '../../../../tools/timeConverter';
 import { connect } from 'react-redux';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
@@ -164,7 +164,7 @@ const SongListListItem = ({
               </Typography>
 
               <Typography component="span">
-                {` - Duration: ${secondsDuration(duration)}`}
+                {` - Duration: ${secondsDurationWithZero(duration)}`}
               </Typography>
 
             </React.Fragment>

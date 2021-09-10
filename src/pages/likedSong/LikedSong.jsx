@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(2),
       '& .MuiTypography-root:first-child': {
         fontSize: '3em',
-        textShadow: '0 0 20px #4399FD'
+        fontWeight: 'bold'
+        // textShadow: '0 0 20px #4399FD'
       }
     }
   },
@@ -49,11 +50,22 @@ const LikedSong = () => {
       <CircularProgress />
     </div>
   )
+
+  const songTotal = playlistDetail.data.songs?.length || 0;
+
   return (
     <Container className={classes.root}>
       <div className="liked-header">
         <Typography align="center">Your Liked Songs</Typography>
-        <LinedText text={`${playlistDetail.data.songs?.length || 0} songs`} lineLeft={true} lineRight={true} />
+        <LinedText
+          text={songTotal > 1 ?
+            `${songTotal} songs`
+            :
+            `${songTotal} song`
+          }
+          lineLeft={true}
+          lineRight={true}
+        />
       </div>
       <div>
         <SongListTable isOwner={false} data={playlistDetailData.songs} handleDelete={() => { }} handleSongPlay={playerAction.handleSongPlay} handleAddNewSong={() => { }} />
