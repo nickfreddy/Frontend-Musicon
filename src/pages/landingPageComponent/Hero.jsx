@@ -29,6 +29,10 @@ const useStyles = makeStyles(theme => ({
       justifyContent: 'center',
       alignItems: 'center',
       padding: theme.spacing(5, 3, 5),
+      [theme.breakpoints.up('lg')]:{
+        justifyContent: 'flex-end',
+        padding: theme.spacing(5, 15)
+      },
       '& .hero-text': {
         [theme.breakpoints.up('md')]: {
           maxWidth: '420px',
@@ -88,7 +92,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         '& .hero-image': {
           marginTop: "0",
-          width: '50%',
+          // width: '50%',
+          maxWidth: '400px',
+
           marginLeft: '10%'
         }
       }

@@ -32,7 +32,8 @@ const useStyle = makeStyles(theme => ({
   imagePreview: {
     width: '100%',
     height: '100%',
-    borderRadius: theme.spacing(100)
+    borderRadius: theme.spacing(100),
+    objectFit: 'cover'
   },
   changeImageIcon: {
     position: 'absolute',

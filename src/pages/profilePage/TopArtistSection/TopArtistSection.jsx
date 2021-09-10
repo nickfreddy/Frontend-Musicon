@@ -19,8 +19,14 @@ const useStyle = makeStyles(theme => ({
     // },
     [theme.breakpoints.up('md')]:{
       // maxWidth: `calc(80vw - ${drawerWidth + theme.spacing(4)})`,
-      maxWidth: '1050px',
+      // maxWidth: '1050px',
+      maxWidth: theme.breakpoints.values.md,
+
     },
+    [theme.breakpoints.up('lg')]:{
+      maxWidth: theme.breakpoints.values.lg,
+    },
+
     // maxWidth: '1030px',
     marginBottom: theme.spacing(2),
     overflowX: 'auto',

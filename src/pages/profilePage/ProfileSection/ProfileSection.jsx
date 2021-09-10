@@ -163,7 +163,15 @@ const ProfileSection = ({ photo, fullName, createdPlaylist }) => {
               }
             </div>
           </div>
-          <Typography className={classes.info} variant="body1">{createdPlaylist} Playlist Created</Typography>
+          <Typography
+            className={classes.info}
+            variant="body1"
+          >{(createdPlaylist || 0) > 1 ?
+            `${createdPlaylist} Playlists Created`
+            :
+            `${createdPlaylist} Playlist Created`
+            }
+          </Typography>
         </div>
       </form>
 

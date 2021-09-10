@@ -184,8 +184,6 @@ const useStyles = makeStyles(theme => ({
 
     [theme.breakpoints.up('md')]: {
       position: 'static',
-      top: '0px',
-      right: '10px'
     },
 
   }
@@ -250,7 +248,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
             {playlistTitle}
           </span>
           {isOwner && //OPTION TWO USING EDIT PENCIL IN TITLE
-            <IconButton className={classes.editIconPencil} onClick={handleClickMenu}>
+            <IconButton disableRipple className={classes.editIconPencil} onClick={handleClickMenu}>
               <EditIcon />
             </IconButton>
           }
@@ -316,7 +314,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'left',
         }}
       >
         <MenuItem onClick={handleOpenCreatePlaylistModal}>Edit Playlist</MenuItem>
