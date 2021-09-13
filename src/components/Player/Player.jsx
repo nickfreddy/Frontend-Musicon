@@ -110,7 +110,7 @@ const Player = ({ currentPlaying, playlistDetail }) => {
 
   useEffect(() => {
     // if (currentPlaying.isRepeatOn) {
-    if (currentTime === duration) {
+    if (currentTime === duration && duration !== 0) {
       // console.log('PLAY NEXT SONG BROH');
       // dispatch(unsetPlayCurrentPlayingAction());
       if (songList) {
