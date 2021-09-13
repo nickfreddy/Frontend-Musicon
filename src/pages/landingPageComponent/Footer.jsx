@@ -6,6 +6,7 @@ import playStore from '../../assets/img/available-on-the-app-store.svg';
 import facebookWhite from '../../assets/img/facebookWhite.svg';
 import instagramWhite from '../../assets/img/instagramWhite.svg';
 import twitterWhite from '../../assets/img/twitterWhite.svg';
+import CopyrightIcon from '@material-ui/icons/Copyright';
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -27,6 +28,14 @@ const useStyles = makeStyles(theme => ({
 
 
     '& .brief-info': {
+      '& .copyright':{
+        display: 'flex', 
+        alignItems: 'center',
+        justifyContent: 'center',
+        [theme.breakpoints.up('md')]:{
+        justifyContent: 'flex-start'
+        },
+      },
       '& .available': {
         '& img': {
           margin: theme.spacing(1)
@@ -35,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     '& .section': {
-      '& h5':{
+      '& h5': {
         fontWeight: 'bold',
         fontSize: '1.5em',
         color: '#92929D'
@@ -51,6 +60,8 @@ const useStyles = makeStyles(theme => ({
         }
       }
     },
+
+
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(1),
 
@@ -59,9 +70,10 @@ const useStyles = makeStyles(theme => ({
       textAlign: 'left',
       '& .brief-info': {
         width: "32%",
-        '& .available':{
+
+        '& .available': {
           paddingTop: theme.spacing(2),
-          '& img:first-child':{
+          '& img:first-child': {
             marginLeft: '0px'
           }
         }
@@ -95,7 +107,10 @@ const Footer = () => {
 
       <Container className={classes.aboutDetail}>
         <div className="brief-info">
-          <Typography>Lorem ipsum dolor sit amet sit amet dolor</Typography>
+          <Typography className="copyright">
+            <CopyrightIcon style={{ marginRight: '0.3em' }} />
+            Glints Academy
+          </Typography>
           <div className="available section">
             <Typography variant="h5" componenet="h5">AVAILABLE ON</Typography>
             <div>

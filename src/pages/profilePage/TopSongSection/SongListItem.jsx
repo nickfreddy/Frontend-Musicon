@@ -132,9 +132,9 @@ const SongListItem = ({
                 variant="body2"
                 className={classes.inline}
               >
-                {duration}
+                {artist}
               </Typography>
-              {` - ${artist}`}
+              {` - ${duration}`}
             </React.Fragment>
           }
         />

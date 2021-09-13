@@ -28,19 +28,27 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: theme.spacing(3, 3, 5),
+      padding: theme.spacing(5, 3, 5),
+      [theme.breakpoints.up('lg')]:{
+        justifyContent: 'flex-end',
+        padding: theme.spacing(5, 15)
+      },
       '& .hero-text': {
-        [theme.breakpoints.up('md')]:{
+        [theme.breakpoints.up('md')]: {
           maxWidth: '420px',
         },
         '& h2': {
-          fontSize: '5em',
+          fontSize: '3em',
           fontFamily: 'Poppins',
           marginBottom: theme.spacing(2),
-          lineHeight: '1em',
+          lineHeight: '1.2em',
           // padding: '0 1em',
-          [theme.breakpoints.up('md')]:{
-          lineHeight: '1.3em',
+
+          [theme.breakpoints.up('sm')]: {
+            fontSize: '5em',
+          },
+          [theme.breakpoints.up('md')]: {
+            lineHeight: '1.3em',
 
           }
         },
@@ -68,7 +76,7 @@ const useStyles = makeStyles(theme => ({
         // marginLeft: '10%'
       },
 
-      [theme.breakpoints.up('sm')]:{
+      [theme.breakpoints.up('sm')]: {
         '& .hero-image': {
           // width: '70%',
           marginTop: '15%',
@@ -84,7 +92,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         '& .hero-image': {
           marginTop: "0",
-          width: '50%',
+          // width: '50%',
+          maxWidth: '400px',
+
           marginLeft: '10%'
         }
       }
@@ -105,14 +115,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Hero = ({handleOpenAuthModal}) => {
+const Hero = ({ handleOpenAuthModal }) => {
   const classes = useStyles();
   return (
     <div id="home" className={classes.root}>
       <div className="side left-side">
         <div className="hero-text">
           <Typography variant="h2" component="h2">Listening to The Music</Typography>
-          <Typography variant="subtitle1" component="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Consectetur orci quam est nisl, turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
+          <Typography variant="subtitle1" component="p">
+            Musicon is a simple music player app, just a few button clicks away to discover songs you like. It has highly-customizable playlist features. Discover other's playlists and rate them or publish your playlists for the world to show your good taste in music.
+          </Typography>
           <RoundedButton onClick={handleOpenAuthModal} variant="gold">Start Now</RoundedButton>
 
         </div>

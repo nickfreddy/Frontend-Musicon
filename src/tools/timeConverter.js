@@ -22,7 +22,7 @@ export const secondsDuration = (val) => {
   }
 }
 
-const convertToTwoDigits = (val) => {
+export const convertToTwoDigits = (val) => {
   if(val < 10) return `0${val}`;
   return `${val}`
 }
