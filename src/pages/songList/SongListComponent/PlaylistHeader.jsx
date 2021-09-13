@@ -4,7 +4,7 @@ import { secondsToHMS } from '../../../tools/timeConverter';
 import Rating from '@material-ui/lab/Rating';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { sourceUrl } from '../../../redux/Api/setupAPI';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+// import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch, useSelector } from 'react-redux';
 import { openCreatePlaylistModalAction } from '../../../redux/actions/modalAction';
 import CreatePlaylistModal from '../../../components/createPlaylistModal/CreatePlaylistModal';
@@ -13,6 +13,7 @@ import { Skeleton } from '@material-ui/lab';
 // import { sourceUrl } from '../../../redux/Api/setupAPI';
 // import samplePhoto from '../../../assets/img/XMLID1383.svg'
 import { selectPhotoSource } from '../../../tools/checkPhotoSource';
+import EditIcon from '@material-ui/icons/Edit';
 
 const StyledRating = withStyles({
   iconEmpty: {
@@ -175,6 +176,16 @@ const useStyles = makeStyles(theme => ({
         }
       }
     }
+  },
+  editIconPencil: {
+    position: 'absolute',
+    top: '0px',
+    right: '10px',
+
+    [theme.breakpoints.up('md')]: {
+      position: 'static',
+    },
+
   }
 }))
 
@@ -231,7 +242,17 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
     <div className={classes.root}>
       {/** LEFT SIDE */}
       <div className={classes.leftSide}>
-        <Typography className={classes.playlistTitle} variant="h4">{`${nowLocation} / `}<span>{playlistTitle}</span></Typography>
+        <Typography className={classes.playlistTitle} variant="h4">
+          {`${nowLocation} / `}
+          <span>
+            {playlistTitle}
+          </span>
+          {isOwner && //OPTION TWO USING EDIT PENCIL IN TITLE
+            <IconButton disableRipple className={classes.editIconPencil} onClick={handleClickMenu}>
+              <EditIcon />
+            </IconButton>
+          }
+        </Typography>
         <div className={classes.description}>
           <img className={classes.playListPhoto} src={selectPhotoSource(photo, sourceUrl)} alt="..." />
           <div className={classes.descriptionContent}>
@@ -246,11 +267,11 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
           </div>
         </div>
         <div className={classes.actionHeaderContainer}>
-          {isOwner &&
+          {/* {isOwner && //FIRST OPTION USING MORE HORIZONTAL ICON AS FIGMA
             <IconButton onClick={handleClickMenu}>
               <MoreHorizIcon />
             </IconButton>
-          }
+          } */}
         </div>
       </div>
       {/** RIGHT SIDE */}
@@ -293,7 +314,7 @@ const PlaylistHeader = ({ nowLocation, playlistId, playlistTitle, photo, descrip
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'left',
         }}
       >
         <MenuItem onClick={handleOpenCreatePlaylistModal}>Edit Playlist</MenuItem>

@@ -14,9 +14,9 @@ const SocketIOClientComponent = () => {
       native: true, // when using native, your OS will handle theming.
       title,
       message,
+      duration: 100000,
       // theme: 'darkblue',
       icon,
-      vibrate: 2,
     });
   }
 
