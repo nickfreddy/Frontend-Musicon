@@ -42,7 +42,7 @@
     "start": "react-scripts start",
     "startHttps": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "server": "json-server --watch server/db.json -p 3001"
   },
