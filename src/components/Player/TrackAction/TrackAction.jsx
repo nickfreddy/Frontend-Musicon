@@ -17,7 +17,10 @@ const useStyles = makeStyles(theme => ({
     // }
   },
   iconVolume: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(0)
+  },
+  loveButton:{
+    marginLeft: theme.spacing(1.5)
   }
 }))
 
@@ -74,7 +77,7 @@ const TrackAction = ({ volume, setVolume, muted, setMuted, songLyric, songId, is
         step={0.01}
         onChange={(e, newVal) => setVolume(newVal)}
       />
-      <LoveButton songId={songId} isLiked={isLiked}/>
+      <LoveButton className={classes.loveButton} songId={songId} isLiked={isLiked}/>
       {/* <IconButton onClick={() => {console.log(songId)}}>
         <img src={loveAction} alt="..." />
       </IconButton> */}

@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import samplePhoto from '../../../../assets/img/XMLID1383.svg';
 import deleteIcon from '../../../../assets/img/deleteIcon.svg';
-import { secondsDuration } from '../../../../tools/timeConverter';
+import { secondsDurationWithZero } from '../../../../tools/timeConverter';
 import { connect } from 'react-redux';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
@@ -149,7 +149,7 @@ const SongListTableItem = ({ currentPlaying, isOwner, song, handleDelete, handle
       </TableCell >
       <TableCell padding="none" onClick={() => handleSongPlay(song)}>
         <Typography align="center">
-          {secondsDuration(song.songDuration)}
+          {secondsDurationWithZero(song.songDuration)}
         </Typography>
       </TableCell>
       <TableCell className={classes.actionButton} padding="none" align="center">

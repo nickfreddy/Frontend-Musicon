@@ -118,7 +118,7 @@ const BrowseAlbums = ({ pattern }) => {
     if (loading) return dummyData.map(data => <Skeleton key={data} variant="rect" className={classes.albumsCardSkeleton} />)
     if (result.data.length === 0) return (
       <Typography variant="h6" style={{ marginLeft: 10, marginBottom: 30 }}>
-        Oops!... Can't find the Album...
+        Oops!... Can't find the album...
       </Typography>
     )
     return result.data.map((data) => (
