@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
     // marginTop: theme.spacing(2),
     // marginBottom: theme.spacing(2),
     padding: theme.spacing(2),
-    overflow: 'auto'
+    overflow: 'auto',
+    
+    background: 'none',
+    boxShadow: 'none'
     
   },
   songTitle: {

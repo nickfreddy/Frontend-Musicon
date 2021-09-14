@@ -110,7 +110,7 @@ const Player = ({ currentPlaying, playlistDetail }) => {
 
   useEffect(() => {
     // if (currentPlaying.isRepeatOn) {
-    if (currentTime === duration) {
+    if (currentTime === duration && duration !== 0) {
       // console.log('PLAY NEXT SONG BROH');
       // dispatch(unsetPlayCurrentPlayingAction());
       if (songList) {
@@ -122,7 +122,8 @@ const Player = ({ currentPlaying, playlistDetail }) => {
               if (currentSongIndex < songList.length - 1) {
                 dispatch(setCurrentPlayingAction(songList[currentSongIndex + 1]))
               } else {
-                dispatch(setCurrentPlayingAction(songList[0]))
+                dispatch(setCurrentPlayingAction(songList[0]));
+                handlePlayTrack();// ensure song played even if only one song available
               }
             } else {
               const newSongIndex = getRandomNumberExcept(0, songList.length, currentSongIndex);

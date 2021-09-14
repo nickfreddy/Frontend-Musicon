@@ -22,7 +22,7 @@ import SongListItem from './SongListItem';
 import { useDispatch, useSelector, connect } from 'react-redux';
 import { getUserTopSongsAction } from '../../../redux/actions/userTopSongsAction.js'
 import { Skeleton } from '@material-ui/lab';
-import { secondsDuration } from '../../../tools/timeConverter';
+import { secondsDurationWithZero } from '../../../tools/timeConverter';
 import { setCurrentPlayingAction, setPlayCurrentPlayingAction } from '../../../redux/actions/currentPlayingAction';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
@@ -242,7 +242,7 @@ const TopSongSection = ({ currentPlaying }) => {
         </TableCell >
         <TableCell padding="none" onClick={() => handleSongPlay(song)}>
           <Typography align="center">
-            {secondsDuration(song.songDuration) || 'under maintenance'}
+            {secondsDurationWithZero(song.songDuration) || 'under maintenance'}
           </Typography>
         </TableCell>
       </TableRow>
@@ -266,7 +266,7 @@ const TopSongSection = ({ currentPlaying }) => {
     )
     return (
       userTopSongs.data.map((song, index) => (
-        <SongListItem key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId?.name || 'under maintenance'} duration={secondsDuration(song.songDuration) || 'under maintenance'} onPlay={() => handleSongPlay(song)} onDelete={() => handleDelete(song._id)} />
+        <SongListItem key={song._id} number={index + 1} id={song._id} image={song.songImage} title={song.songTitle} artist={song.artistId?.name || 'under maintenance'} duration={secondsDurationWithZero(song.songDuration) || 'under maintenance'} onPlay={() => handleSongPlay(song)} onDelete={() => handleDelete(song._id)} />
       ))
     )
 

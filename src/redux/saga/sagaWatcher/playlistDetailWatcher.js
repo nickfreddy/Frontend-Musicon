@@ -1,4 +1,4 @@
-import { takeLatest } from "redux-saga/effects";
+import { takeLatest, takeEvery } from "redux-saga/effects";
 import * as type from '../../actions/actionTypes';
 import { 
   addSongToPlaylistWorker, 
@@ -11,8 +11,12 @@ export function* getPlaylistDetailWatcher(){
   yield takeLatest(type.GET_PLAYLIST_DETAIL, getPlaylistDetailWorker);
 };
 
+// export function* addSongToPlaylistWatcher(){
+//   yield takeLatest(type.ADD_SONG_TO_PLAYLIST_DETAIL, addSongToPlaylistWorker);
+// };
+
 export function* addSongToPlaylistWatcher(){
-  yield takeLatest(type.ADD_SONG_TO_PLAYLIST_DETAIL, addSongToPlaylistWorker);
+  yield takeEvery(type.ADD_SONG_TO_PLAYLIST_DETAIL, addSongToPlaylistWorker);
 };
 
 export function* deleteSongFromPlaylistWatcher(){
